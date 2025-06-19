@@ -38,35 +38,37 @@ const Login = () => {
     }
     return (
         <Flex>
-            <div className="login-card">
-                <Title>Login</Title>
-                <Input
-                    value={user}
-                    type="text"
-                    onChange={(event) =>
-                        setUser(event.target.value)}
-                    placeholder="Nombre"
-                    className="login-input"
-                />
+            <div className="login-container">
+                <div className="login-card">
+                    <Title level={2}>Login</Title>
+                    <Input
+                        value={user}
+                        type="text"
+                        onChange={(event) =>
+                            setUser(event.target.value)}
+                        placeholder="Nombre"
+                        className="login-input"
+                    />
 
-                <Input
-                    value={password}
-                    type="password"
-                    onChange={(event) =>
-                        setPassword(event.target.value)}
-                    placeholder="Contraseña"
-                    className="login-input"
-                />
-                <Input
-                    value={email}
-                    type="text"
-                    onChange={(event) =>
-                        setEmail(event.target.value)}
-                    placeholder="Correo"
-                    className="login-input"
-                />
-                <Button disabled={!isButtonEnabled} type="primary" onClick={handleLoginButtonClick}>Login</Button>
-                <Typography.Text>{errorMsg}</Typography.Text>
+                    <Input
+                        value={password}
+                        type="password"
+                        onChange={(event) =>
+                            setPassword(event.target.value)}
+                        placeholder="Contraseña"
+                        className="login-input"
+                    />
+                    <Input
+                        value={email}
+                        type="text"
+                        onChange={(event) =>
+                            setEmail(event.target.value)}
+                        placeholder="Correo"
+                        className="login-input"
+                    />
+                    <Button disabled={!isButtonEnabled} type="primary" onClick={handleLoginButtonClick}>Login</Button>
+                    <Typography.Text>{errorMsg}</Typography.Text>
+                </div>
             </div>
         </Flex>
     )
