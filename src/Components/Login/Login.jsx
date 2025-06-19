@@ -24,8 +24,9 @@ const Login = () => {
         }, []);*/
 
     const handleLoginButtonClick = () => {
-        console.log(user, password);
+        console.log(user, password, email);
         const savedData = JSON.parse(localStorage.getItem("login"));
+        console.log(savedData);
 
         if (savedData && user === savedData.user && password === savedData.password && email === savedData.email) {
             navigate("/");
@@ -58,7 +59,7 @@ const Login = () => {
                 />
                 <Input
                     value={email}
-                    type="email"
+                    type="text"
                     onChange={(event) =>
                         setEmail(event.target.value)}
                     placeholder="Correo"
