@@ -3,6 +3,8 @@ import { Button, Input, Flex, Typography } from "antd";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 //import {Title} from "../../Title/Title"
+import logo from "../../assets/Celima.PNG";
+
 import "./Login.scss";
 
 const { Title } = Typography;
@@ -69,7 +71,9 @@ const Login = () => {
                     <Button disabled={!isButtonEnabled} type="primary" onClick={handleLoginButtonClick}>Login</Button>
                     <Typography.Text>{errorMsg}</Typography.Text>
                 </div>
+
             </div>
+            <img src={logo} alt="Logo Celima" className="login-logo" />
         </Flex>
     )
 };

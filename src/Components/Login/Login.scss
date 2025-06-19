@@ -31,3 +31,14 @@ body {
   height: 50px;
   margin-bottom: 1rem;
 }
+
+.login-logo {
+  width: 500px;
+  height: 500px;
+  //display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 400px;
+  margin-top: 150px;
+}
