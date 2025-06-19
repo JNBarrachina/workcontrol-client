@@ -3,16 +3,17 @@ import { Button, Input, Flex, Typography } from "antd";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 //import {Title} from "../../Title/Title"
-//import "./Login.scss";
+import "./Login.scss";
 
 const { Title } = Typography;
 const Login = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
 
-    const isButtonEnabled = user && password
+    const isButtonEnabled = user && password && email
 
 
     /*useEffect(() => {
@@ -26,7 +27,7 @@ const Login = () => {
         console.log(user, password);
         const savedData = JSON.parse(localStorage.getItem("login"));
 
-        if (savedData && user === savedData.user && password === savedData.password) {
+        if (savedData && user === savedData.user && password === savedData.password && email === savedData.email) {
             navigate("/");
         } else {
             setErrorMsg("Usuario o contraseña incorrectos");
@@ -36,7 +37,7 @@ const Login = () => {
     }
     return (
         <Flex>
-            <div>
+            <div className="login-card">
                 <Title>Login</Title>
                 <Input
                     value={user}
@@ -44,6 +45,7 @@ const Login = () => {
                     onChange={(event) =>
                         setUser(event.target.value)}
                     placeholder="Nombre"
+                    className="login-input"
                 />
 
                 <Input
@@ -52,12 +54,18 @@ const Login = () => {
                     onChange={(event) =>
                         setPassword(event.target.value)}
                     placeholder="Contraseña"
+                    className="login-input"
+                />
+                <Input
+                    value={email}
+                    type="email"
+                    onChange={(event) =>
+                        setEmail(event.target.value)}
+                    placeholder="Correo"
+                    className="login-input"
                 />
                 <Button disabled={!isButtonEnabled} type="primary" onClick={handleLoginButtonClick}>Login</Button>
                 <Typography.Text>{errorMsg}</Typography.Text>
-                <p>
-                    No tienes cuenta? <Link to="/register">Registrate ahora</Link>
-                </p>
             </div>
         </Flex>
     )
