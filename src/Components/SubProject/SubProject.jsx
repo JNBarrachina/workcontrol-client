@@ -14,7 +14,7 @@ const SubProject = () => {
 
     const isButtonEnabled = subproject;
 
-    const handleLoginButtonClick = () => {
+    const handleSubProjectButtonClick = () => {
         fetch("http://localhost:3000/users/subproject", {
             headers: {
                 "Content-type": "application/json"
@@ -41,18 +41,16 @@ const SubProject = () => {
                 <div>
                     <Title level={2}>SubProyectos</Title>
                     <Input
-                        value={user}
+                        value={subproject}
                         type="text"
                         onChange={(event) =>
                             setSubProject(event.target.value)}
                         placeholder="Crear subproyecto"
                     />
-                    <Button disabled={!isButtonEnabled} type="primary" onClick={handleLoginButtonClick}>Login</Button><br />
+                    <Button disabled={!isButtonEnabled} type="primary" onClick={handleSubProjectButtonClick}>Crear</Button><br />
                     <Typography.Text className="error">{errorMsg}</Typography.Text>
                 </div>
-
             </div>
-            <img src={logo} alt="Logo Celima" className="login-logo" />
         </Flex>
     )
 };
