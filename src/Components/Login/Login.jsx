@@ -29,11 +29,11 @@ const Login = () => {
         console.log(user, password, email);
         //Usamos el LocalStorage.setItem con JSON.stringify 
         //para convertir los datos en un codigo JSON y guardarlos
-        localStorage.setItem("login", JSON.stringify({
+        /*localStorage.setItem("login", JSON.stringify({
             user: user,
             password: password,
             email: email
-        }));
+        }));*/
         //Luego, lo parseamos con el getItem del valor que hemos añadido en el setItem y el logín leerá
         //los usuarios para que tengan el login correcto en su base de datos.
         const savedData = JSON.parse(localStorage.getItem("login"));
@@ -46,7 +46,7 @@ const Login = () => {
 
             navigate("/");
         } else {
-            setErrorMsg("Usuario o contraseña incorrectos");
+            setErrorMsg("Usuario, contraseña o correo incorrectos");
         }
         // POST /register
         // si el resultado es exitoso redirigir a /login
