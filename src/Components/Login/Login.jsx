@@ -68,8 +68,8 @@ const Login = () => {
                         placeholder="Correo"
                         className="login-input"
                     />
-                    <Button disabled={!isButtonEnabled} type="primary" onClick={handleLoginButtonClick}>Login</Button>
-                    <Typography.Text>{errorMsg}</Typography.Text>
+                    <Button disabled={!isButtonEnabled} type="primary" onClick={handleLoginButtonClick}>Login</Button><br />
+                    <Typography.Text className="error">{errorMsg}</Typography.Text>
                 </div>
 
             </div>
