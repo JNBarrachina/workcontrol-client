@@ -26,14 +26,25 @@ const Login = () => {
         }, []);*/
 
     const handleLoginButtonClick = () => {
-        console.log(user, password, email);
-        //Usamos el LocalStorage.setItem con JSON.stringify 
-        //para convertir los datos en un codigo JSON y guardarlos
-        /*localStorage.setItem("login", JSON.stringify({
-            user: user,
-            password: password,
-            email: email
-        }));*/
+        fetch("http://localhost:3000/users/login", {
+            headers: {
+                "Content-type": "application/json"
+            },
+            method: "POST", body: JSON.stringify(
+                { name: user, password: password, email: email })
+        })
+            .then(async (res) => {
+                const data = await res.json();
+                if (res.status >= 400 && data.msg) {
+                    setErrorMsg(data.msg);
+                } else {
+                    console.log(data);
+                    localStorage.setItem("user", data.name)
+                    navigate("/")
+                    //window.location.href = "/";
+                }
+            })
+            .catch((err) => console.error(err))
         //Luego, lo parseamos con el getItem del valor que hemos añadido en el setItem y el logín leerá
         //los usuarios para que tengan el login correcto en su base de datos.
         const savedData = JSON.parse(localStorage.getItem("login"));
