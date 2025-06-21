@@ -40,7 +40,7 @@ const Login = () => {
                 } else {
                     console.log(data);
                     localStorage.setItem("user", data.name)
-                    navigate("/")
+                    navigate("/dashboard")
                     //window.location.href = "/";
                 }
             })
@@ -55,7 +55,7 @@ const Login = () => {
             password === savedData.password &&
             email === savedData.email) {
 
-            navigate("/");
+            navigate("/dashboard");
         } else {
             setErrorMsg("Usuario, contraseña o correo incorrectos");
         }
