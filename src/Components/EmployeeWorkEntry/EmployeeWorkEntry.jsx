@@ -46,13 +46,13 @@ const EmployeeWorkEntry = () => {
         <Flex>
             <div>
                 <div>
-                    <Title level={2}>SubProyectos</Title>
+                    <Title level={2}>Registro de horas en SubProyecto</Title>
                     <Input
                         value={subproject}
                         type="number"
                         onChange={(event) =>
                             setSubProject(event.target.value)}
-                        placeholder="Crear subproyecto"
+                        placeholder="Id del subproyecto"
                     />
                     <Input
                         value={user}
@@ -75,7 +75,7 @@ const EmployeeWorkEntry = () => {
                             setHours(event.target.value)}
                         placeholder="Horas que hiciste en el subproyecto"
                     />
-                    <Button disabled={!isButtonEnabled} type="primary" onClick={handleEmployeeWorkEntryButtonClick}>Crear</Button><br />
+                    <Button disabled={!isButtonEnabled} type="primary" onClick={handleEmployeeWorkEntryButtonClick}>Registrar Datos</Button><br />
                     <Typography.Text className="error">{errorMsg}</Typography.Text>
                 </div>
             </div>
