@@ -40,24 +40,24 @@ const Login = () => {
                 } else {
                     console.log(data);
                     localStorage.setItem("access_token", data.accessToken)
-                    navigate("/")
+                    navigate("/dashboard")
                     //window.location.href = "/";
                 }
             })
             .catch((err) => console.error(err))
         //Luego, lo parseamos con el getItem del valor que hemos añadido en el setItem y el logín leerá
         //los usuarios para que tengan el login correcto en su base de datos.
-        const savedData = JSON.parse(localStorage.getItem("login"));
-        console.log(savedData);
+        //const savedData = JSON.parse(localStorage.getItem("login"));
+        //console.log(savedData);
 
-        if (savedData &&
+        /*if (savedData &&
             email === savedData.email &&
             password === savedData.password ) 
             {
-                navigate("/");
+                navigate("/dashboard");
             } else {
             setErrorMsg("Usuario, contraseña o correo incorrectos");
-        }
+        }*/
         // POST /register
         // si el resultado es exitoso redirigir a /login
     }
