@@ -44,7 +44,7 @@ const Login = () => {
 
                     localStorage.setItem("user", data.name)
 
-                    navigate("/dashboard")
+                    navigate("/menu")
                     //window.location.href = "/";
                 }
             })
