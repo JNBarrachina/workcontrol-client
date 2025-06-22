@@ -1,24 +1,27 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, use } from 'react'
 
-import { MonthDaysGrid } from '../MonthDaysGrid/MonthDaysGrid';
+import { MonthDaysList } from '../MonthDaysList/MonthDaysList';
 
 import './DashboardMain.scss'
 
 export const DashboardMain = () => {
     const [date, setDate] = useState(new Date().toISOString().slice(0, 7));
+    const [days, setDays] = useState([]);
 
-    function getDaysInMonth(monthValue) {
-        const [year, month] = monthValue.split('-').map(Number);
-        return new Date(year, month, 0).getDate(); // Día 0 del mes siguiente = último día del mes actual
-    }
-
-
-    const days = getDaysInMonth("2025-06");
-    console.log(days);
+    useEffect(() => {
+        fetch(`http://localhost:3000/calendar/${date}`, {
+            headers: {
+                "Content-type": "application/json"
+            },
+            method: "GET",
+        })
+            .then(res => res.json())
+            .then(data => { setDays(data) })
+    }, [date])
 
     const handleMonthChange = (e) => {
         setDate(e.target.value);
-    };
+    }
 
     return (
         <article className="dashboardMainContent">
@@ -32,7 +35,10 @@ export const DashboardMain = () => {
                     value={date}
                     onChange={handleMonthChange} />
             </div>
-            <MonthDaysGrid />
+            <MonthDaysList days={days} />
         </article>
     )
-}
+};
+
+
+
