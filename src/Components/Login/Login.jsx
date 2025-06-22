@@ -54,17 +54,9 @@ const Login = () => {
         const savedData = JSON.parse(localStorage.getItem("login"));
         console.log(savedData);
 
-        if (savedData &&
-
-            email === savedData.email &&
-            password === savedData.password ) 
-            {
+        if ( savedData &&  email === savedData.email && password === savedData.password ) {
                 navigate("/dashboard");
-            } else {
-            user === savedData.user &&
-            password === savedData.password &&
-            email === savedData.email) {
-            navigate("/dashboard");
+                
         } else {
             setErrorMsg("Usuario, contraseña o correo incorrectos");
         }
