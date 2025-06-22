@@ -10,12 +10,12 @@ import "./Login.scss";
 const { Title } = Typography;
 const Login = () => {
     const navigate = useNavigate();
-    const [user, setUser] = useState("");
+    //const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
 
-    const isButtonEnabled = user && password && email
+    const isButtonEnabled = email && password
 
 
     /*useEffect(() => {
@@ -31,7 +31,7 @@ const Login = () => {
                 "Content-type": "application/json"
             },
             method: "POST", body: JSON.stringify(
-                { name: user, password: password, email: email })
+                { email: email, password: password })
         })
             .then(async (res) => {
                 const data = await res.json();
@@ -39,7 +39,11 @@ const Login = () => {
                     setErrorMsg(data.msg);
                 } else {
                     console.log(data);
+
+                    localStorage.setItem("access_token", data.accessToken)
+
                     localStorage.setItem("user", data.name)
+
                     navigate("/dashboard")
                     //window.location.href = "/";
                 }
@@ -51,10 +55,15 @@ const Login = () => {
         console.log(savedData);
 
         if (savedData &&
+
+            email === savedData.email &&
+            password === savedData.password ) 
+            {
+                navigate("/dashboard");
+            } else {
             user === savedData.user &&
             password === savedData.password &&
             email === savedData.email) {
-
             navigate("/dashboard");
         } else {
             setErrorMsg("Usuario, contraseña o correo incorrectos");
@@ -68,11 +77,11 @@ const Login = () => {
                 <div className="login-card">
                     <Title level={2}>Login</Title>
                     <Input
-                        value={user}
+                        value={email}
                         type="text"
                         onChange={(event) =>
-                            setUser(event.target.value)}
-                        placeholder="Nombre"
+                            setEmail(event.target.value)}
+                        placeholder="Correo Electronico"
                         className="login-input"
                     />
 
@@ -82,14 +91,6 @@ const Login = () => {
                         onChange={(event) =>
                             setPassword(event.target.value)}
                         placeholder="Contraseña"
-                        className="login-input"
-                    />
-                    <Input
-                        value={email}
-                        type="text"
-                        onChange={(event) =>
-                            setEmail(event.target.value)}
-                        placeholder="Correo"
                         className="login-input"
                     />
                     <Button disabled={!isButtonEnabled} type="primary" onClick={handleLoginButtonClick}>Login</Button><br />
