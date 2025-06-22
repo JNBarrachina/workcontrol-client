@@ -40,6 +40,14 @@ export const DashboardNav = () => {
                     />
                     <p className="linkText">Profile</p>
                 </Link>
+                <Link to="/admindashboard" className="dashboardNavLink">
+                    <img
+                        className="dashboardNavImg"
+                        src="/src/assets/admin.svg"
+                        alt=""
+                    />
+                    <p className="linkText">Admin Area</p>
+                </Link>
             </nav>
         </>
     );

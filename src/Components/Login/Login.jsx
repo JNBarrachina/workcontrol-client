@@ -39,7 +39,11 @@ const Login = () => {
                     setErrorMsg(data.msg);
                 } else {
                     console.log(data);
+
                     localStorage.setItem("access_token", data.accessToken)
+
+                    localStorage.setItem("user", data.name)
+
                     navigate("/dashboard")
                     //window.location.href = "/";
                 }
@@ -51,11 +55,17 @@ const Login = () => {
         console.log(savedData);
 
         if (savedData &&
+
             email === savedData.email &&
             password === savedData.password ) 
             {
                 navigate("/dashboard");
             } else {
+            user === savedData.user &&
+            password === savedData.password &&
+            email === savedData.email) {
+            navigate("/dashboard");
+        } else {
             setErrorMsg("Usuario, contraseña o correo incorrectos");
         }
         // POST /register
