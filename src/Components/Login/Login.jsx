@@ -61,13 +61,8 @@ const Login = () => {
             {
                 navigate("/dashboard");
             } else {
-            user === savedData.user &&
-            password === savedData.password &&
-            email === savedData.email) {
-            navigate("/dashboard");
-        } else {
             setErrorMsg("Usuario, contraseña o correo incorrectos");
-        }
+            }
         // POST /register
         // si el resultado es exitoso redirigir a /login
     }
