@@ -11,6 +11,8 @@
   padding: 0.4rem;
 
   background-color: white;
+
+  transition: width 0.3s ease;
 }
 
 .dashboardNavLink {
@@ -20,7 +22,6 @@
   align-items: center;
 
   width: 100%;
-
   gap: 0.4rem;
   padding: 0.4rem;
 
@@ -31,6 +32,27 @@
 .linkText {
   font-size: 1rem;
   color: black;
+
+  /* Transición suave de colapso */
+  max-width: 200px;
+  padding-right: 0.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+
+  transition:
+    max-width 0.3s ease,
+    padding 0.3s ease,
+    opacity 0.3s ease;
+  opacity: 1;
+}
+
+/* ↓ Versión colapsada en media query ↓ */
+@media screen and (max-width: 950px) {
+  .linkText {
+    max-width: 0;
+    padding-right: 0;
+    opacity: 0;
+  }
 }
 
 .dashboardNavLink:hover {
@@ -59,7 +81,6 @@
 
 .logoutBtn {
   padding: 0.4rem;
-
   background-color: white;
   border-radius: 1rem;
 }
@@ -67,10 +88,4 @@
 .logoutBtn:hover {
   transform: scale(1.02);
   transition: 0.6s;
-}
-
-@media screen and (max-width: 950px) {
-    .linkText {
-        display: none;
-    }
 }
