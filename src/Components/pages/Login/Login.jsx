@@ -11,6 +11,10 @@ import "./Login.scss";
 const { Title } = Typography;
 const Login = () => {
     const navigate = useNavigate();
+    //const [user, setUser] = useState("");
+    //const { userData, setUserData } = useContext(UserDataContext);
+    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
     const { userData, setUserData } = useContext(UserDataContext);
 
     //const [user, setUser] = useState("");
@@ -55,7 +59,6 @@ const Login = () => {
         const savedData = JSON.parse(localStorage.getItem("login"));
         console.log(savedData);
 
-
         if ( savedData &&  email === savedData.email && password === savedData.password ) {
                 navigate("/dashboard");
                 
@@ -82,7 +85,7 @@ const Login = () => {
 
                     <Input
                         value={password}
-                        type="password"
+                        type="password"  
                         onChange={(event) => setPassword(event.target.value)}
                         placeholder="Contraseña"
                         className="login-input"
