@@ -55,22 +55,16 @@ const Login = () => {
         const savedData = JSON.parse(localStorage.getItem("login"));
         console.log(savedData);
 
-        // if (savedData &&
 
-        //     email === savedData.email &&
-        //     password === savedData.password ) 
-        //     {
-        //         navigate("/dashboard");
-        //     } else {
-        //     user === savedData.user &&
-        //     password === savedData.password &&
-        //     email === savedData.email) {
-        //     navigate("/dashboard");
-        // } else {
-        //     setErrorMsg("Usuario, contraseña o correo incorrectos");
-        // }
+        if ( savedData &&  email === savedData.email && password === savedData.password ) {
+                navigate("/dashboard");
+                
+        } else {
+            setErrorMsg("Usuario, contraseña o correo incorrectos");
+        }
+
         // POST /register
-        // si el resultado es exitoso redirigir a /login
+        // si 
     }
     return (
         <Flex>
@@ -89,8 +83,7 @@ const Login = () => {
                     <Input
                         value={password}
                         type="password"
-                        onChange={(event) =>
-                            setPassword(event.target.value)}
+                        onChange={(event) => setPassword(event.target.value)}
                         placeholder="Contraseña"
                         className="login-input"
                     />
