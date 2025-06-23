@@ -12,7 +12,7 @@ const { Title } = Typography;
 const Login = () => {
     const navigate = useNavigate();
     //const [user, setUser] = useState("");
-    const { userData, setUserData } = useContext(UserDataContext);
+    //const { userData, setUserData } = useContext(UserDataContext);
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
@@ -50,7 +50,7 @@ const Login = () => {
             .catch((err) => console.error(err))
         //Luego, lo parseamos con el getItem del valor que hemos añadido en el setItem y el logín leerá
         //los usuarios para que tengan el login correcto en su base de datos.
-        const savedData = JSON.parse(localStorage.getItem("login"));
+        const savedData = JSON.parse(localStorage.setItem(userData, "login"));
         console.log(savedData);
 
         if (savedData &&
