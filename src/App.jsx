@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 
 import { BrowserRouter, Route, Routes, Navigate, useNavigate } from "react-router"
 
-import { Login } from "./Components/Login/Login"
+import { Login } from "./Components/pages/Login/Login"
 import { Dashboard } from './Components/pages/Dashboard/Dashboard'
 import { AdminArea } from './Components/pages/AdminArea/AdminArea'
 import { NotFound } from './Components/pages/NotFound/NotFound'
