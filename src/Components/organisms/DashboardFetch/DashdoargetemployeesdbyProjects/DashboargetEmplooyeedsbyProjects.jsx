@@ -1,0 +1,52 @@
+import { useEffect, useState } from 'react';
+import './DashboargetEmplooyeedsbyProjects.css';
+
+const DashboargetEmplooyeedsbyProjects = () => {
+
+    const [getpreviw, setpreview] = useState([]);
+
+    useEffect( () => {
+
+        fetch('http://localhost:3000/employeeds_projects')
+        .then( res => res.json() )
+        .then( data => {
+            setpreview(data);
+            //console.log('Preview:', getpreviw);
+        })
+
+    }, []);
+
+  
+
+    return(
+        <main id="DashboargetEmplooyeedsbyProjects">
+                    <table>
+                        <thead>
+                            <tr>
+                                {getpreviw.length > 0 && Object.keys(getpreviw[1][0]).map((key, index) => (
+                                    <>
+                                        <th key={index}>{key}</th>
+                                    </>
+                                    
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {getpreviw.length > 0 && getpreviw[1].map((obj, i) => (
+                                <tr key={i}>
+                                    {Object.values(obj).map((value, j) => (
+                                        <>
+                                            <td key={j}>{value}</td>
+                                        </>
+                                    ))}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+        </main>
+    )
+}
+
+export {
+    DashboargetEmplooyeedsbyProjects
+}

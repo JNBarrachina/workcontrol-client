@@ -1,0 +1,58 @@
+.dashboardHeaderContainer {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: white;
+}
+
+.dashboardLogo {
+  height: 40px;
+}
+
+.userProfileBox {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.userProfileImg {
+  width: 30px;
+  height: 30px;
+}
+
+.userProfileName {
+  font-weight: bold;
+}
+
+.themeBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+.themeBtn:hover {
+  transform: scale(1.1);
+}
+
+.logoutBtn {
+  background-color: white;
+  border-radius: 1rem;
+}
+
+.logoutBtn:hover {
+  transform: scale(1.02);
+  transition: 0.6s;
+}
+
+.logoutImg {
+  width: 25px;
+  height: 25px;
+}/*# sourceMappingURL=DashboardHeader.css.map */

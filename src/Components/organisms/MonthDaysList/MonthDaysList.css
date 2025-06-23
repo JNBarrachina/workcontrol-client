@@ -1,0 +1,7 @@
+.monthDaysList {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  gap: 8px;
+}/*# sourceMappingURL=MonthDaysList.css.map */
