@@ -1,106 +1,79 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button, Input, Flex, Typography } from "antd";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-//import {Title} from "../../Title/Title"
 import logo from "../../assets/Celima.PNG";
-
 import "./Login.scss";
 
 const { Title } = Typography;
+
 const Login = () => {
-    const navigate = useNavigate();
-    //const [user, setUser] = useState("");
-    const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
-    const [errorMsg, setErrorMsg] = useState("");
+  const navigate = useNavigate();
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
-    const isButtonEnabled = email && password
+  const isButtonEnabled = email.trim() !== "" && password.trim() !== "";
 
+  const handleLoginButtonClick = () => {
+    setErrorMsg(""); // limpiar error previo
 
-    /*useEffect(() => {
-            const datosguardados = localStorage.getItem("login");
-            if (datosguardados) {
-                setUser(JSON.parse(datosguardados));
-            }
-        }, []);*/
-
-    const handleLoginButtonClick = () => {
-        fetch("http://localhost:3000/users/login", {
-            headers: {
-                "Content-type": "application/json"
-            },
-            method: "POST", body: JSON.stringify(
-                { email: email, password: password })
-        })
-            .then(async (res) => {
-                const data = await res.json();
-                if (res.status >= 400 && data.msg) {
-                    setErrorMsg(data.msg);
-                } else {
-                    console.log(data);
-
-                    localStorage.setItem("access_token", data.accessToken)
-
-                    localStorage.setItem("user", data.name)
-
-                    navigate("/dashboard")
-                    //window.location.href = "/";
-                }
-            })
-            .catch((err) => console.error(err))
-        //Luego, lo parseamos con el getItem del valor que hemos añadido en el setItem y el logín leerá
-        //los usuarios para que tengan el login correcto en su base de datos.
-        const savedData = JSON.parse(localStorage.getItem("login"));
-        console.log(savedData);
-
-        if (savedData &&
-
-            email === savedData.email &&
-            password === savedData.password ) 
-            {
-                navigate("/dashboard");
-            } else {
-            user === savedData.user &&
-            password === savedData.password &&
-            email === savedData.email) {
-            navigate("/dashboard");
+    fetch("http://localhost:3000/users/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    })
+      .then(async (res) => {
+        const data = await res.json();
+        if (!res.ok) {
+          // cualquier error, mostrar mensaje del backend
+          setErrorMsg(data.msg || "Error desconocido");
         } else {
-            setErrorMsg("Usuario, contraseña o correo incorrectos");
+          // éxito: guardar token y usuario
+          localStorage.setItem("access_token", data.accessToken);
+          localStorage.setItem("user", data.name);
+
+          navigate("/dashboard");
         }
-        // POST /register
-        // si el resultado es exitoso redirigir a /login
-    }
-    return (
-        <Flex>
-            <div className="login-container">
-                <div className="login-card">
-                    <Title level={2}>Login</Title>
-                    <Input
-                        value={email}
-                        type="text"
-                        onChange={(event) =>
-                            setEmail(event.target.value)}
-                        placeholder="Correo Electronico"
-                        className="login-input"
-                    />
+      })
+      .catch((err) => {
+        console.error(err);
+        setErrorMsg("Error en la conexión al servidor");
+      });
+  };
 
-                    <Input
-                        value={password}
-                        type="password"
-                        onChange={(event) =>
-                            setPassword(event.target.value)}
-                        placeholder="Contraseña"
-                        className="login-input"
-                    />
-                    <Button disabled={!isButtonEnabled} type="primary" onClick={handleLoginButtonClick}>Login</Button><br />
-                    <Typography.Text className="error">{errorMsg}</Typography.Text>
-                </div>
-
-            </div>
-            <img src={logo} alt="Logo Celima" className="login-logo" />
-        </Flex>
-    )
+  return (
+    <Flex>
+      <div className="login-container">
+        <div className="login-card">
+          <Title level={2}>Login</Title>
+          <Input
+            value={email}
+            type="text"
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Correo Electrónico"
+            className="login-input"
+          />
+          <Input
+            value={password}
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Contraseña"
+            className="login-input"
+          />
+          <Button
+            disabled={!isButtonEnabled}
+            type="primary"
+            onClick={handleLoginButtonClick}
+          >
+            Login
+          </Button>
+          <br />
+          <Typography.Text className="error">{errorMsg}</Typography.Text>
+        </div>
+      </div>
+      <img src={logo} alt="Logo Celima" className="login-logo" />
+    </Flex>
+  );
 };
 
-export { Login }
+export { Login };
