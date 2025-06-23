@@ -17,10 +17,6 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const { userData, setUserData } = useContext(UserDataContext);
 
-    //const [user, setUser] = useState("");
-    const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
-
     const [errorMsg, setErrorMsg] = useState("");
 
     const isButtonEnabled = email && password
