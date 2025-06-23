@@ -1,0 +1,92 @@
+::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.newWorkEntryDialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1.4rem;
+  min-width: 400px;
+  border: none;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+.newWorkEntryDialogContainer {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 1rem;
+}
+
+.newWorkEntryForm {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+
+  gap: 0.6rem;
+}
+
+.selectProject, .selectTime {
+  label {
+    text-align: center;
+  }
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: flex-start;
+
+  gap: 0.6rem;
+}
+
+.newWorkEntryBtns {
+  width: 100%;
+  
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.dialogTitle {
+  color: #254d70;
+  font-size: xx-large;
+}
+
+.newWorkEntryTime {
+  padding: 0.4rem;
+}
+
+.modalLabel {
+  width: 100%;
+  text-align: center;
+}
+
+::placeholder {
+  color: lightgray;
+}
+
+.modalBtn {
+  cursor: pointer;
+
+  border: 1px solid lightgrey;
+  border-radius: 8px;
+}
+
+.modalBtn:hover {
+  border: 3px solid rgb(115, 17, 110);
+}
+
+.msgError {
+  align-self: center;
+
+  font-weight: bolder;
+  color: red;
+}

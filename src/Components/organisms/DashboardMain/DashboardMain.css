@@ -1,0 +1,23 @@
+.dashboardMainContent {
+  height: 100vh;
+  overflow-y: scroll;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-grow: 1;
+  padding: 1rem;
+  gap: 1rem;
+  background-color: whitesmoke;
+}
+
+.dashboardMainTitle {
+  width: 100%;
+  text-align: left;
+  font-size: 1.8rem;
+}
+
+.monthSelector {
+  display: flex;
+  gap: 1rem;
+}/*# sourceMappingURL=DashboardMain.css.map */

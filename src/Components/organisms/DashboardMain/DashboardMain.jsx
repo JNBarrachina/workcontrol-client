@@ -1,24 +1,60 @@
 import { useState, useEffect } from 'react'
 
-import { MonthDaysGrid } from '../MonthDaysGrid/MonthDaysGrid';
+import { MonthDaysList } from '../MonthDaysList/MonthDaysList';
 
 import './DashboardMain.scss'
 
 export const DashboardMain = () => {
     const [date, setDate] = useState(new Date().toISOString().slice(0, 7));
+    const [days, setDays] = useState([]);
+    const [entries, setEntries] = useState([]);
+    console.log("Valor inicial de date:", date);
 
-    function getDaysInMonth(monthValue) {
-        const [year, month] = monthValue.split('-').map(Number);
-        return new Date(year, month, 0).getDate(); // Día 0 del mes siguiente = último día del mes actual
-    }
+useEffect(() => {
+    console.log("Llamando a /calendar con fecha:", date);
 
+    fetch(`http://localhost:3000/calendar/${date}`, {
+        headers: {
+            "Content-type": "application/json"
+        },
+        method: "GET",
+    })
+        .then(res => {
+            if (!res.ok) {
+                // Si el backend devuelve error (404, 500), lanza
+                throw new Error(`Error ${res.status} en /calendar`);
+            }
+            return res.json(); // solo si es respuesta válida
+        })
+        .then(data => {
+            setDays(data);
+        })
+        .catch(err => {
+            console.error("Error en fetch de /calendar:", err);
+            setDays([]); // evita que quede mal cargado
+        });
+}, [date]);
 
-    const days = getDaysInMonth("2025-06");
-    console.log(days);
+    useEffect(() => {
+        const [year, month] = date.split('-');
+
+        fetch(`http://localhost:3000/api/workentries/1/${year}-${month}`, {
+            headers: {
+                "Content-type": "application/json"
+            },
+            method: "GET",
+        })
+            .then(res => res.json())
+            .then(data => {
+            // En caso de que tu backend devuelva { data: [...], message: "..." }
+            setEntries(data.data || []);
+        });
+}, [date]);
+    console.log(entries)
 
     const handleMonthChange = (e) => {
         setDate(e.target.value);
-    };
+    }
 
     return (
         <article className="dashboardMainContent">
@@ -32,7 +68,10 @@ export const DashboardMain = () => {
                     value={date}
                     onChange={handleMonthChange} />
             </div>
-            <MonthDaysGrid />
+            <MonthDaysList days={days} entries={entries} />
         </article>
     )
-}
+};
+
+
+

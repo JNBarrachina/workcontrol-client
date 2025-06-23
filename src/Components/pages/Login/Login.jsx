@@ -15,6 +15,12 @@ const Login = () => {
     //const { userData, setUserData } = useContext(UserDataContext);
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
+    const { userData, setUserData } = useContext(UserDataContext);
+
+    //const [user, setUser] = useState("");
+    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
+
     const [errorMsg, setErrorMsg] = useState("");
 
     const isButtonEnabled = email && password
@@ -53,17 +59,15 @@ const Login = () => {
         const savedData = JSON.parse(localStorage.getItem("login"));
         console.log(savedData);
 
-        if (savedData &&
-
-            email === savedData.email &&
-            password === savedData.password ) 
-            {
+        if ( savedData &&  email === savedData.email && password === savedData.password ) {
                 navigate("/dashboard");
-            } else {
+                
+        } else {
             setErrorMsg("Usuario, contraseña o correo incorrectos");
-            }
+        }
+
         // POST /register
-        // si el resultado es exitoso redirigir a /login
+        // si 
     }
     return (
         <Flex>
@@ -81,9 +85,8 @@ const Login = () => {
 
                     <Input
                         value={password}
-                        type="password"
-                        onChange={(event) =>
-                            setPassword(event.target.value)}
+                        type="password"  
+                        onChange={(event) => setPassword(event.target.value)}
                         placeholder="Contraseña"
                         className="login-input"
                     />
