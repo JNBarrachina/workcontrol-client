@@ -25,9 +25,10 @@ export const MonthDay = ({ day }) => {
     };
 
     const changeDayType = (e) => {
-        setDayType(parseInt(e.target.value));
+        const newDayType = parseInt(e.target.value);
+        setDayType(newDayType);
 
-        console.log(day.id, dayType);
+        console.log(day.id, newDayType);
 
         fetch(`http://localhost:3000/calendar/${day.id}`, {
             headers: {
@@ -35,17 +36,17 @@ export const MonthDay = ({ day }) => {
             },
             method: "PATCH",
             body: JSON.stringify({
-                DayCodeId: dayType
+                DayCodeId: newDayType
             })
-        })
-    }
+        });
+    };
 
     return (
         <div className='dayContainer'>
             <div className='dayHeaderContainer'>
                 <section className='dayTitleType'>
                     <h4>{formatFecha(day.date)}</h4>
-                    <select name="dayType" id="dayType" onChange={(e) => changeDayType(e)}>
+                    <select name="dayType" id="dayType" value={dayType} onChange={(e) => changeDayType(e)}>
                         <option value="6">Laborable (WD)</option>
                         <option value="5">Fin de semana (WE)</option>
                         <option value="1">Vacaciones (AH)</option>

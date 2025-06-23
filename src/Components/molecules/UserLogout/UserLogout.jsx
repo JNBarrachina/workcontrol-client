@@ -5,7 +5,7 @@ export const UserLogout = ({ modalRef }) => {
   const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem("userLogged");
-    navigate("/");
+    navigate("/login");
   };
 
   const closeModal = () => {

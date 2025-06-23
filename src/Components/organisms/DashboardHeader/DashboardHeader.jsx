@@ -1,10 +1,12 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 
 import { UserLogout } from "../../molecules/UserLogout/UserLogout";
+import { UserDataContext } from "../../../contexts/UserDataContext";
 
 import "./DashboardHeader.scss";
 
 export const DashboardHeader = () => {
+    const { userData } = useContext(UserDataContext);
     const modalRef = useRef(null);
 
     const openModal = () => {
@@ -16,7 +18,7 @@ export const DashboardHeader = () => {
             <header className="dashboardHeaderContainer">
                 <img src=" /src/assets/workflow.png" className="dashboardLogo" alt="" />
                 <div className="userProfileBox">
-                    <p className="userProfileName">John Doe</p>
+                    <p className="userProfileName">{userData.email}</p>
                     <img
                         className="userProfileImg"
                         src="/src/assets/avatar.png"
