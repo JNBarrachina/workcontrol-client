@@ -25,6 +25,13 @@ const DashboardbyEmplooyeedbyProjets = () => {
   return (
     <div>
       <table>
+        <thead>
+            <tr>
+                {getpreviw.length > 0 && Object.keys(getpreviw[0]).map((key, index) => (
+                    <th key={index}>{key}</th>
+                ))}
+            </tr>
+        </thead>
         <tbody>
           {getpreviw.length > 0 && getpreviw.map((obj, i) => (
             <tr key={i}>

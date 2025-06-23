@@ -6,6 +6,7 @@ import { Login } from "./Components/pages/Login/Login"
 import { Dashboard } from './Components/pages/Dashboard/Dashboard'
 import { AdminArea } from './Components/pages/AdminArea/AdminArea'
 import { NotFound } from './Components/pages/NotFound/NotFound'
+import { Userprofile } from './Components/pages/Userprofile/Userprofile.jsx'
 
 import { UserDataContext } from './contexts/UserDataContext'
 
@@ -26,7 +27,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/adminarea" element={<AdminArea />} />
-            <Route path='/userprofile' element={ <></>} />
+            <Route path='/userprofile' element={ <Userprofile/>} />
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
