@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { DashboardNav } from '../DashboardNav/DashboardNav'
 import { DashboardMain } from '../DashboardMain/DashboardMain'
-import { DashboardbyEmplooyeedProjets } from '../DashboardFetch/DashboardbyEmployeedProjects/DashboardbyEmployeedProjects.jsx';
+import { DashboardbyEmplooyeedbyProjets } from '../DashboardFetch/DashboardbyEmployeedProjects/DashboardbyEmployeedProjects.jsx';
 import { DashboargetEmplooyeedsbyProjects } from '../DashboardFetch/DashdoargetemployeesdbyProjects/DashboargetEmplooyeedsbyProjects.jsx';
 
 import "./DashboardContent.scss"
@@ -14,11 +14,13 @@ export const DashboardContent = () => {
         <main className="dashboardContent">
             <DashboardNav />
 
-            { false && < DashboardbyEmplooyeedProjets/> }
-            { true && < DashboargetEmplooyeedsbyProjects />}
+            { /*User*/}
+            { true && < DashboardbyEmplooyeedbyProjets/> }
+            { /*Admin*/}
+            { false && < DashboargetEmplooyeedsbyProjects />}
+            
 
             <DashboardMain />
         </main>
     )
 }
-g

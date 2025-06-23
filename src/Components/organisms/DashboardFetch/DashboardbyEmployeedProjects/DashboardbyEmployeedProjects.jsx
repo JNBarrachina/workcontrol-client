@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
-import './DashboardbyEmplooyeedProjets.css';
+import { useEffect, useState } from 'react'
 
-const DashboardbyEmplooyeedProjets = () => {
+
+const DashboardbyEmplooyeedbyProjets = () => {
 
  const [getpreviw, setpreview] = useState([])
-
+//User
 useEffect(() => {
-    fetch('http://localhost:3000/employeed_assigned', {
+    fetch('http://localhost:3000/fetchs/employeed_assigned', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -25,15 +25,8 @@ useEffect(() => {
 
 
 return(
-            <main id ="DashboardbyEmplooyeedProjets">
+            <div>
                 <table>
-                    <thead>
-                        <tr>
-                            {getpreviw[0] && Object.keys(getpreviw[0]).map((key, index) => (
-                                <th key={index}>{key}</th>
-                            ))}
-                        </tr>
-                    </thead>
                     <tbody>
                     {getpreviw.map((obj, i) => (
                         <tr key={i}>
@@ -44,11 +37,11 @@ return(
                     ))}
                     </tbody>
                 </table>
-            </main>
+            </div>
 )
 
 }
 
 export {
-    DashboardbyEmplooyeedProjets
+    DashboardbyEmplooyeedbyProjets
 }

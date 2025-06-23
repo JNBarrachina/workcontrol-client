@@ -5,9 +5,10 @@ const DashboargetEmplooyeedsbyProjects = () => {
 
     const [getpreviw, setpreview] = useState([]);
 
+    //ADMIN
     useEffect( () => {
 
-        fetch('http://localhost:3000/employeeds_projects')
+        fetch('http://localhost:3000/fetchs/employeeds_projects')
         .then( res => res.json() )
         .then( data => {
             setpreview(data);
