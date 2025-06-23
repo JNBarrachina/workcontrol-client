@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { UserDataContext } from "../../../contexts/UserDataContext";
 //import {Title} from "../../Title/Title"
-import logo from "../../assets/Celima.PNG";
+import logo from "../../../assets/Celima.PNG";
 
 import "./Login.scss";
 
@@ -12,7 +12,7 @@ const { Title } = Typography;
 const Login = () => {
     const navigate = useNavigate();
     //const [user, setUser] = useState("");
-    const { userData, setUserData } = useContext(UserDataContext);
+    //const { userData, setUserData } = useContext(UserDataContext);
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
