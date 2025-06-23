@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
 import { Button, Input, Flex, Typography } from "antd";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
+import { UserDataContext } from "../../contexts/UserDataContext";
 //import {Title} from "../../Title/Title"
 import logo from "../../assets/Celima.PNG";
 
@@ -10,9 +11,12 @@ import "./Login.scss";
 const { Title } = Typography;
 const Login = () => {
     const navigate = useNavigate();
+    const { userData, setUserData } = useContext(UserDataContext);
+
     //const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
+
     const [errorMsg, setErrorMsg] = useState("");
 
     const isButtonEnabled = email && password
@@ -38,11 +42,8 @@ const Login = () => {
                 if (res.status >= 400 && data.msg) {
                     setErrorMsg(data.msg);
                 } else {
-                    console.log(data);
-
-                    localStorage.setItem("access_token", data.accessToken)
-
-                    localStorage.setItem("user", data.name)
+                    setUserData(data);
+                    localStorage.setItem("login", JSON.stringify(data));
 
                     navigate("/dashboard")
                     //window.location.href = "/";
