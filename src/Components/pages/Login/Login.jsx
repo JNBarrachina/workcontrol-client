@@ -2,9 +2,9 @@ import { useState, useContext } from "react";
 import { Button, Input, Flex, Typography } from "antd";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-import { UserDataContext } from "../../contexts/UserDataContext";
+import { UserDataContext } from "../../../contexts/UserDataContext";
 //import {Title} from "../../Title/Title"
-import logo from "../../assets/Celima.PNG";
+import logo from "../../../assets/Celima.PNG";
 
 import "./Login.scss";
 
