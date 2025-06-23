@@ -1,9 +1,12 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import "./DashboardNav.scss";
 
-export const DashboardNav = () => {
+import { UserDataContext } from "../../../contexts/UserDataContext";
 
+export const DashboardNav = () => {
+    const { userData } = useContext(UserDataContext);
 
     return (
         <>
@@ -40,14 +43,14 @@ export const DashboardNav = () => {
                     />
                     <p className="linkText">Profile</p>
                 </Link>
-                <Link to="/admindashboard" className="dashboardNavLink">
+                {userData.role === "admin" && <Link to="/adminarea" className="dashboardNavLink">
                     <img
                         className="dashboardNavImg"
                         src="/src/assets/admin.svg"
                         alt=""
                     />
                     <p className="linkText">Admin Area</p>
-                </Link>
+                </Link>}
             </nav>
         </>
     );
