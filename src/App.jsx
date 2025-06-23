@@ -14,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/login" element={ <Login /> } />
           <Route path="/dashboard" element={ <Dashboard /> } />
+          <Route path='/userprofile' element={ <></>} />
           <Route path="/" element={ <Login /> } />
           <Route path="*" element={ <NotFound /> } />
         </Routes>
