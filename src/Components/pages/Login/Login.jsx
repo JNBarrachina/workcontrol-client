@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
 import { Button, Input, Flex, Typography } from "antd";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
+import { UserDataContext } from "../../../contexts/UserDataContext";
 //import {Title} from "../../Title/Title"
 import logo from "../../assets/Celima.PNG";
 
@@ -11,6 +12,7 @@ const { Title } = Typography;
 const Login = () => {
     const navigate = useNavigate();
     //const [user, setUser] = useState("");
+    const { userData, setUserData } = useContext(UserDataContext);
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
@@ -38,13 +40,10 @@ const Login = () => {
                 if (res.status >= 400 && data.msg) {
                     setErrorMsg(data.msg);
                 } else {
-                    console.log(data);
+                    setUserData(data);
+                    localStorage.setItem("login", JSON.stringify(data));
 
-                    localStorage.setItem("access_token", data.accessToken)
-
-                    localStorage.setItem("user", data.name)
-
-                    navigate("/menu")
+                    navigate("/dashboard")
                     //window.location.href = "/";
                 }
             })
