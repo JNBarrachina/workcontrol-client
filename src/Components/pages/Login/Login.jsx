@@ -3,8 +3,6 @@ import { Button, Input, Flex, Typography } from "antd";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { UserDataContext } from "../../../contexts/UserDataContext";
-//import {Title} from "../../Title/Title"
-import logo from "../../../assets/Celima.PNG";
 
 import "./Login.scss";
 
@@ -15,9 +13,7 @@ const Login = () => {
     //const { userData, setUserData } = useContext(UserDataContext);
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
-    const { userData, setUserData, getlogeaded, setlogeaded } = useContext(UserDataContext);
-
-    
+    const { userData, setUserData, getlogeaded, setlogeaded, } = useContext(UserDataContext);
 
     const [errorMsg, setErrorMsg] = useState("");
 
@@ -49,7 +45,6 @@ const Login = () => {
                     localStorage.setItem("login", JSON.stringify(data));
 
                     navigate("/dashboard")
-                    //window.location.href = "/";
                 }
             })
             .catch((err) => console.error(err))
@@ -58,9 +53,9 @@ const Login = () => {
         const savedData = JSON.parse(localStorage.getItem("login"));
         console.log(savedData);
 
-        if ( savedData &&  email === savedData.email && password === savedData.password ) {
-                navigate("/dashboard");
-                
+        if (savedData && email === savedData.email && password === savedData.password) {
+            navigate("/dashboard");
+
         } else {
             setErrorMsg("Usuario, contraseña o correo incorrectos");
         }
@@ -71,33 +66,36 @@ const Login = () => {
     return (
         <Flex>
             <main id="login-main">
-            <div className="login-container">
-                <div className="login-card">
-                    <Title level={2}>Login</Title>
-                    <Input
-                        value={email}
-                        type="text"
-                        onChange={(event) =>
-                            setEmail(event.target.value)}
-                        placeholder="Correo Electronico"
-                        className="login-input"
-                    />
-
-                    <Input
-                        value={password}
-                        type="password"  
-                        onChange={(event) => setPassword(event.target.value)}
-                        placeholder="Contraseña"
-                        className="login-input"
-                    />
-                    <Button disabled={!isButtonEnabled} type="primary" onClick={handleLoginButtonClick}>Login</Button><br />
-                    <Typography.Text className="error">{errorMsg}</Typography.Text>
+                <div className="login-container">
+                    <div className="login-card">
+                        <img src="/src/assets/workflow.png" alt="" />
+                        <Title level={3}>Login</Title>
+                        <Input
+                            value={email}
+                            type="text"
+                            onChange={(event) =>
+                                setEmail(event.target.value)}
+                            placeholder="Correo Electronico"
+                            className="login-input"
+                        />
+                        <Input
+                            value={password}
+                            type="password"
+                            onChange={(event) => setPassword(event.target.value)}
+                            placeholder="Contraseña"
+                            className="login-input"
+                        />
+                        <Button disabled={!isButtonEnabled} type="primary" onClick={handleLoginButtonClick}>Login</Button><br />
+                        <Typography.Text className="error">{errorMsg}</Typography.Text>
+                        <img src="/src/assets/lasnavesajuntament.webp" alt="" className="lasnaves" />
+                    </div>
                 </div>
-            </div>
-             <img src={logo} alt="Logo Celima" className="login-logo" />
             </main>
         </Flex>
     )
-};
+}
+
+
+
 
 export { Login }

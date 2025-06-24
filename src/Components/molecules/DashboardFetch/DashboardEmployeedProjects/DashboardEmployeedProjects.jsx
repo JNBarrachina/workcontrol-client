@@ -1,30 +1,21 @@
 import { useEffect, useState } from 'react';
-import './DashboardbyEmplooyeedProjets.scss';
+
+import './DashboardEmplooyeedProjets.scss';
 
 const DashboardbyEmplooyeedbyProjets = () => {
   const [getpreviw, setpreview] = useState([]);
-  const user = JSON.parse (localStorage.getItem ("login"))
   useEffect(() => {
-    fetch('http://localhost:3000/fetchs/employeed_assigned', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        rol: user.role,
-        id: JSON.parse( localStorage.getItem('login') )?.id,
-      })
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log('Resultados del Backend ',data);
+    fetch('http://localhost:3000/fetchs/employeed_assigned')
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
         setpreview(data);
-      })
-      .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
   }, []);  // Solo al montar
 
   return (
-    <main id='main-dashboardbyemployeedprojects'>
+    <main id='main-dashboardemployedproyects'>
       <table>
         <thead>
             <tr>

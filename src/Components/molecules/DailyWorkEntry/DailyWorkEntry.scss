@@ -1,0 +1,23 @@
+.dailyWorkEntryCard {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: center;
+
+    width: 100%;
+    flex-grow: 1;
+
+    background-color: whitesmoke;
+    border-radius: 4px;
+    padding: 1rem;
+}
+
+.entryName {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.entryTime {
+    font-weight: bold;
+    font-size: 1rem;
+}
