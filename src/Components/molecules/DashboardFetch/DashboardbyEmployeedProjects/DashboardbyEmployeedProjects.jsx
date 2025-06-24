@@ -11,12 +11,12 @@ const DashboardbyEmplooyeedbyProjets = () => {
       },
       body: JSON.stringify({
         rol: "user",
-        name: "Julian"
+        id: `${ JSON.parse( localStorage.getItem('proyectos') )[0]?.id }`
       })
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+        console.log('Resultados del Backend ',data);
         setpreview(data);
       })
       .catch(err => console.log(err));
