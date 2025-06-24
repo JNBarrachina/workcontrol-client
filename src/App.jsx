@@ -17,7 +17,7 @@ function App() {
     return stored ? JSON.parse(stored) : {};
   });
 
-   const [getlogeaded, setlogeaded] = useState(false)
+  const [getlogeaded, setlogeaded] = useState(false)
 
   return (
     <>
