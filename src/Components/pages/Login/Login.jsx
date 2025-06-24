@@ -11,11 +11,11 @@ import "./Login.scss";
 const { Title } = Typography;
 const Login = () => {
     const navigate = useNavigate();
-    const { userData, setUserData } = useContext(UserDataContext);
-
     //const [user, setUser] = useState("");
+    //const { userData, setUserData } = useContext(UserDataContext);
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
+    const { userData, setUserData, getlogeaded, setlogeaded, } = useContext(UserDataContext);
 
     const [errorMsg, setErrorMsg] = useState("");
 
@@ -43,6 +43,7 @@ const Login = () => {
                     setErrorMsg(data.msg);
                 } else {
                     setUserData(data);
+                    setlogeaded(true);
                     localStorage.setItem("login", JSON.stringify(data));
 
                     navigate("/dashboard")
@@ -51,28 +52,19 @@ const Login = () => {
             .catch((err) => console.error(err))
         //Luego, lo parseamos con el getItem del valor que hemos añadido en el setItem y el logín leerá
         //los usuarios para que tengan el login correcto en su base de datos.
-        const loginData = JSON.parse(localStorage.getItem("login"));
-        console.log(loginData);
+        const savedData = JSON.parse(localStorage.getItem("login"));
+        console.log(savedData);
+
+        if (savedData && email === savedData.email && password === savedData.password) {
+            navigate("/dashboard");
+
+        } else {
+            setErrorMsg("Usuario, contraseña o correo incorrectos");
+        }
+
+        // POST /register
+        // si 
     }
-
-    // if (savedData &&
-
-    //     email === savedData.email &&
-    //     password === savedData.password ) 
-    //     {
-    //         navigate("/dashboard");
-    //     } else {
-    //     user === savedData.user &&
-    //     password === savedData.password &&
-    //     email === savedData.email) {
-    //     navigate("/dashboard");
-    // } else {
-    //     setErrorMsg("Usuario, contraseña o correo incorrectos");
-    // }
-    // POST /register
-    // si el resultado es exitoso redirigir a /login
-
-
     return (
         <Flex>
             <div className="login-container">
@@ -90,8 +82,7 @@ const Login = () => {
                     <Input
                         value={password}
                         type="password"
-                        onChange={(event) =>
-                            setPassword(event.target.value)}
+                        onChange={(event) => setPassword(event.target.value)}
                         placeholder="Contraseña"
                         className="login-input"
                     />

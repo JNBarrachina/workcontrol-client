@@ -6,7 +6,9 @@ export const AdminArea = () => {
     return (
         <>
             <DashboardHeader />
-            <DashboardAdminContent />
+            <DashboardAdminContent/>
+
+
         </>
     )
 }

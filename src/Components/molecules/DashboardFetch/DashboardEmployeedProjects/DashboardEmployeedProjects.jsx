@@ -2,21 +2,12 @@ import { useEffect, useState } from 'react';
 
 const DashboardbyEmplooyeedbyProjets = () => {
   const [getpreviw, setpreview] = useState([]);
-  const user = JSON.parse (localStorage.getItem ("login"))
   useEffect(() => {
-    fetch('http://localhost:3000/fetchs/employeed_assigned', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        rol: user.role,
-        name: user.name
-      })
+    fetch('http://localhost:3000/fetchs/employeed_assigned')
     })
       .then(res => res.json())
       .then(data => {
-        console.log('Resultados del Backend ',data);
+        console.log(data);
         setpreview(data);
       })
       .catch(err => console.log(err));

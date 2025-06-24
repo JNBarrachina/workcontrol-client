@@ -6,6 +6,7 @@ import { Login } from "./Components/pages/Login/Login"
 import { Dashboard } from './Components/pages/Dashboard/Dashboard'
 import { AdminArea } from './Components/pages/AdminArea/AdminArea'
 import { NotFound } from './Components/pages/NotFound/NotFound'
+import { Userprofile } from './Components/pages/Userprofile/Userprofile.jsx'
 
 import { UserDataContext } from './contexts/UserDataContext'
 
@@ -16,17 +17,19 @@ function App() {
     return stored ? JSON.parse(stored) : {};
   });
 
+  const [getlogeaded, setlogeaded] = useState(false)
+
   return (
     <>
       <UserDataContext.Provider
-        value={{ userData, setUserData }}
+        value={{ userData, setUserData , getlogeaded, setlogeaded}}
       >
         <BrowserRouter>
           <Routes>
             <Route path="/login" element={<Login />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/adminarea" element={<AdminArea />} />
-            <Route path='/userprofile' element={ <></>} />
+            <Route path="/dashboard" element={ getlogeaded ? <Dashboard /> : <Login />} />
+            <Route path="/adminarea" element={ getlogeaded ? <AdminArea /> : <Login />} />
+            <Route path='/userprofile' element={ getlogeaded ? <Userprofile/> : <Login />} />
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
