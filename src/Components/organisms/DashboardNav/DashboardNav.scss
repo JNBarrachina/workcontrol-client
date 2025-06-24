@@ -46,14 +46,6 @@
   opacity: 1;
 }
 
-/* ↓ Versión colapsada en media query ↓ */
-@media screen and (max-width: 950px) {
-  .linkText {
-    max-width: 0;
-    padding-right: 0;
-    opacity: 0;
-  }
-}
 
 .dashboardNavLink:hover {
   cursor: pointer;
@@ -68,7 +60,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
+  
   font-weight: bold;
   border-radius: 50%;
   width: 50px;
@@ -88,4 +80,21 @@
 .logoutBtn:hover {
   transform: scale(1.02);
   transition: 0.6s;
+}
+
+@media screen and (max-width: 950px) {
+  .linkText {
+    max-width: 0;
+    padding-right: 0;
+    opacity: 0;
+  }
+
+  .dashboardNavLink {
+    padding: 0;
+  }
+
+  .dashboardNavImg {
+    width: 20px;
+    height: 20px;
+  }
 }
