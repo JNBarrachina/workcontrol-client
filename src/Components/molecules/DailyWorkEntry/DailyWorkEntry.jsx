@@ -9,7 +9,7 @@ const DailyWorkEntry = ({ entry }) => {
         <article className="dailyWorkEntryCard">
             <h3 className="entryName">{entry.Subproject.name}</h3>
             <div className="timeremoveContainer">
-                <p className="entryTime">{entry.hours}H</p>
+                <p className="entryTime">{entry.hours}h</p>
                 <RemoveWorkEntryBtn action={() => { }} />
             </div>
         </article>

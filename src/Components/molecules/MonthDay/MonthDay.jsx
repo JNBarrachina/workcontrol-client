@@ -58,9 +58,7 @@ export const MonthDay = ({ day, entries }) => {
                         <option value="4">Baja médica (SL)</option>
                     </select>
                 </section>
-                <div className='dayHoursAdd'>
-                    <button className='addEntryBtn' disabled={dayType !== 6 && true}><img src="/src/assets/addentryitem.svg" alt="" onClick={openNewWorkEntryModal} /></button>
-                </div>
+                <button className='addEntryBtn' disabled={dayType !== 6 && true}><img src="/src/assets/addentryitem.svg" alt="" onClick={openNewWorkEntryModal} /></button>
             </div>
             <div className='dayWorkEntriesContainer'>
                 {entries.map(entry => {
