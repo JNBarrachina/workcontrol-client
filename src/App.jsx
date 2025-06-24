@@ -17,17 +17,15 @@ function App() {
     return stored ? JSON.parse(stored) : {};
   });
 
-    const [getlogeaded, setlogeaded] = useState()
-
-    useEffect(() => {
-      const stored = localStorage.getItem('logead');
-      if (!stored) {
-        localStorage.setItem('logead', JSON.stringify(false));
-        setlogeaded(false);
-      } else {
-        setlogeaded(JSON.parse(stored));
-      }
-    }, []);
+const [getlogeaded, setlogeaded] = useState(() => {
+    try {
+      const stored = localStorage.getItem("logead");
+      return stored !== null ? JSON.parse(stored) : false;
+    } catch (e) {
+      console.error("Error parsing logead from localStorage:", e);
+      return false;
+    }
+});
 
   useEffect(() => {
     localStorage.setItem('logead', JSON.stringify(getlogeaded));

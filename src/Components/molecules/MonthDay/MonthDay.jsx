@@ -50,7 +50,7 @@ export const MonthDay = ({ day, entries, refreshCalendar }) => {
         <div className='dayContainer'>
             <div className='dayHeaderContainer'>
                 <section className='dayTitleType'>
-                    <h4>{formatFecha(day.date)}</h4>
+                    <h4 className='dayDate'>{formatFecha(day.date)}</h4>
                     <select name="dayType" id="dayType" value={dayType} onChange={(e) => changeDayType(e)}>
                         <option value="6">Laborable (WD)</option>
                         <option value="5">Fin de semana (WE)</option>
