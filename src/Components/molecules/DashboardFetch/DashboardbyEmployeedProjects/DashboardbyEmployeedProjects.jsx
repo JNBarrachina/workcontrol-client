@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const DashboardbyEmplooyeedbyProjets = () => {
+const DashboardbyEmplooyeedProjects = () => {
   const [getpreviw, setpreview] = useState([]);
   const user = JSON.parse (localStorage.getItem ("login"))
   useEffect(() => {
@@ -47,5 +47,5 @@ const DashboardbyEmplooyeedbyProjets = () => {
 };
 
 export {
-  DashboardbyEmplooyeedbyProjets
+  DashboardbyEmplooyeedProjects
 };

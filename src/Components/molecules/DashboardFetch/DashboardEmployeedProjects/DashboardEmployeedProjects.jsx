@@ -1,17 +1,16 @@
 import { useEffect, useState } from 'react';
 
-const DashboardbyEmplooyeedbyProjets = () => {
+const DashboardEmplooyeedProjets = () => {
   const [getpreviw, setpreview] = useState([]);
   useEffect(() => {
     fetch('http://localhost:3000/fetchs/employeed_assigned')
-    })
       .then(res => res.json())
       .then(data => {
         console.log(data);
         setpreview(data);
       })
       .catch(err => console.log(err));
-  }, []);  // Solo al montar
+  }, []);
 
   return (
     <div>
@@ -38,5 +37,5 @@ const DashboardbyEmplooyeedbyProjets = () => {
 };
 
 export {
-  DashboardbyEmplooyeedbyProjets
+  DashboardEmplooyeedProjets
 };
