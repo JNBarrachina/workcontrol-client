@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import './DashboardbyEmplooyeedProjets.scss';
 
 const DashboardbyEmplooyeedbyProjets = () => {
   const [getpreviw, setpreview] = useState([]);
@@ -11,7 +12,7 @@ const DashboardbyEmplooyeedbyProjets = () => {
       },
       body: JSON.stringify({
         rol: user.role,
-        name: user.name
+        id: JSON.parse( localStorage.getItem('login') )?.id,
       })
     })
       .then(res => res.json())
@@ -23,7 +24,7 @@ const DashboardbyEmplooyeedbyProjets = () => {
   }, []);  // Solo al montar
 
   return (
-    <div>
+    <main id='main-dashboardbyemployeedprojects'>
       <table>
         <thead>
             <tr>
@@ -42,7 +43,7 @@ const DashboardbyEmplooyeedbyProjets = () => {
           ))}
         </tbody>
       </table>
-    </div>
+    </main>
   );
 };
 
