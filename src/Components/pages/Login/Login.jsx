@@ -45,6 +45,7 @@ const Login = () => {
                     setErrorMsg(data.msg);
                 } else {
                     setUserData(data);
+                    setlogeaded(true);
                     localStorage.setItem("login", JSON.stringify(data));
 
                     navigate("/dashboard")
