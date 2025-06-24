@@ -86,7 +86,9 @@ const Login = () => {
                         placeholder="Contraseña"
                         className="login-input"
                     />
-                    <Button disabled={!isButtonEnabled} type="primary" onClick={handleLoginButtonClick}>Login</Button><br />
+                    <div className="prepare-button">
+                        <Button disabled={!isButtonEnabled} className="login-button" type="primary" onClick={handleLoginButtonClick}>Login</Button>
+                    </div>
                     <Typography.Text className="error">{errorMsg}</Typography.Text>
                 </div>
             </div>

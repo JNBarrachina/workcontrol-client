@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react';
 
+import './DashboardEmplooyeedProjets.scss';
+
 const DashboardbyEmplooyeedbyProjets = () => {
   const [getpreviw, setpreview] = useState([]);
   useEffect(() => {
     fetch('http://localhost:3000/fetchs/employeed_assigned')
-    })
-      .then(res => res.json())
-      .then(data => {
+    .then(res => res.json())
+    .then(data => {
         console.log(data);
         setpreview(data);
-      })
-      .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
   }, []);  // Solo al montar
 
   return (
-    <div>
+    <main id='main-dashboardemployedproyects'>
       <table>
         <thead>
             <tr>
@@ -33,7 +34,7 @@ const DashboardbyEmplooyeedbyProjets = () => {
           ))}
         </tbody>
       </table>
-    </div>
+    </main>
   );
 };
 
