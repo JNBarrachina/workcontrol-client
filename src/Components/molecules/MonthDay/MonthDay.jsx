@@ -3,6 +3,7 @@ import { useState, useRef } from "react";
 import './MonthDay.scss'
 
 import { NewWorkEntry } from "../NewWorkEntry/NewWorkEntry";
+import { DailyWorkEntry } from "../DailyWorkEntry/DailyWorkEntry";
 
 export const MonthDay = ({ day }) => {
     const modalRef = useRef(null);
@@ -60,7 +61,8 @@ export const MonthDay = ({ day }) => {
                     <button className='addEntryBtn' disabled={dayType !== 6 && true}><img src="/src/assets/addentryitem.svg" alt="" onClick={openNewWorkEntryModal} /></button>
                 </div>
             </div>
-            <div className='dayWorkContainer'>
+            <div className='dayWorkEntriesContainer'>
+                <DailyWorkEntry />
             </div>
             <NewWorkEntry modalRef={modalRef} day={day} />
         </div>

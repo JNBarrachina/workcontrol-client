@@ -5,9 +5,6 @@ import { UserDataContext } from "../../../contexts/UserDataContext";
 import "./NewWorkEntry.scss";
 
 export const NewWorkEntry = ({ modalRef, day }) => {
-
-    console.log(day);
-
     const [project, setProject] = useState("");
     const [time, setTime] = useState("");
     const [msg, setMsg] = useState("");
@@ -37,7 +34,7 @@ export const NewWorkEntry = ({ modalRef, day }) => {
         <>
             <dialog ref={modalRef} className="newWorkEntryDialog">
                 <div className="newWorkEntryDialogContainer">
-                    <h2 className="dialogTitle">New Work Entry</h2>
+                    <h2 className="dialogTitle">New Work Entry ({day.date})</h2>
                     <form action="" className="newWorkEntryForm" onSubmit={handleSubmit}>
                         <div className="selectProject">
                             <label htmlFor="project" className="modalLabel">Project</label>

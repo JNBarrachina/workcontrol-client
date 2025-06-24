@@ -10,30 +10,30 @@ export const DashboardMain = () => {
     const [entries, setEntries] = useState([]);
     console.log("Valor inicial de date:", date);
 
-useEffect(() => {
-    console.log("Llamando a /calendar con fecha:", date);
+    useEffect(() => {
+        console.log("Llamando a /calendar con fecha:", date);
 
-    fetch(`http://localhost:3000/calendar/${date}`, {
-        headers: {
-            "Content-type": "application/json"
-        },
-        method: "GET",
-    })
-        .then(res => {
-            if (!res.ok) {
-                // Si el backend devuelve error (404, 500), lanza
-                throw new Error(`Error ${res.status} en /calendar`);
-            }
-            return res.json(); // solo si es respuesta válida
+        fetch(`http://localhost:3000/calendar/${date}`, {
+            headers: {
+                "Content-type": "application/json"
+            },
+            method: "GET",
         })
-        .then(data => {
-            setDays(data);
-        })
-        .catch(err => {
-            console.error("Error en fetch de /calendar:", err);
-            setDays([]); // evita que quede mal cargado
-        });
-}, [date]);
+            .then(res => {
+                if (!res.ok) {
+                    // Si el backend devuelve error (404, 500), lanza
+                    throw new Error(`Error ${res.status} en /calendar`);
+                }
+                return res.json(); // solo si es respuesta válida
+            })
+            .then(data => {
+                setDays(data);
+            })
+            .catch(err => {
+                console.error("Error en fetch de /calendar:", err);
+                setDays([]); // evita que quede mal cargado
+            });
+    }, [date]);
 
     useEffect(() => {
         const [year, month] = date.split('-');
@@ -46,10 +46,10 @@ useEffect(() => {
         })
             .then(res => res.json())
             .then(data => {
-            // En caso de que tu backend devuelva { data: [...], message: "..." }
-            setEntries(data.data || []);
-        });
-}, [date]);
+                // En caso de que tu backend devuelva { data: [...], message: "..." }
+                setEntries(data.data || []);
+            });
+    }, [date]);
     console.log(entries)
 
     const handleMonthChange = (e) => {
