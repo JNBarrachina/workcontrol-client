@@ -1,23 +1,22 @@
 .dashboardMainContent {
-    height: 100vh;
-
-    overflow-y: scroll;
-
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: flex-start;
+    width: 100%;
+    height: 100%;
+    
 
 
     padding: 1rem;
-    gap: 1rem;
 
     background-color: whitesmoke;
+
+    overflow: hidden;
+    overflow-y: auto;
 }
 
 .dashboardMainTitle {
-    width: 100%;
-    
     text-align: left;
     font-size: 1.8rem;
 }
