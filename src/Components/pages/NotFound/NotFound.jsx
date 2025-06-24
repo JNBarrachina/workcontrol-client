@@ -14,9 +14,9 @@ export const NotFound = () => {
 
             <>
                 <DashboardHeader />
-                <main id='main-notfound'>
+                <main className="dashboardContent">
                     <DashboardNav />
-                    <section>
+                    <section id='main-notfound'>
                         <h1>404</h1>
                         <p>Page not found</p>
                     </section>
