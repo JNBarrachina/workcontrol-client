@@ -16,6 +16,7 @@ function App() {
     const stored = localStorage.getItem("login");
     return stored ? JSON.parse(stored) : {};
   });
+  
 const [getlogeaded, setlogeaded] = useState(() => {
     try {
       const stored = localStorage.getItem("logead");
