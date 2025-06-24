@@ -14,8 +14,8 @@ export const MonthDay = ({ day, entries }) => {
     };
 
     const [dayType, setDayType] = useState(day.DayCodeId);
-    const [dayEntries, setDayEntries] = useState (entries);
-  
+    const [dayEntries, setDayEntries] = useState(entries);
+
 
     const formatFecha = (fechaString) => {
         const fecha = new Date(fechaString);
@@ -48,7 +48,7 @@ export const MonthDay = ({ day, entries }) => {
         <div className='dayContainer'>
             <div className='dayHeaderContainer'>
                 <section className='dayTitleType'>
-                    <h4>{formatFecha(day.date)}</h4>
+                    <h4 className='dayDate'>{formatFecha(day.date)}</h4>
                     <select name="dayType" id="dayType" value={dayType} onChange={(e) => changeDayType(e)}>
                         <option value="6">Laborable (WD)</option>
                         <option value="5">Fin de semana (WE)</option>
@@ -59,18 +59,15 @@ export const MonthDay = ({ day, entries }) => {
                     </select>
                 </section>
                 <div className='dayHoursAdd'>
-                    <p className='dayHours'>Time</p>
                     <button className='addEntryBtn' disabled={dayType !== 6 && true}><img src="/src/assets/addentryitem.svg" alt="" onClick={openNewWorkEntryModal} /></button>
                 </div>
             </div>
             <div className='dayWorkEntriesContainer'>
-               
-               {console.log("Entradas diarias",dayEntries)}
                 {entries.map(entry => {
-                return (
-                    <DailyWorkEntry key={entry.id} entry={entry} />
-                );
-            })}
+                    return (
+                        <DailyWorkEntry key={entry.id} entry={entry} />
+                    );
+                })}
             </div>
             <NewWorkEntry modalRef={modalRef} day={day} />
         </div>

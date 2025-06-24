@@ -1,0 +1,23 @@
+
+.btnRemove {
+  padding: 0.4rem 0.6rem;
+  background-color: whitesmoke;
+}
+
+.btnRemove:hover {
+  transform: scale(1.4);
+  transition: 0.2s;
+}
+
+.btnRemove:focus {
+  box-shadow: 225, 83, 97;
+}
+
+.btnRemove:active {
+  transform: scale(1);
+}
+
+.imgRemove {
+  width: 25px;
+  height: 25px;
+}

@@ -6,10 +6,13 @@
   padding: 1rem;
   background-color: white;
   width: 100%;
+  border-bottom: 3px solid rgb(162, 29, 156);
 }
 
 .dashboardLogo {
   height: 40px;
+  height: 55px;
+
 }
 
 .userProfileBox {
@@ -59,4 +62,14 @@
 .logoutImg {
   width: 25px;
   height: 25px;
+}
+
+@media screen and (max-width: 600px) {
+  .dashboardHeaderContainer {
+    padding: 0.6rem;
+  }
+  .dashboardLogo {
+    height: 40px;
+  }
+  
 }
