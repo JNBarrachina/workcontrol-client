@@ -9,8 +9,6 @@ import { DashboardbyEmplooyeedbyProjets } from '../../molecules/DashboardFetch/D
 import '../../organisms/DashboardContent/DashboardContent.scss'
 
 const Userprofile = () => {
-
-
     return(
         <>
             <DashboardHeader />

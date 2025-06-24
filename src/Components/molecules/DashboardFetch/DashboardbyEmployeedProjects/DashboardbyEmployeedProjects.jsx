@@ -11,7 +11,7 @@ const DashboardbyEmplooyeedbyProjets = () => {
       },
       body: JSON.stringify({
         rol: user.role,
-        name: user.name
+        id: JSON.parse( localStorage.getItem('login') )?.id,
       })
     })
       .then(res => res.json())
