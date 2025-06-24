@@ -67,6 +67,7 @@ const Login = () => {
     }
     return (
         <Flex>
+            <main id="login-main">
             <div className="login-container">
                 <div className="login-card">
                     <Title level={2}>Login</Title>
@@ -78,7 +79,6 @@ const Login = () => {
                         placeholder="Correo Electronico"
                         className="login-input"
                     />
-
                     <Input
                         value={password}
                         type="password"
@@ -89,9 +89,9 @@ const Login = () => {
                     <Button disabled={!isButtonEnabled} type="primary" onClick={handleLoginButtonClick}>Login</Button><br />
                     <Typography.Text className="error">{errorMsg}</Typography.Text>
                 </div>
-
             </div>
             <img src={logo} alt="Logo Celima" className="login-logo" />
+            </main>
         </Flex>
     )
 }
