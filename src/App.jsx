@@ -22,7 +22,7 @@ function App() {
   return (
     <>
       <UserDataContext.Provider
-        value={{ userData, setUserData , getlogeaded, setlogeaded }}
+        value={{ userData, setUserData , getlogeaded, setlogeaded}}
       >
         <BrowserRouter>
           <Routes>
