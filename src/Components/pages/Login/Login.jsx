@@ -15,7 +15,7 @@ const Login = () => {
     //const { userData, setUserData } = useContext(UserDataContext);
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
-    const { userData, setUserData } = useContext(UserDataContext);
+    const { userData, setUserData, getlogeaded, setlogeaded, } = useContext(UserDataContext);
 
     const [errorMsg, setErrorMsg] = useState("");
 
@@ -43,6 +43,7 @@ const Login = () => {
                     setErrorMsg(data.msg);
                 } else {
                     setUserData(data);
+                    setlogeaded(true);
                     localStorage.setItem("login", JSON.stringify(data));
 
                     navigate("/dashboard")
