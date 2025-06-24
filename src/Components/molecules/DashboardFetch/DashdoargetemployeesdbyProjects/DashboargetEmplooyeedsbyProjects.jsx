@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import './DashboargetEmplooyeedsbyProjects.css';
+
+import './DashboargetEmplooyeedsbyProjects.scss'
 
 const DashboargetEmplooyeedsbyProjects = () => {
     const [getpreviw, setpreview] = useState([]);
@@ -19,7 +20,7 @@ const DashboargetEmplooyeedsbyProjects = () => {
     },[getpreviw])
 
     return (
-        <main id="DashboargetEmplooyeedsbyProjects">
+        <main id="main-DashboargetEmplooyeedsbyProjects">
             <table>
                 <thead>
                     <tr>

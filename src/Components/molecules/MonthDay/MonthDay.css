@@ -1,5 +1,6 @@
 .dayContainer {
   display: flex;
+  flex-flow: column wrap;
   justify-content: center;
   align-items: center;
   min-width: 360px;
@@ -9,6 +10,14 @@
   padding: 12px;
   border-radius: 4px;
   font-weight: bold;
+}
+
+.dayWorkEntriesContainer {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .dayHeaderContainer {
