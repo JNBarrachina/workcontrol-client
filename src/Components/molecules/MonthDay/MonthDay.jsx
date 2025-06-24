@@ -5,17 +5,15 @@ import './MonthDay.scss'
 import { NewWorkEntry } from "../NewWorkEntry/NewWorkEntry";
 import { DailyWorkEntry } from "../DailyWorkEntry/DailyWorkEntry";
 
-export const MonthDay = ({ day, entries }) => {
+export const MonthDay = ({ day, entries, refreshCalendar }) => {
     const modalRef = useRef(null);
-    console.log(entries)
 
     const openNewWorkEntryModal = () => {
         modalRef.current?.showModal();
     };
 
     const [dayType, setDayType] = useState(day.DayCodeId);
-    const [dayEntries, setDayEntries] = useState (entries);
-  
+    const [dayEntries, setDayEntries] = useState(entries);
 
     const formatFecha = (fechaString) => {
         const fecha = new Date(fechaString);
@@ -32,7 +30,6 @@ export const MonthDay = ({ day, entries }) => {
         const newDayType = parseInt(e.target.value);
         setDayType(newDayType);
 
-
         fetch(`http://localhost:3000/calendar/${day.id}`, {
             headers: {
                 "Content-type": "application/json"
@@ -41,6 +38,11 @@ export const MonthDay = ({ day, entries }) => {
             body: JSON.stringify({
                 DayCodeId: newDayType
             })
+        })
+        .then(() => {
+            if (typeof refreshCalendar === 'function') {
+                refreshCalendar(); // 🔁 actualizar resumen
+            }
         });
     };
 
@@ -58,21 +60,11 @@ export const MonthDay = ({ day, entries }) => {
                         <option value="4">Baja médica (SL)</option>
                     </select>
                 </section>
-                <div className='dayHoursAdd'>
-                    <p className='dayHours'>Time</p>
-                    <button className='addEntryBtn' disabled={dayType !== 6 && true}><img src="/src/assets/addentryitem.svg" alt="" onClick={openNewWorkEntryModal} /></button>
-                </div>
+                <button className='addWorkEntryButton' onClick={openNewWorkEntryModal}>Añadir entrada</button>
             </div>
-            <div className='dayWorkEntriesContainer'>
-               
-               {console.log("Entradas diarias",dayEntries)}
-                {entries.map(entry => {
-                return (
-                    <DailyWorkEntry key={entry.id} entry={entry} />
-                );
-            })}
-            </div>
+
+            <DailyWorkEntry entries={dayEntries} />
             <NewWorkEntry modalRef={modalRef} day={day} />
         </div>
-    )
-}
+    );
+};
