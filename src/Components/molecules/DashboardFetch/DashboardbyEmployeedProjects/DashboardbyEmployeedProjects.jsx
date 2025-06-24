@@ -16,7 +16,7 @@ const DashboardbyEmplooyeedbyProjets = () => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+        console.log('Resultados del Backend ',data);
         setpreview(data);
       })
       .catch(err => console.log(err));
