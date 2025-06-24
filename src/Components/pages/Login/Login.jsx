@@ -17,7 +17,7 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const { userData, setUserData, getlogeaded, setlogeaded } = useContext(UserDataContext);
 
-    //const [user, setUser] = useState("");
+    
 
     const [errorMsg, setErrorMsg] = useState("");
 
