@@ -3,8 +3,6 @@ import { Button, Input, Flex, Typography } from "antd";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { UserDataContext } from "../../../contexts/UserDataContext";
-//import {Title} from "../../Title/Title"
-import logo from "../../../assets/Celima.PNG";
 
 import "./Login.scss";
 
@@ -67,31 +65,32 @@ const Login = () => {
     }
     return (
         <Flex>
-            <div className="login-container">
-                <div className="login-card">
-                    <Title level={2}>Login</Title>
-                    <Input
-                        value={email}
-                        type="text"
-                        onChange={(event) =>
-                            setEmail(event.target.value)}
-                        placeholder="Correo Electronico"
-                        className="login-input"
-                    />
-
-                    <Input
-                        value={password}
-                        type="password"
-                        onChange={(event) => setPassword(event.target.value)}
-                        placeholder="Contraseña"
-                        className="login-input"
-                    />
-                    <Button disabled={!isButtonEnabled} type="primary" onClick={handleLoginButtonClick}>Login</Button><br />
-                    <Typography.Text className="error">{errorMsg}</Typography.Text>
+            <main id="login-main">
+                <div className="login-container">
+                    <div className="login-card">
+                        <img src="/src/assets/workflow.png" alt="" />
+                        <Title level={3}>Login</Title>
+                        <Input
+                            value={email}
+                            type="text"
+                            onChange={(event) =>
+                                setEmail(event.target.value)}
+                            placeholder="Correo Electronico"
+                            className="login-input"
+                        />
+                        <Input
+                            value={password}
+                            type="password"
+                            onChange={(event) => setPassword(event.target.value)}
+                            placeholder="Contraseña"
+                            className="login-input"
+                        />
+                        <Button disabled={!isButtonEnabled} type="primary" onClick={handleLoginButtonClick}>Login</Button><br />
+                        <Typography.Text className="error">{errorMsg}</Typography.Text>
+                        <img src="/src/assets/lasnavesajuntament.webp" alt="" className="lasnaves" />
+                    </div>
                 </div>
-
-            </div>
-            <img src={logo} alt="Logo Celima" className="login-logo" />
+            </main>
         </Flex>
     )
 }
