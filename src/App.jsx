@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import { BrowserRouter, Route, Routes, Navigate, useNavigate } from "react-router"
 
@@ -17,7 +17,21 @@ function App() {
     return stored ? JSON.parse(stored) : {};
   });
 
-  const [getlogeaded, setlogeaded] = useState(false)
+    const [getlogeaded, setlogeaded] = useState()
+
+    useEffect(() => {
+      const stored = localStorage.getItem('logead');
+      if (!stored) {
+        localStorage.setItem('logead', JSON.stringify(false));
+        setlogeaded(false);
+      } else {
+        setlogeaded(JSON.parse(stored));
+      }
+    }, []);
+
+  useEffect(() => {
+    localStorage.setItem('logead', JSON.stringify(getlogeaded));
+  }, [getlogeaded]);
 
   return (
     <>

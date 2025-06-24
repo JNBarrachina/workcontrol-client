@@ -5,14 +5,17 @@ import './MonthDay.scss'
 import { NewWorkEntry } from "../NewWorkEntry/NewWorkEntry";
 import { DailyWorkEntry } from "../DailyWorkEntry/DailyWorkEntry";
 
-export const MonthDay = ({ day }) => {
+export const MonthDay = ({ day, entries }) => {
     const modalRef = useRef(null);
+    console.log(entries)
 
     const openNewWorkEntryModal = () => {
         modalRef.current?.showModal();
     };
 
     const [dayType, setDayType] = useState(day.DayCodeId);
+    const [dayEntries, setDayEntries] = useState (entries);
+  
 
     const formatFecha = (fechaString) => {
         const fecha = new Date(fechaString);
@@ -29,7 +32,6 @@ export const MonthDay = ({ day }) => {
         const newDayType = parseInt(e.target.value);
         setDayType(newDayType);
 
-        console.log(day.id, newDayType);
 
         fetch(`http://localhost:3000/calendar/${day.id}`, {
             headers: {
@@ -62,7 +64,13 @@ export const MonthDay = ({ day }) => {
                 </div>
             </div>
             <div className='dayWorkEntriesContainer'>
-                <DailyWorkEntry />
+               
+               {console.log("Entradas diarias",dayEntries)}
+                {entries.map(entry => {
+                return (
+                    <DailyWorkEntry key={entry.id} entry={entry} />
+                );
+            })}
             </div>
             <NewWorkEntry modalRef={modalRef} day={day} />
         </div>
