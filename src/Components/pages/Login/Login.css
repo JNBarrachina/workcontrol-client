@@ -42,12 +42,19 @@ body {
 }
 
 .login-button {
-  width: 100%;
-  margin: 0;
-  font-weight: bold;
   background-color: pink;
-}
+  color: white;
+  border: none;
+  font-weight: bold;
+  width: 100%;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
 
+  &:hover {
+    background-color: pink !important ;
+    color: white !important;
+  }
+}
 .login-logo {
   width: 100%;
   max-width: 400px;

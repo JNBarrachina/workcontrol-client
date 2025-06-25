@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import { UserDataContext } from "../../../contexts/UserDataContext";
 
 import "./Login.scss";
-
+import "./Login.css";
 const { Title } = Typography;
 const Login = () => {
     const navigate = useNavigate();
@@ -85,7 +85,7 @@ const Login = () => {
                             placeholder="Contraseña"
                             className="login-input"
                         />
-                        <Button disabled={!isButtonEnabled} type="primary" className="login-button" onClick={handleLoginButtonClick}>Login</Button><br />
+                        <Button disabled={!isButtonEnabled} className="login-button" onClick={handleLoginButtonClick}>Login</Button><br />
                         <Typography.Text className="error">{errorMsg}</Typography.Text>
                         <img src="/src/assets/lasnavesajuntament.webp" alt="" className="lasnaves" />
                     </div>
