@@ -16,8 +16,8 @@ function App() {
     const stored = localStorage.getItem("login");
     return stored ? JSON.parse(stored) : {};
   });
-  
-const [getlogeaded, setlogeaded] = useState(() => {
+
+  const [getlogeaded, setlogeaded] = useState(() => {
     try {
       const stored = localStorage.getItem("logead");
       return stored !== null ? JSON.parse(stored) : false;
@@ -25,7 +25,7 @@ const [getlogeaded, setlogeaded] = useState(() => {
       console.error("Error parsing logead from localStorage:", e);
       return false;
     }
-});
+  });
 
   useEffect(() => {
     localStorage.setItem('logead', JSON.stringify(getlogeaded));
@@ -34,14 +34,14 @@ const [getlogeaded, setlogeaded] = useState(() => {
   return (
     <>
       <UserDataContext.Provider
-        value={{ userData, setUserData , getlogeaded, setlogeaded}}
+        value={{ userData, setUserData, getlogeaded, setlogeaded }}
       >
         <BrowserRouter>
           <Routes>
             <Route path="/login" element={<Login />} />
-            <Route path="/dashboard" element={ getlogeaded ? <Dashboard /> : <Login />} />
-            <Route path="/adminarea" element={ getlogeaded ? <AdminArea /> : <Login />} />
-            <Route path='/userprofile' element={ getlogeaded ? <Userprofile/> : <Login />} />
+            <Route path="/dashboard" element={getlogeaded ? <Dashboard /> : <Login />} />
+            <Route path="/adminarea" element={getlogeaded ? <AdminArea /> : <Login />} />
+            <Route path='/userprofile' element={getlogeaded ? <Userprofile /> : <Login />} />
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
