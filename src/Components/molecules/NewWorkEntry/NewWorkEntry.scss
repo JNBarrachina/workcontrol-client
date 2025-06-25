@@ -31,7 +31,7 @@
   justify-content: center;
   align-items: center;
 
-  gap: 0.6rem;
+  gap: 1rem;
 }
 
 .selectProject, .selectTime {
@@ -47,6 +47,11 @@
   gap: 0.6rem;
 }
 
+.newWorkEntryProjectSelect {
+  border: 2px solid lightgrey;
+  padding:  0.6rem;
+}
+
 .newWorkEntryBtns {
   width: 100%;
   
@@ -56,12 +61,12 @@
 }
 
 .dialogTitle {
-  color: #254d70;
-  font-size: xx-large;
+  color: rgb(162, 29, 156);
 }
 
 .newWorkEntryTime {
-  padding: 0.4rem;
+  border: 2px solid lightgrey;
+  padding: 0.6rem;
 }
 
 .modalLabel {
@@ -76,7 +81,7 @@
 .modalBtn {
   cursor: pointer;
 
-  border: 1px solid lightgrey;
+  border: 3px solid transparent;
   border-radius: 8px;
 }
 

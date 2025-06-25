@@ -29,7 +29,6 @@ export const NewWorkEntry = ({ modalRef, day }) => {
         closeModal();
     };
 
-
     return (
         <>
             <dialog ref={modalRef} className="newWorkEntryDialog">
@@ -39,7 +38,7 @@ export const NewWorkEntry = ({ modalRef, day }) => {
                         <div className="selectProject">
                             <label htmlFor="project" className="modalLabel">Project</label>
                             <select
-                                className="newWorkEntryProject"
+                                className="newWorkEntryProjectSelect"
                                 name="project"
                                 id="project"
                                 onChange={(e) => setNewCategory(e.target.value)}
