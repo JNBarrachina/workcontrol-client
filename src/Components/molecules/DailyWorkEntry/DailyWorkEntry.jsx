@@ -1,20 +1,28 @@
-import { RemoveWorkEntryBtn } from "../../atoms/RemoveWorkEntryBtn/RemoveWorkEntryBtn";
-import "./DailyWorkEntry.scss";
+import { useState, useEffect, useRef } from "react";
 
-const DailyWorkEntry = ({ entries }) => {
-    if (!Array.isArray(entries)) return null;
+import { RemoveWorkEntryBtn } from "../../atoms/RemoveWorkEntryBtn/RemoveWorkEntryBtn"
+import { RemoveWorkEntry } from "../../molecules/RemoveWorkEntry/RemoveWorkEntry"
+
+import "./DailyWorkEntry.scss"
+const DailyWorkEntry = ({ entry }) => {
+    const modalRef = useRef(null);
+
+    const openNewWorkEntryModal = () => {
+        dialogRef.current?.showModal();
+    };
+
+    console.log(entry);
 
     return (
-        <>
-            {entries.map((entry, index) => (
-                <article className="dailyWorkEntryCard" key={index}>
-                    <h3 className="entryName">{entry?.Subproject?.name || "Sin subproyecto"}</h3>
-                    <p className="entryTime">{entry?.hours || 0}H</p>
-                    <RemoveWorkEntryBtn action={() => { }} />
-                </article>
-            ))}
-        </>
-    );
+        <article className="dailyWorkEntryCard">
+            <h3 className="entryName">{entry.Subproject.name}</h3>
+            <div className="timeremoveContainer">
+                <p className="entryTime">{entry.hours}h</p>
+                <RemoveWorkEntryBtn action={openNewWorkEntryModal} />
+            </div>
+            <RemoveWorkEntry modalRef={modalRef} entry={entry} />
+        </article>
+    )
 };
 
 export { DailyWorkEntry };
