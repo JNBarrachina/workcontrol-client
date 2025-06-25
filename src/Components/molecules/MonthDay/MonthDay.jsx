@@ -5,7 +5,7 @@ import './MonthDay.scss'
 import { NewWorkEntry } from "../NewWorkEntry/NewWorkEntry";
 import { DailyWorkEntry } from "../DailyWorkEntry/DailyWorkEntry";
 
-export const MonthDay = ({ day, entries, refreshCalendar }) => {
+export const MonthDay = ({ day, entries }) => {
     const modalRef = useRef(null);
 
     const openNewWorkEntryModal = () => {
@@ -39,11 +39,11 @@ export const MonthDay = ({ day, entries, refreshCalendar }) => {
                 DayCodeId: newDayType
             })
         })
-        .then(() => {
-            if (typeof refreshCalendar === 'function') {
-                refreshCalendar(); // 🔁 actualizar resumen
-            }
-        });
+            .then(() => {
+                if (typeof refreshCalendar === 'function') {
+                    refreshCalendar(); // 🔁 actualizar resumen
+                }
+            });
     };
 
     return (
