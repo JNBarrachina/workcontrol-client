@@ -19,7 +19,7 @@ export const DashboardNav = () => {
                     />
                     <p className="linkText">My calendar</p>
                 </Link>
-                <Link to="/userprofile" className="dashboardNavLink">
+                <Link to="#" className="dashboardNavLink">
                     <img
                         className="dashboardNavImg"
                         src="/src/assets/documentsicon.svg"

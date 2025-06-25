@@ -1,19 +1,22 @@
-import { useState, useEffect } from "react";
+import { RemoveWorkEntryBtn } from "../../atoms/RemoveWorkEntryBtn/RemoveWorkEntryBtn";
+import "./DailyWorkEntry.scss";
 
-import { RemoveWorkEntryBtn } from "../../atoms/RemoveWorkEntryBtn/RemoveWorkEntryBtn"
-import "./DailyWorkEntry.scss"
-const DailyWorkEntry = ({ entry }) => {
-    console.log(entry);
+const DailyWorkEntry = ({ entries }) => {
+    if (!Array.isArray(entries)) return null;
 
     return (
-        <article className="dailyWorkEntryCard">
-            <h3 className="entryName">{entry.Subproject.name}</h3>
-            <div className="timeremoveContainer">
-                <p className="entryTime">{entry.hours}H</p>
-                <RemoveWorkEntryBtn action={() => { }} />
-            </div>
-        </article>
-    )
+        <>
+            {entries.map((entry, index) => (
+                <article className="dailyWorkEntryCard" key={index}>
+                    <h3 className="entryName">{entry?.Subproject?.name || "Sin subproyecto"}</h3>
+                    <p className="entryTime">{entry?.hours || 0}H</p>
+                    <RemoveWorkEntryBtn action={() => { }} />
+                </article>
+            ))}
+        </>
+    );
 };
 
-export { DailyWorkEntry }
+export { DailyWorkEntry };
+
+
