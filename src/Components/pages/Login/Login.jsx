@@ -1,6 +1,5 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Button, Input, Flex, Typography } from "antd";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { UserDataContext } from "../../../contexts/UserDataContext";
 
@@ -95,7 +94,4 @@ const Login = () => {
     )
 }
 
-
-
-
-export { Login }
+export { Login };
