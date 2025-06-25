@@ -8,7 +8,7 @@ const DailyWorkEntry = ({ entry }) => {
     const modalRef = useRef(null);
 
     const openNewWorkEntryModal = () => {
-        dialogRef.current?.showModal();
+        modalRef.current?.showModal();
     };
 
     console.log(entry);
