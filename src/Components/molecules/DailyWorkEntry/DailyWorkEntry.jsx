@@ -31,7 +31,10 @@ const DailyWorkEntry = ({ entry, onDelete }) => {
 
     return (
         <article className="dailyWorkEntryCard">
-            <h3 className="entryName">{entry.Subproject.name}</h3>
+            <div className="namesContainer">
+                <h3 className="entryProjectName">{entry.Subproject.Project.name}</h3>
+                <h4 className="entrySubprojectName">{entry.Subproject.name}</h4>
+            </div>
             <div className="timeremoveContainer">
                 <p className="entryTime">{entry.hours}h</p>
                 <RemoveWorkEntryBtn action={openDeleteModal} />

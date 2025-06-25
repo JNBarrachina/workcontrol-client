@@ -1,6 +1,6 @@
 .dailyWorkEntryCard {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
 
@@ -25,15 +25,26 @@
     transition: 0.3s;
 }
 
-.entryName {
-    font-size: 1rem;
-    flex-grow: 1;
-    max-width: clamp(25ch, 70%, 100ch);
-    word-wrap: break-word;
+.namesContainer {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
 
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    flex-grow: 1;
+
+    gap: 0.2rem;
+}
+
+.entryProjectName{
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.entrySubprojectName {
+    font-size: 1rem;
+    font-weight: normal;
+
 }
 
 .timeremoveContainer {
@@ -51,7 +62,12 @@
 }
 
 @media screen and (max-width: 600px) {
-    .entryName {
+
+    .entryProjectName {
+        font-size: 1rem;
+    }
+
+    .entrySubprojectName {
         font-size: 0.8rem;
     }
 
