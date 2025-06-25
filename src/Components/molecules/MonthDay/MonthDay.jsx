@@ -16,7 +16,6 @@ export const MonthDay = ({ day, entries }) => {
     const [dayType, setDayType] = useState(day.DayCodeId);
     const [dayEntries, setDayEntries] = useState(entries);
 
-
     const formatFecha = (fechaString) => {
         const fecha = new Date(fechaString);
         const texto = fecha.toLocaleDateString('es-ES', {
