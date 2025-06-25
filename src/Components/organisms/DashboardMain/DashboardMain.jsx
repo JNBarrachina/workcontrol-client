@@ -1,64 +1,61 @@
 import { useState, useEffect } from 'react'
-
 import { MonthDaysList } from '../MonthDaysList/MonthDaysList';
-
 import './DashboardMain.scss'
 
 export const DashboardMain = () => {
     const [date, setDate] = useState(new Date().toISOString().slice(0, 7));
     const [days, setDays] = useState([]);
     const [entries, setEntries] = useState([]);
-    console.log("Valor inicial de date:", date);
 
-useEffect(() => {
-    console.log("Llamando a /calendar con fecha:", date);
-
-    fetch(`http://localhost:3000/calendar/${date}`, {
-        headers: {
-            "Content-type": "application/json"
-        },
-        method: "GET",
-    })
-        .then(res => {
-            if (!res.ok) {
-                // Si el backend devuelve error (404, 500), lanza
-                throw new Error(`Error ${res.status} en /calendar`);
-            }
-            return res.json(); // solo si es respuesta válida
+    useEffect(() => {
+        fetch(`http://localhost:3000/calendar/${date}`, {
+            headers: { "Content-type": "application/json" },
+            method: "GET",
         })
-        .then(data => {
-            setDays(data);
-        })
-        .catch(err => {
-            console.error("Error en fetch de /calendar:", err);
-            setDays([]); // evita que quede mal cargado
-        });
-}, [date]);
+            .then(res => {
+                if (!res.ok) throw new Error(`Error ${res.status} en /calendar`);
+                return res.json();
+            })
+            .then(data => setDays(data))
+            .catch(err => {
+                console.error("Error en fetch de /calendar:", err);
+                setDays([]);
+            });
+    }, [date]);
 
     useEffect(() => {
         const [year, month] = date.split('-');
-
         fetch(`http://localhost:3000/api/workentries/1/${year}-${month}`, {
-            headers: {
-                "Content-type": "application/json"
-            },
+            headers: { "Content-type": "application/json" },
             method: "GET",
         })
             .then(res => res.json())
-            .then(data => {
-            // En caso de que tu backend devuelva { data: [...], message: "..." }
-            setEntries(data.data || []);
-        });
-}, [date]);
-    console.log(entries)
-
+            .then(data => setEntries(data.data || []));
+    }, [date]);
+   
     const handleMonthChange = (e) => {
         setDate(e.target.value);
-    }
+    };
+
+    // 🔢 Total de horas trabajadas en el mes
+    const totalHorasMes = entries.reduce((acc, e) => acc + e.hours, 0);
+
+    // 📆 Calcular días laborables y horas esperadas
+    const diasLaborables = days.filter(d => d.isWorkingDay).length;
+    const horasEsperadasMes = diasLaborables * 7.5;
+    const horasRestantes = Math.max(horasEsperadasMes - totalHorasMes, 0);
+
+    // 📅 Agrupar entradas por día
+    const entradasPorDia = {};
+    entries.forEach(e => {
+        if (!entradasPorDia[e.date]) entradasPorDia[e.date] = [];
+        entradasPorDia[e.date].push(e);
+    });
 
     return (
         <article className="dashboardMainContent">
             <h1 className="dashboardMainTitle">Your workflow</h1>
+
             <div className="monthSelector">
                 <p>Select a month: </p>
                 <input
@@ -68,10 +65,23 @@ useEffect(() => {
                     value={date}
                     onChange={handleMonthChange} />
             </div>
+
+            {/* ✅ Resumen mensual */}
+            <div className="monthlySummary">
+                <h2>Resumen del mes</h2>
+                <p>Horas trabajadas: <strong>{totalHorasMes.toFixed(2)} h</strong></p>
+                <p>Horas que debes trabajar: <strong>{horasEsperadasMes.toFixed(2)} h</strong></p>
+                <p>Horas restantes por imputar: <strong>{horasRestantes.toFixed(2)} h</strong></p>
+            </div>
+            <div>
+                {entries.length === 0 && (
+                    <p style={{ marginTop: "2em" }}>No hay entradas para este mes.</p>
+                )}
+            </div>
+
+            {/* Lista previa de días */}
             <MonthDaysList days={days} entries={entries} />
         </article>
-    )
+    );
 };
-
-
 

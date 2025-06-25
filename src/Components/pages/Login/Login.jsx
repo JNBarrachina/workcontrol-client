@@ -1,79 +1,97 @@
 import { useState } from "react";
 import { Button, Input, Flex, Typography } from "antd";
 import { useNavigate } from "react-router";
-import logo from "../../assets/Celima.PNG";
+import { UserDataContext } from "../../../contexts/UserDataContext";
+
 import "./Login.scss";
 
 const { Title } = Typography;
-
 const Login = () => {
-  const navigate = useNavigate();
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
+    const navigate = useNavigate();
+    //const [user, setUser] = useState("");
+    //const { userData, setUserData } = useContext(UserDataContext);
+    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
+    const { userData, setUserData, getlogeaded, setlogeaded, } = useContext(UserDataContext);
 
-  const isButtonEnabled = email.trim() !== "" && password.trim() !== "";
+    const [errorMsg, setErrorMsg] = useState("");
 
-  const handleLoginButtonClick = () => {
-    setErrorMsg(""); // limpiar error previo
+    const isButtonEnabled = email && password
 
-    fetch("http://localhost:3000/users/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    })
-      .then(async (res) => {
-        const data = await res.json();
-        if (!res.ok) {
-          // cualquier error, mostrar mensaje del backend
-          setErrorMsg(data.msg || "Error desconocido");
+
+    /*useEffect(() => {
+            const datosguardados = localStorage.getItem("login");
+            if (datosguardados) {
+                setUser(JSON.parse(datosguardados));
+            }
+        }, []);*/
+
+    const handleLoginButtonClick = () => {
+        fetch("http://localhost:3000/users/login", {
+            headers: {
+                "Content-type": "application/json"
+            },
+            method: "POST", body: JSON.stringify(
+                { email: email, password: password })
+        })
+            .then(async (res) => {
+                const data = await res.json();
+                if (res.status >= 400 && data.msg) {
+                    setErrorMsg(data.msg);
+                } else {
+                    setUserData(data);
+                    setlogeaded(true);
+                    localStorage.setItem("login", JSON.stringify(data));
+
+                    navigate("/dashboard")
+                }
+            })
+            .catch((err) => console.error(err))
+        //Luego, lo parseamos con el getItem del valor que hemos añadido en el setItem y el logín leerá
+        //los usuarios para que tengan el login correcto en su base de datos.
+        const savedData = JSON.parse(localStorage.getItem("login"));
+        console.log(savedData);
+
+        if (savedData && email === savedData.email && password === savedData.password) {
+            navigate("/dashboard");
+
         } else {
-          // éxito: guardar token y usuario
-          localStorage.setItem("access_token", data.accessToken);
-          localStorage.setItem("user", data.name);
-
-          navigate("/dashboard");
+            setErrorMsg("Usuario, contraseña o correo incorrectos");
         }
-      })
-      .catch((err) => {
-        console.error(err);
-        setErrorMsg("Error en la conexión al servidor");
-      });
-  };
 
-  return (
-    <Flex>
-      <div className="login-container">
-        <div className="login-card">
-          <Title level={2}>Login</Title>
-          <Input
-            value={email}
-            type="text"
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Correo Electrónico"
-            className="login-input"
-          />
-          <Input
-            value={password}
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Contraseña"
-            className="login-input"
-          />
-          <Button
-            disabled={!isButtonEnabled}
-            type="primary"
-            onClick={handleLoginButtonClick}
-          >
-            Login
-          </Button>
-          <br />
-          <Typography.Text className="error">{errorMsg}</Typography.Text>
-        </div>
-      </div>
-      <img src={logo} alt="Logo Celima" className="login-logo" />
-    </Flex>
-  );
-};
+        // POST /register
+        // si 
+    }
+    return (
+        <Flex>
+            <main id="login-main">
+                <div className="login-container">
+                    <div className="login-card">
+                        <img src="/src/assets/workflow.png" alt="" />
+                        <Title level={3}>Login</Title>
+                        <Input
+                            value={email}
+                            type="text"
+                            onChange={(event) =>
+                                setEmail(event.target.value)}
+                            placeholder="Correo Electronico"
+                            className="login-input"
+                        />
+                        <Input
+                            value={password}
+                            type="password"
+                            onChange={(event) => setPassword(event.target.value)}
+                            placeholder="Contraseña"
+                            className="login-input"
+                        />
+                        <Button disabled={!isButtonEnabled} type="primary" onClick={handleLoginButtonClick}>Login</Button><br />
+                        <Typography.Text className="error">{errorMsg}</Typography.Text>
+                        <img src="/src/assets/lasnavesajuntament.webp" alt="" className="lasnaves" />
+                    </div>
+                </div>
+            </main>
+        </Flex>
+    )
+}
 
 export { Login };

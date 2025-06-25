@@ -1,5 +1,6 @@
 * {
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -38,11 +39,6 @@ button {
   font-family: inherit;
   cursor: pointer;
   transition: border-color 0.25s;
-}
-
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
 @media (prefers-color-scheme: light) {

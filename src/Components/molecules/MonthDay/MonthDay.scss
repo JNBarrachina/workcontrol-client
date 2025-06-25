@@ -1,17 +1,34 @@
 .dayContainer {
     display: flex;
+    flex-flow: column wrap;
     justify-content: center;
     align-items: center;
 
-    min-width: 360px;
+    min-width: 320px;
     width: 48%;
+    height: fit-content;
 
     flex-grow: 1;
 
-    background-color: white;
-    padding: 12px;
     border-radius: 4px;
+    background-color: white;
+    
+    padding: 0.8rem;
+    gap: 0.8rem;
+    
     font-weight: bold;
+
+    position: relative;
+}
+
+.dayWorkEntriesContainer {
+    width: 100%;
+
+    gap: 0.5rem;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .dayHeaderContainer {
@@ -27,22 +44,25 @@
 
 .dayTitleType {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column nowrap;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
 
     gap: 0.5rem;
 }
 
-.dayHoursAdd {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 0.5rem;
+.dayDate{
+    font-weight: bolder;
+    font-size: 1.2rem;
+    color: rgb(162, 29, 156);
 }
+
 
 .addEntryBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
     border: 1px solid lightgrey;
     border-radius: 8px;
 

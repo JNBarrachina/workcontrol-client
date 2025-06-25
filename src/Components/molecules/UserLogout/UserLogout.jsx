@@ -1,10 +1,19 @@
-import { useNavigate } from "react-router-dom";
+import { useState, useContext } from "react";
+import { useNavigate, } from "react-router-dom";
+
+import { UserDataContext } from "../../../contexts/UserDataContext";
+
 import "./UserLogout.scss";
+
 
 export const UserLogout = ({ modalRef }) => {
   const navigate = useNavigate();
+
+const { userData, setUserData, getlogeaded, setlogeaded, } = useContext(UserDataContext);
+
   const logout = () => {
     localStorage.removeItem("userLogged");
+    setlogeaded(false)
     navigate("/login");
   };
 

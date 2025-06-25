@@ -1,9 +1,9 @@
-import "./RemoveWorkEntryBtn.css";
+import "./RemoveWorkEntryBtn.scss";
 
 export const RemoveWorkEntryBtn = ({ action }) => {
   return (
-    <button className="removeBtn btnRemove" onClick={action}>
-      <img className="removeImg imgRemove" src="/src/assets/delete.svg" alt="Delete" />
+    <button className="btnRemove" onClick={action}>
+      <img className="imgRemove" src="/src/assets/deletecross.svg" alt="Delete" />
     </button>
   );
 };
