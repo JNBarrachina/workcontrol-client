@@ -15,6 +15,7 @@
 }
 
 .dailyWorkEntryCard:hover {
+    transform: scale(1.01);
     background-color: rgb(236, 205, 246);
     transition: 0.3s;
 }
