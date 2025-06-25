@@ -1,10 +1,10 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { Button, Input, Flex, Typography } from "antd";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { UserDataContext } from "../../../contexts/UserDataContext";
-
 import "./Login.scss";
-
+import "./Login.css";
 const { Title } = Typography;
 const Login = () => {
     const navigate = useNavigate();
@@ -13,19 +13,14 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const { userData, setUserData, getlogeaded, setlogeaded, } = useContext(UserDataContext);
-
     const [errorMsg, setErrorMsg] = useState("");
-
     const isButtonEnabled = email && password
-
-
     /*useEffect(() => {
             const datosguardados = localStorage.getItem("login");
             if (datosguardados) {
                 setUser(JSON.parse(datosguardados));
             }
         }, []);*/
-
     const handleLoginButtonClick = () => {
         fetch("http://localhost:3000/users/login", {
             headers: {
@@ -42,7 +37,6 @@ const Login = () => {
                     setUserData(data);
                     setlogeaded(true);
                     localStorage.setItem("login", JSON.stringify(data));
-
                     navigate("/dashboard")
                 }
             })
@@ -51,16 +45,13 @@ const Login = () => {
         //los usuarios para que tengan el login correcto en su base de datos.
         const savedData = JSON.parse(localStorage.getItem("login"));
         console.log(savedData);
-
-        if (savedData && email === savedData.email && password === savedData.password) {
+        /*if (savedData && email === savedData.email && password === savedData.password) {
             navigate("/dashboard");
-
         } else {
             setErrorMsg("Usuario, contraseña o correo incorrectos");
-        }
-
+        }*/
         // POST /register
-        // si 
+        // si
     }
     return (
         <Flex>
@@ -84,7 +75,7 @@ const Login = () => {
                             placeholder="Contraseña"
                             className="login-input"
                         />
-                        <Button disabled={!isButtonEnabled} type="primary" onClick={handleLoginButtonClick}>Login</Button><br />
+                        <Button disabled={!isButtonEnabled} className="login-button" onClick={handleLoginButtonClick}>Login</Button><br />
                         <Typography.Text className="error">{errorMsg}</Typography.Text>
                         <img src="/src/assets/lasnavesajuntament.webp" alt="" className="lasnaves" />
                     </div>
@@ -94,4 +85,10 @@ const Login = () => {
     )
 }
 
-export { Login };
+export { Login }
+
+
+
+
+
+
