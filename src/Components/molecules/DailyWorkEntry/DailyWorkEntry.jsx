@@ -25,10 +25,8 @@ const DailyWorkEntry = ({ entry }) => {
             });
 
             if (res.ok) {
-                // ✅ Actualiza el contexto global
                 setEntries(prevEntries => prevEntries.filter(e => e.id !== entry.id));
 
-                // ✅ Informa al padre (MonthDay) para que actualice su propia lista
                 if (onDelete) onDelete(entry.id);
             } else {
                 alert("Error al eliminar la entrada.");

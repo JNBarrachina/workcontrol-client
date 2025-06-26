@@ -48,8 +48,8 @@ export const NewWorkEntry = ({ modalRef, day, onNewWorkEntry }) => {
                 if (res.status >= 400 && data.msg) {
                     setMsg(data.msg);
                 } else {
-                    console.log(data);
-                    onNewWorkEntry(data);
+                    const newWorkEntry = data.checkedNewWorkEntry
+                    onNewWorkEntry(newWorkEntry);
                 }
             })
             .catch((err) => console.error(err));
