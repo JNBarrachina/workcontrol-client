@@ -54,6 +54,7 @@ const Login = () => {
         })
             .then(async (res) => {
                 const userProjects = await res.json();
+                console.log(userProjects);
                 setUserProjects(userProjects);
                 localStorage.setItem("userprojects", JSON.stringify(userProjects));
             })

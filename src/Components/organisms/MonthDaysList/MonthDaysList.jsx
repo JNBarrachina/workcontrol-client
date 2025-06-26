@@ -5,8 +5,15 @@ import { MonthlyEntriesContext } from "../../../contexts/MonthlyEntriesContext";
 
 import './MonthDaysList.scss';
 
-export const MonthDaysList = ({ days }) => {
+export const MonthDaysList = ({ days, setDays }) => {
     const { entries } = useContext(MonthlyEntriesContext);
+
+    const handleDayCodeChange = (dayId, newDayCodeId) => {
+        const updatedDays = days.map(day =>
+            day.id === dayId ? { ...day, DayCodeId: newDayCodeId } : day
+        );
+        setDays(updatedDays);
+    };
 
     return (
         <section className='monthDaysList'>
@@ -17,6 +24,7 @@ export const MonthDaysList = ({ days }) => {
                         key={day.id}
                         day={day}
                         dayEntries={dayEntries}
+                        onChangeDayCode={handleDayCodeChange}
                     />
                 );
             })}

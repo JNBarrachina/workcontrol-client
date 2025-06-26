@@ -6,7 +6,7 @@ import { DailyWorkEntry } from "../DailyWorkEntry/DailyWorkEntry";
 
 import { MonthlyEntriesContext } from "../../../contexts/MonthlyEntriesContext";
 
-export const MonthDay = ({ day, dayEntries }) => {
+export const MonthDay = ({ day, dayEntries, onChangeDayCode }) => {
     const { entries, setEntries } = useContext(MonthlyEntriesContext);
 
     const modalRef = useRef(null);
@@ -27,9 +27,21 @@ export const MonthDay = ({ day, dayEntries }) => {
         fetch(`http://localhost:3000/calendar/${day.id}`, {
             headers: { "Content-type": "application/json" },
             method: "PATCH",
-            body: JSON.stringify({ DayCodeId: newDayType })
-        });
+            body: JSON.stringify({ DayCodeId: newDayType }),
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(`Error actualizando tipo de día: ${res.status}`);
+                }
+                else {
+                    onChangeDayCode(day.id, newDayType);
+                }
+            })
+            .catch((err) => {
+                console.error("Error cambiando tipo de día:", err);
+            });
     };
+
 
     const formatFecha = (fechaString) => {
         const fecha = new Date(fechaString);

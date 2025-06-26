@@ -15,6 +15,11 @@ export const DashboardMain = () => {
     const [days, setDays] = useState([]);
     const { entries, setEntries } = useContext(MonthlyEntriesContext);
 
+    const diasLaborables = days.filter(day => day.DayCodeId === 6).length;
+    const totalHorasMes = entries.reduce((acc, e) => acc + e.hours, 0);
+    const horasEsperadasMes = diasLaborables * 7.5;
+    const horasRestantes = Math.max(horasEsperadasMes - totalHorasMes, 0);
+
     useEffect(() => {
         fetch(`http://localhost:3000/calendar/${userData.id}/${date}`, {
             headers: { "Content-type": "application/json" },
@@ -50,11 +55,6 @@ export const DashboardMain = () => {
         setDate(e.target.value);
     };
 
-    const totalHorasMes = entries.reduce((acc, e) => acc + e.hours, 0);
-
-    const diasLaborables = days.filter(d => d.isWorkingDay).length;
-    const horasEsperadasMes = diasLaborables * 7.5;
-    const horasRestantes = Math.max(horasEsperadasMes - totalHorasMes, 0);
 
     const entradasPorDia = {};
     entries.forEach(e => {
@@ -77,8 +77,8 @@ export const DashboardMain = () => {
 
             <div className="monthlySummary">
                 <h2>Resumen del mes</h2>
-                <p>Horas trabajadas: <strong>{totalHorasMes.toFixed(2)} h</strong></p>
                 <p>Horas que debes trabajar: <strong>{horasEsperadasMes.toFixed(2)} h</strong></p>
+                <p>Horas trabajadas: <strong>{totalHorasMes.toFixed(2)} h</strong></p>
                 <p>Horas restantes por imputar: <strong>{horasRestantes.toFixed(2)} h</strong></p>
             </div>
             <div>
@@ -87,7 +87,7 @@ export const DashboardMain = () => {
                 )}
             </div>
 
-            <MonthDaysList days={days} />
+            <MonthDaysList days={days} setDays={setDays} />
         </article>
     );
 };
