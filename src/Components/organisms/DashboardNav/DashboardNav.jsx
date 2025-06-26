@@ -17,7 +17,7 @@ export const DashboardNav = () => {
                         src="/src/assets/calendaricon.svg"
                         alt=""
                     />
-                    <p className="linkText">My calendar</p>
+                    <p className="linkText">My workflow</p>
                 </Link>
                 <Link to="#" className="dashboardNavLink">
                     <img

@@ -1,15 +1,18 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext, useRef } from 'react'
 
 import { UserDataContext } from '../../../contexts/UserDataContext';
 import { MonthlyEntriesContext } from '../../../contexts/MonthlyEntriesContext';
 
 import { MonthDaysList } from '../MonthDaysList/MonthDaysList';
+import { MonthSummary } from '../../molecules/MonthSummary/MonthSummary';
 import './DashboardMain.scss'
 
 export const DashboardMain = () => {
     const { userData } = useContext(UserDataContext);
 
-    console.log(userData);
+    const [modalOpen, setModalOpen] = useState(false);
+    const handleOpen = () => setModalOpen(true);
+    const handleClose = () => setModalOpen(false);
 
     const [date, setDate] = useState(new Date().toISOString().slice(0, 7));
     const [days, setDays] = useState([]);
@@ -55,10 +58,6 @@ export const DashboardMain = () => {
         setDate(e.target.value);
     };
 
-    const getMonthSummary = () => {
-        console.log(entries)
-    };
-
     const generateMonthlyTimesheet = () => {
         console.log(entries);
     };
@@ -72,7 +71,7 @@ export const DashboardMain = () => {
     return (
         <article className="dashboardMainContent">
             <section className='dashboardMainHeader'>
-                <h1 className="dashboardMainTitle">Your workflow</h1>
+                <h1 className="dashboardMainTitle">Welcome, {userData.name}</h1>
                 <div className="monthInfoContainer">
                     <div className="monthSelector">
                         <input
@@ -90,7 +89,7 @@ export const DashboardMain = () => {
                     <div className="monthlySummaryBtns">
                         <button className='monthBtns timesheetBtn' onClick={generateMonthlyTimesheet} disabled={horasEsperadasMes !== totalHorasMes}
                         >Generate timesheet</button>
-                        <button className='monthBtns monthlySummaryBtn' onClick={getMonthSummary}>Month summary</button>
+                        <button className='monthBtns monthlySummaryBtn' onClick={handleOpen}>Month summary</button>
                     </div>
                 </div>
             </section>
@@ -99,8 +98,8 @@ export const DashboardMain = () => {
                     <p style={{ marginTop: "2em" }}>No entries for this month</p>
                 )}
             </div>
-
             <MonthDaysList days={days} setDays={setDays} />
+            <MonthSummary isOpen={modalOpen} onClose={handleClose} date={date} />
         </article>
     );
 };

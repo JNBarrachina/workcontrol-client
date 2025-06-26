@@ -30,14 +30,14 @@ export const RemoveWorkEntry = ({ modalRef, entry, handleConfirmedDelete }) => {
   };
 
   return (
-    <dialog ref={modalRef} className="removeTransactionTooltip">
-      <div className="removeTransactionTooltipContainer">
+    <dialog ref={modalRef} className="removeWorkEntryModal">
+      <div className="removeWorkEntryModalContainer">
         <p>¿Do you want to permanently delete this entry?</p>
-        <div className="removeTransactionBtnsContainer">
-          <button className="removeTransactionBtns backBtn" onClick={closeModal}>
+        <div className="removeWorkEntryBtnsContainer">
+          <button className="removeWorkEntryBtns backBtn" onClick={closeModal}>
             Back
           </button>
-          <button className="removeTransactionBtns removeConfirmBtn" onClick={handleDestroyWorkEntry}>
+          <button className="removeWorkEntryBtns removeConfirmBtn" onClick={handleDestroyWorkEntry}>
             Delete
           </button>
         </div>
