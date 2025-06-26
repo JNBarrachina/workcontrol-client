@@ -83,20 +83,20 @@ export const DashboardMain = () => {
                             onChange={handleMonthChange} />
                     </div>
                     <div className="monthlySummary">
-                        <p className="summaryp">Horas objetivo: <strong>{horasEsperadasMes.toFixed(2)} h</strong></p>
-                        <p className='summaryp'>Horas imputadas: <strong>{totalHorasMes.toFixed(2)} h</strong></p>
-                        <p className='summaryp'>Horas pendientes: <strong>{horasRestantes.toFixed(2)} h</strong></p>
+                        <p className="summaryp">Expected: <strong>{horasEsperadasMes.toFixed(2)} h</strong></p>
+                        <p className='summaryp'>Logged: <strong>{totalHorasMes.toFixed(2)} h</strong></p>
+                        <p className='summaryp'>Remaining: <strong>{horasRestantes.toFixed(2)} h</strong></p>
                     </div>
                     <div className="monthlySummaryBtns">
                         <button className='monthBtns timesheetBtn' onClick={generateMonthlyTimesheet} disabled={horasEsperadasMes !== totalHorasMes}
-                        >Generar timesheet</button>
-                        <button className='monthBtns monthlySummaryBtn' onClick={getMonthSummary}>Ver resumen</button>
+                        >Generate timesheet</button>
+                        <button className='monthBtns monthlySummaryBtn' onClick={getMonthSummary}>Month summary</button>
                     </div>
                 </div>
             </section>
             <div>
                 {entries.length === 0 && (
-                    <p style={{ marginTop: "2em" }}>No hay entradas para este mes.</p>
+                    <p style={{ marginTop: "2em" }}>No entries for this month</p>
                 )}
             </div>
 

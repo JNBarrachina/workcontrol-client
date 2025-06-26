@@ -109,7 +109,7 @@ export const NewWorkEntry = ({ modalRef, day, onNewWorkEntry }) => {
                     )}
 
                     <div className="selectTime">
-                        <label htmlFor="time" className="modalLabel">Time</label>
+                        <label htmlFor="time" className="modalLabel">Time (in hours)</label>
                         <input
                             type="number"
                             name="time"

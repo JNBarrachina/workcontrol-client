@@ -18,7 +18,7 @@ export const DashboardHeader = () => {
             <header className="dashboardHeaderContainer">
                 <img src=" /src/assets/workflow.png" className="dashboardLogo" alt="" />
                 <div className="userProfileBox">
-                    <p className="userProfileName">{userData.email}</p>
+                    <p className="userProfileEmail">{userData.email}</p>
                     <img
                         className="userProfileImg"
                         src="/src/assets/avatar.png"
