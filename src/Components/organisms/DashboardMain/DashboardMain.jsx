@@ -55,6 +55,13 @@ export const DashboardMain = () => {
         setDate(e.target.value);
     };
 
+    const getMonthSummary = () => {
+        console.log(entries)
+    };
+
+    const generateMonthlyTimesheet = () => {
+        console.log(entries);
+    };
 
     const entradasPorDia = {};
     entries.forEach(e => {
@@ -64,23 +71,29 @@ export const DashboardMain = () => {
 
     return (
         <article className="dashboardMainContent">
-            <h1 className="dashboardMainTitle">Your workflow</h1>
-            <div className="monthSelector">
-                <p>Select a month: </p>
-                <input
-                    type="month"
-                    min={"2015-01"}
-                    max={new Date().toISOString().slice(0, 7)}
-                    value={date}
-                    onChange={handleMonthChange} />
-            </div>
-
-            <div className="monthlySummary">
-                <h2>Resumen del mes</h2>
-                <p>Horas que debes trabajar: <strong>{horasEsperadasMes.toFixed(2)} h</strong></p>
-                <p>Horas trabajadas: <strong>{totalHorasMes.toFixed(2)} h</strong></p>
-                <p>Horas restantes por imputar: <strong>{horasRestantes.toFixed(2)} h</strong></p>
-            </div>
+            <section className='dashboardMainHeader'>
+                <h1 className="dashboardMainTitle">Your workflow</h1>
+                <div className="monthInfoContainer">
+                    <div className="monthSelector">
+                        <input
+                            type="month"
+                            min={"2015-01"}
+                            max={new Date().toISOString().slice(0, 7)}
+                            value={date}
+                            onChange={handleMonthChange} />
+                    </div>
+                    <div className="monthlySummary">
+                        <p className="summaryp">Horas objetivo: <strong>{horasEsperadasMes.toFixed(2)} h</strong></p>
+                        <p className='summaryp'>Horas imputadas: <strong>{totalHorasMes.toFixed(2)} h</strong></p>
+                        <p className='summaryp'>Horas pendientes: <strong>{horasRestantes.toFixed(2)} h</strong></p>
+                    </div>
+                    <div className="monthlySummaryBtns">
+                        <button className='monthBtns timesheetBtn' onClick={generateMonthlyTimesheet} disabled={horasEsperadasMes !== totalHorasMes}
+                        >Generar timesheet</button>
+                        <button className='monthBtns monthlySummaryBtn' onClick={getMonthSummary}>Ver resumen</button>
+                    </div>
+                </div>
+            </section>
             <div>
                 {entries.length === 0 && (
                     <p style={{ marginTop: "2em" }}>No hay entradas para este mes.</p>
