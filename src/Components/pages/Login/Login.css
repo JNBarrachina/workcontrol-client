@@ -42,9 +42,17 @@ body {
 }
 
 .login-button {
-  width: 50%;
+  width: 100%;
   margin: 0;
   font-weight: bold;
+}
+
+.login-button:hover {
+  color: black;
+  font-size: bolder;
+  
+  transform: scale(1.04);
+  transition: 0.3s;
 }
 
 .login-logo {

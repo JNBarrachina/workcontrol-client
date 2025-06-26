@@ -3,6 +3,9 @@
 }
 
 .newWorkEntryDialog {
+  max-width: 500px;
+  width: 90vw;
+  
   position: fixed;
   top: 50%;
   left: 50%;
@@ -13,7 +16,7 @@
   border-radius: 8px;
   background-color: white;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  z-index: 1000;
+  z-index: 1;
 }
 
 .newWorkEntryDialogContainer {
@@ -31,10 +34,10 @@
   justify-content: center;
   align-items: center;
 
-  gap: 0.6rem;
+  gap: 1rem;
 }
 
-.selectProject, .selectTime {
+.selectProject,.selectSubproject, .selectTime {
   label {
     text-align: center;
   }
@@ -47,6 +50,14 @@
   gap: 0.6rem;
 }
 
+
+.newWorkEntryProjectSelect, .newWorkEntrySubprojectSelect {
+  width: 100%;
+
+  border: 2px solid lightgrey;
+  padding:  0.6rem;
+}
+
 .newWorkEntryBtns {
   width: 100%;
   
@@ -56,12 +67,12 @@
 }
 
 .dialogTitle {
-  color: #254d70;
-  font-size: xx-large;
+  color: rgb(162, 29, 156);
 }
 
 .newWorkEntryTime {
-  padding: 0.4rem;
+  border: 2px solid lightgrey;
+  padding: 0.6rem;
 }
 
 .modalLabel {
@@ -76,7 +87,7 @@
 .modalBtn {
   cursor: pointer;
 
-  border: 1px solid lightgrey;
+  border: 3px solid transparent;
   border-radius: 8px;
 }
 

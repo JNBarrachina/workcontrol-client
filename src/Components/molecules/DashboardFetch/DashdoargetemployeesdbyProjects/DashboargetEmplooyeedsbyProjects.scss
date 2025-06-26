@@ -23,17 +23,52 @@ th{
     border-radius: 12px;
 }
 
+tbody{
+    background: whitesmoke;
+}
+
 tbody tr{
     margin: 1rem 0;
 }
 
 td{
-    margin: 2em;
+    margin: 0.30rem 0.20rem;
     padding: 5px 10px;
-    background: whitesmoke;
+    background: #fff;
     text-align: center;
-    font-weight: 500;
+    font-weight: bold;
 
     border-radius: 12px;
-    box-shadow: 1px 1px 0.9px #000, 0 6px 12px #000;
+    box-shadow: inherit;
+    box-shadow: 1.55px 1px 1px #000, -0.10px -0.10px 0.7px #000;
+}
+
+td details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+td section{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    margin: 0.25rem;
+    padding: 5px;
+    border: 1px solid #000;
+    border-radius: 12px;
+}
+
+td section p{
+    width: 100%;
+}
+
+.separate{
+    padding: 0;
+    margin: 0;
+    height: 1.5px;
+    background: #E745D1;
+    border-radius: 0;
 }

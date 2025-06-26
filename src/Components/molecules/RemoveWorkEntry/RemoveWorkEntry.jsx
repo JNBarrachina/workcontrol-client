@@ -1,10 +1,31 @@
 import "./RemoveWorkEntry.scss";
 
-export const RemoveWorkEntry = ({ modalRef, entry, onConfirm }) => {
+import { useContext } from "react";
+import { MonthlyEntriesContext } from "../../../contexts/MonthlyEntriesContext";
+
+export const RemoveWorkEntry = ({ modalRef, entry, handleConfirmedDelete }) => {
   const closeModal = () => modalRef.current?.close();
 
-  const handleDelete = () => {
-    if (onConfirm) onConfirm(); // Ejecuta lógica del padre
+  const { entries, setEntries } = useContext(MonthlyEntriesContext);
+
+  const handleDestroyWorkEntry = async () => {
+    try {
+      fetch(`http://localhost:3000/users/rmworkentry`, {
+        headers: { "Content-type": "application/json" },
+        method: "DELETE",
+        body: JSON.stringify({ id: entry.id }),
+      })
+        .then(async (res) => {
+          if (!res.ok) {
+            console.error("Error deleting entry");
+          } else {
+            handleConfirmedDelete(entry);
+          }
+        });
+    } catch (err) {
+      console.error(err);
+    }
+
     closeModal();
   };
 
@@ -16,7 +37,7 @@ export const RemoveWorkEntry = ({ modalRef, entry, onConfirm }) => {
           <button className="removeTransactionBtns backBtn" onClick={closeModal}>
             Back
           </button>
-          <button className="removeTransactionBtns removeConfirmBtn" onClick={handleDelete}>
+          <button className="removeTransactionBtns removeConfirmBtn" onClick={handleDestroyWorkEntry}>
             Delete
           </button>
         </div>
@@ -24,4 +45,5 @@ export const RemoveWorkEntry = ({ modalRef, entry, onConfirm }) => {
     </dialog>
   );
 };
+
 
