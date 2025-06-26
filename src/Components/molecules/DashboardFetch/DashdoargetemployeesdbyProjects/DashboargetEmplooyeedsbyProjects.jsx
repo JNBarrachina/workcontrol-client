@@ -1,4 +1,4 @@
-import { useEffect, useState, Fragment } from 'react';
+import { useEffect, useState, Fragment, } from 'react';
 
 import './DashboargetEmplooyeedsbyProjects.scss'
 
@@ -6,6 +6,9 @@ const DashboargetEmplooyeedsbyProjects = () => {
     
     const [ getpreviw, setpreview] = useState([]);
     const [ getpreformated, setpreformated ] = useState();
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [getselectedSubprojects, setSelectedSubprojects] = useState(null);
 
 
     useEffect(() => {
@@ -47,6 +50,14 @@ const DashboargetEmplooyeedsbyProjects = () => {
         setpreformated(grouped)
     }, [getpreviw]);
 
+    const previewProjects = ( subprojects ) => {
+        setSelectedSubprojects( subprojects);
+        setIsModalOpen(true);                
+    }
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    }
 
     return (
         <main id="main-DashboargetEmplooyeedsbyProjects">
@@ -87,18 +98,12 @@ const DashboargetEmplooyeedsbyProjects = () => {
                                 <td style={{ backgroundColor: 'white' }}>{project}</td>
                                 {/* Columna 3: Subproyectos & fechas */}
                                 <td style={{ backgroundColor: 'white' }} colSpan={2}>
-                                    <details>
-                                    <summary style={{ cursor: 'pointer' }}>
-                                         SubProjects ({subprojects.length})
-                                    </summary>
 
-                                    {subprojects.map(([sub, date], idx) => (
-                                        <section key={idx} >
-                                            <p style={{ textAlign: 'start' }}>Subproject: {sub}</p>
-                                            <p style={{ textAlign: 'start' }}>Date Assigned: {date}</p>
-                                        </section>
-                                    ))}
-                                    </details>
+                                    <button
+                                        onClick={ () => previewProjects( subprojects ) }
+                                    >
+                                    SubProjects ({subprojects.length})
+                                    </button>
                                 </td>
                                 </tr>
                             ))}
@@ -109,9 +114,72 @@ const DashboargetEmplooyeedsbyProjects = () => {
                             </Fragment>
                         ))
                     }
-
                 </tbody>
             </table>
+
+            {/* Overlay y Modal */}
+            {isModalOpen && (
+                <div style={{
+                    position: 'absolute',
+                    zIndex:'100',
+                    top:'8%',
+                    left:'28%',
+                    right:'28%',
+                    padding:'10px',
+                    background:'rgba(0, 0, 0, 0.89)',
+                    borderRadius: '12px',
+                    }}>
+                    <div style={{display:'flex',flexDirection:'column',  overflowY:'auto', height:'40rem'}}>
+                        <div style={{display: 'flex', justifyContent: 'flex-end', width:'100%', padding:'10px'}}>
+                            <button 
+                                onClick={ closeModal}
+                                style={{
+                                    fontSize: '0.35rem',
+                                    cursor: 'pointer',
+                                    background: '#fff',
+                                    border: '1px solid #000',
+                                    borderRadius:'12px',
+                                }}
+                            >
+                                <img src="/src/assets/deletecross.svg" alt="Close" />
+                            </button>
+                        </div>
+                        <div style={{display: 'flex', flexDirection:'column', justifyContent: 'center', marginRight:'3rem'}}>
+                            {getselectedSubprojects?.map(([sub, date], idx) => (
+                                <div key={idx} style={{marginBottom: '1rem'}}>
+                                    <p style={{
+                                        padding:'10px 0 10px 20px',
+                                        width: '100%',
+                                        textAlign: 'start',
+                                        background: 'linear-gradient(90deg,rgba(252, 6, 174, 1) 0%, rgba(208, 0, 210, 1) 50%, rgba(148, 1, 248, 1) 100%)',
+                                        color: '#fff',
+                                        fontWeight: 'bold',
+                                        margin: '0.5rem 0',
+                                        border: '1px solid #000',
+                                        borderRadius:'12px',
+                                    }}>
+                                        Subproject: {sub}
+                                    </p>
+                                    <p style={{
+                                        padding:'10px 0 10px 20px',
+                                        width: '100%',
+                                        textAlign: 'start',
+                                        fontWeight: 'bold',
+                                        background: 'linear-gradient(90deg,rgba(252, 6, 174, 1) 0%, rgba(208, 0, 210, 1) 50%, rgba(148, 1, 248, 1) 100%)',
+                                        color: '#fff',
+                                        margin: '0.5rem 0',
+                                        border: '1px solid #000',
+                                        borderRadius:'12px',
+                                    }}>
+                                        Date Assigned: {date}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            )}
+
         </main>
     );
 };
