@@ -1,20 +1,26 @@
+import { useContext } from "react";
 
 import { MonthDay } from '../../molecules/MonthDay/MonthDay';
-import './MonthDaysList.scss'
+import { MonthlyEntriesContext } from "../../../contexts/MonthlyEntriesContext";
 
-export const MonthDaysList = ({ days, entries = [] }) => {
-    console.log("Datos del mes",days, entries);
-    
+import './MonthDaysList.scss';
+
+export const MonthDaysList = ({ days }) => {
+    const { entries } = useContext(MonthlyEntriesContext);
 
     return (
         <section className='monthDaysList'>
             {days.map(day => {
                 const dayEntries = entries.filter(e => e.date === day.date);
-                console.log("Filtro de entradas de dia",dayEntries);
                 return (
-                    <MonthDay key={day.id} day={day} entries={dayEntries} />
+                    <MonthDay
+                        key={day.id}
+                        day={day}
+                        dayEntries={dayEntries}
+                    />
                 );
             })}
         </section>
-    )
-}
+    );
+};
+

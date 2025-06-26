@@ -4,6 +4,8 @@ import { Button, Input, Flex, Typography } from "antd";
 import { useNavigate } from "react-router";
 
 import { UserDataContext } from "../../../contexts/UserDataContext";
+import { UserProjectsContext } from "../../../contexts/UserProjectsContext";
+
 import "./Login.scss";
 
 const { Title } = Typography;
@@ -14,6 +16,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const { userData, setUserData, getlogeaded, setlogeaded, } = useContext(UserDataContext);
+    const { userProjects, setUserProjects } = useContext(UserProjectsContext);
     const [errorMsg, setErrorMsg] = useState("");
     const isButtonEnabled = email && password
     /*useEffect(() => {
@@ -42,10 +45,23 @@ const Login = () => {
                 }
             })
             .catch((err) => console.error(err))
+
+        fetch(`http://localhost:3000/users/userprojects/${userData.id}`, {
+            headers: {
+                "Content-type": "application/json"
+            },
+            method: "GET",
+        })
+            .then(async (res) => {
+                const userProjects = await res.json();
+                setUserProjects(userProjects);
+                localStorage.setItem("userprojects", JSON.stringify(userProjects));
+            })
+            .catch((err) => console.error(err))
         //Luego, lo parseamos con el getItem del valor que hemos añadido en el setItem y el logín leerá
         //los usuarios para que tengan el login correcto en su base de datos.
-        const savedData = JSON.parse(localStorage.getItem("login"));
-        console.log(savedData);
+        // const savedData = JSON.parse(localStorage.getItem("login"));
+        // console.log(savedData);
         /*if (savedData && email === savedData.email && password === savedData.password) {
             navigate("/dashboard");
         } else {
@@ -54,6 +70,7 @@ const Login = () => {
         // POST /register
         // si
     }
+
     return (
         <Flex>
             <main id="login-main">

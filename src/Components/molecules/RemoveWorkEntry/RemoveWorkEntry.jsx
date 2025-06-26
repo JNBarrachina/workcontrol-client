@@ -1,6 +1,6 @@
 import "./RemoveWorkEntry.scss";
 
-export const RemoveWorkEntry = ({ modalRef, entry, onConfirm }) => {
+export const RemoveWorkEntry = ({ modalRef, onConfirm }) => {
   const closeModal = () => modalRef.current?.close();
 
   const handleDelete = () => {
@@ -24,4 +24,5 @@ export const RemoveWorkEntry = ({ modalRef, entry, onConfirm }) => {
     </dialog>
   );
 };
+
 

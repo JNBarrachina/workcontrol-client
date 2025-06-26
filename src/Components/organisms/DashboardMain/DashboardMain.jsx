@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 
 import { UserDataContext } from '../../../contexts/UserDataContext';
+import { MonthlyEntriesContext } from '../../../contexts/MonthlyEntriesContext';
 
 import { MonthDaysList } from '../MonthDaysList/MonthDaysList';
 import './DashboardMain.scss'
@@ -12,7 +13,7 @@ export const DashboardMain = () => {
 
     const [date, setDate] = useState(new Date().toISOString().slice(0, 7));
     const [days, setDays] = useState([]);
-    const [entries, setEntries] = useState([]);
+    const { entries, setEntries } = useContext(MonthlyEntriesContext);
 
     useEffect(() => {
         fetch(`http://localhost:3000/calendar/${userData.id}/${date}`, {
@@ -37,8 +38,13 @@ export const DashboardMain = () => {
             method: "GET",
         })
             .then(res => res.json())
-            .then(data => setEntries(data.data || []));
-    }, [date]);
+            .then(data => {
+                setEntries(data.data || [])
+                console.log(entries);
+            })
+            .catch(() => setEntries([]));
+    }, [date, userData.id, setEntries]);
+
 
     const handleMonthChange = (e) => {
         setDate(e.target.value);
@@ -87,7 +93,7 @@ export const DashboardMain = () => {
             </div>
 
             {/* Lista previa de días */}
-            <MonthDaysList days={days} entries={entries} />
+            <MonthDaysList days={days} />
         </article>
     );
 };

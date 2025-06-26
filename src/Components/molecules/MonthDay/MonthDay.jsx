@@ -1,21 +1,23 @@
-import { useState, useRef, useEffect } from "react";
-
-import './MonthDay.scss'
+import { useState, useRef, useContext } from "react";
+import './MonthDay.scss';
 
 import { NewWorkEntry } from "../NewWorkEntry/NewWorkEntry";
 import { DailyWorkEntry } from "../DailyWorkEntry/DailyWorkEntry";
 
-export const MonthDay = ({ day, entries }) => {
+import { MonthlyEntriesContext } from "../../../contexts/MonthlyEntriesContext";
+
+export const MonthDay = ({ day, dayEntries }) => {
+    const { entries, setEntries } = useContext(MonthlyEntriesContext);
+
     const modalRef = useRef(null);
     const [dayType, setDayType] = useState(day.DayCodeId);
-    const [dayEntries, setDayEntries] = useState(entries);
-
-    useEffect(() => {
-        setDayEntries(entries);
-    }, [entries]);
 
     const openNewWorkEntryModal = () => {
         modalRef.current?.showModal();
+    };
+
+    const handleNewWorkEntry = (newEntry) => {
+        setEntries([...entries, newEntry]);
     };
 
     const changeDayType = (e) => {
@@ -27,11 +29,6 @@ export const MonthDay = ({ day, entries }) => {
             method: "PATCH",
             body: JSON.stringify({ DayCodeId: newDayType })
         });
-    };
-
-    // 🔥 Esta función borra la entrada del estado local
-    const handleEntryDeleted = (id) => {
-        setDayEntries(prev => prev.filter(e => e.id !== id));
     };
 
     const formatFecha = (fechaString) => {
@@ -69,12 +66,13 @@ export const MonthDay = ({ day, entries }) => {
                     <DailyWorkEntry
                         key={entry.id}
                         entry={entry}
-                        onDelete={handleEntryDeleted}
                     />
                 ))}
             </div>
 
-            <NewWorkEntry modalRef={modalRef} day={day} />
+            <NewWorkEntry modalRef={modalRef} day={day} onNewWorkEntry={handleNewWorkEntry} />
         </div>
     );
 };
+
+
