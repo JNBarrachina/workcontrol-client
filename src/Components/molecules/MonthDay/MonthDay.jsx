@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import './MonthDay.scss'
 
@@ -7,14 +7,32 @@ import { DailyWorkEntry } from "../DailyWorkEntry/DailyWorkEntry";
 
 export const MonthDay = ({ day, entries }) => {
     const modalRef = useRef(null);
-    console.log(entries)
+    const [dayType, setDayType] = useState(day.DayCodeId);
+    const [dayEntries, setDayEntries] = useState(entries);
+
+    useEffect(() => {
+        setDayEntries(entries);
+    }, [entries]);
 
     const openNewWorkEntryModal = () => {
         modalRef.current?.showModal();
     };
 
-    const [dayType, setDayType] = useState(day.DayCodeId);
-    const [dayEntries, setDayEntries] = useState(entries);
+    const changeDayType = (e) => {
+        const newDayType = parseInt(e.target.value);
+        setDayType(newDayType);
+
+        fetch(`http://localhost:3000/calendar/${day.id}`, {
+            headers: { "Content-type": "application/json" },
+            method: "PATCH",
+            body: JSON.stringify({ DayCodeId: newDayType })
+        });
+    };
+
+    // 🔥 Esta función borra la entrada del estado local
+    const handleEntryDeleted = (id) => {
+        setDayEntries(prev => prev.filter(e => e.id !== id));
+    };
 
     const formatFecha = (fechaString) => {
         const fecha = new Date(fechaString);
@@ -27,28 +45,12 @@ export const MonthDay = ({ day, entries }) => {
         return texto.charAt(0).toUpperCase() + texto.slice(1);
     };
 
-    const changeDayType = (e) => {
-        const newDayType = parseInt(e.target.value);
-        setDayType(newDayType);
-
-
-        fetch(`http://localhost:3000/calendar/${day.id}`, {
-            headers: {
-                "Content-type": "application/json"
-            },
-            method: "PATCH",
-            body: JSON.stringify({
-                DayCodeId: newDayType
-            })
-        });
-    };
-
     return (
         <div className='dayContainer'>
             <div className='dayHeaderContainer'>
                 <section className='dayTitleType'>
                     <h4 className='dayDate'>{formatFecha(day.date)}</h4>
-                    <select name="dayType" id="dayType" value={dayType} onChange={(e) => changeDayType(e)}>
+                    <select value={dayType} onChange={changeDayType}>
                         <option value="6">Laborable (WD)</option>
                         <option value="5">Fin de semana (WE)</option>
                         <option value="1">Vacaciones (AH)</option>
@@ -57,16 +59,22 @@ export const MonthDay = ({ day, entries }) => {
                         <option value="4">Baja médica (SL)</option>
                     </select>
                 </section>
-                <button className='addEntryBtn' disabled={dayType !== 6 && true}><img src="/src/assets/addentryitem.svg" alt="" onClick={openNewWorkEntryModal} /></button>
+                <button className='addEntryBtn' disabled={dayType !== 6}>
+                    <img src="/src/assets/addentryitem.svg" alt="" onClick={openNewWorkEntryModal} />
+                </button>
             </div>
+
             <div className='dayWorkEntriesContainer'>
-                {entries.map(entry => {
-                    return (
-                        <DailyWorkEntry key={entry.id} entry={entry} />
-                    );
-                })}
+                {dayEntries.map(entry => (
+                    <DailyWorkEntry
+                        key={entry.id}
+                        entry={entry}
+                        onDelete={handleEntryDeleted}
+                    />
+                ))}
             </div>
+
             <NewWorkEntry modalRef={modalRef} day={day} />
         </div>
-    )
-}
+    );
+};

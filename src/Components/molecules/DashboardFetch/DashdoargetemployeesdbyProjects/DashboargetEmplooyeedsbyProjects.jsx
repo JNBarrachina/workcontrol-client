@@ -4,20 +4,37 @@ import './DashboargetEmplooyeedsbyProjects.scss'
 
 const DashboargetEmplooyeedsbyProjects = () => {
     const [getpreviw, setpreview] = useState([]);
-
+    function simp(data) {
+    if (!Array.isArray(data) || data.length === 0) return data;
+  
+    const compare = [data[0].Employeed, data[0]["Assigned Project"]];
+  
+    for (let i = 1; i < data.length; i++) {
+      if (data[i].Employeed === compare[0]) {
+        data[i].Employeed = "";
+      } else {
+        compare[0] = data[i].Employeed;
+      }
+  
+      if (data[i]["Assigned Project"] === compare[1]) {
+        data[i]["Assigned Project"] = "";
+      } else {
+        compare[1] = data[i]["Assigned Project"];
+      }
+    }
+  
+    return data;
+  }
     useEffect(() => {
         fetch('http://localhost:3000/fetchs/employeeds_projects')
             .then(res => res.json())
             .then(data => {
-                //console.log('preview',data);
-                setpreview(data[1]);
+                console.log('preview',data[1]);
+                const data2 = simp (data[1])
+                setpreview(data2);
             })
             .catch(err => console.error(err));
     }, []);
-
-    useEffect(()=>{
-
-    },[getpreviw])
 
     return (
         <main id="main-DashboargetEmplooyeedsbyProjects">

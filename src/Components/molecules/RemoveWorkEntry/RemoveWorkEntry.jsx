@@ -1,31 +1,10 @@
-import { useState, useContext, useRef } from "react";
-
-
 import "./RemoveWorkEntry.scss";
 
-export const RemoveWorkEntry = ({ modalRef, entry }) => {
+export const RemoveWorkEntry = ({ modalRef, entry, onConfirm }) => {
+  const closeModal = () => modalRef.current?.close();
 
-  const closeModal = () => {
-    modalRef.current?.close();
-  };
-
-  const removeWorkEntry = () => {
-    console.log(entry);
-
-    fetch(`http://localhost:3000/users/rmworkentry`, {
-      headers: {
-        "Content-type": "application/json",
-      },
-      method: "DELETE",
-      body: JSON.stringify({
-        id: entry.id,
-      }),
-    }).then((res) => {
-      console.log(res);
-    }).catch((err) => {
-      console.log(err);
-    })
-
+  const handleDelete = () => {
+    if (onConfirm) onConfirm(); // Ejecuta lógica del padre
     closeModal();
   };
 
@@ -34,16 +13,10 @@ export const RemoveWorkEntry = ({ modalRef, entry }) => {
       <div className="removeTransactionTooltipContainer">
         <p>¿Do you want to permanently delete this entry?</p>
         <div className="removeTransactionBtnsContainer">
-          <button
-            className="removeTransactionBtns backBtn"
-            onClick={closeModal}
-          >
+          <button className="removeTransactionBtns backBtn" onClick={closeModal}>
             Back
           </button>
-          <button
-            className="removeTransactionBtns removeConfirmBtn"
-            onClick={removeWorkEntry}
-          >
+          <button className="removeTransactionBtns removeConfirmBtn" onClick={handleDelete}>
             Delete
           </button>
         </div>
@@ -51,3 +24,4 @@ export const RemoveWorkEntry = ({ modalRef, entry }) => {
     </dialog>
   );
 };
+

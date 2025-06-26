@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { DashboardHeader } from '../../organisms/DashboardHeader/DashboardHeader.jsx'
 import { DashboardNav } from '../../organisms/DashboardNav/DashboardNav.jsx'
 
-import { DashboardbyEmplooyeedbyProjets } from '../../molecules/DashboardFetch/DashboardbyEmployeedProjects/DashboardbyEmployeedProjects.jsx';
+import { DashboardbyEmployeedbyProjets } from '../../molecules/DashboardFetch/DashboardbyEmployeedProjects/DashboardbyEmployeedProjects.jsx';
 
 import '../../organisms/DashboardContent/DashboardContent.scss';
 const Userprofile = () => {
@@ -14,7 +14,7 @@ const Userprofile = () => {
                 <DashboardNav />
                 <section id="main_userprofile" style={{width: '100%', overflow: 'hidden', overflowY: 'auto'}}>
                     {/* { false && < DashboardbyProjets/> } */}
-                    { true && < DashboardbyEmplooyeedbyProjets/> }
+                    { true && < DashboardbyEmployeedbyProjets/> }
                 </section>
             </main>
         </>
