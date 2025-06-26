@@ -62,7 +62,7 @@ export const MonthDay = ({ day, dayEntries }) => {
             </div>
 
             <div className='dayWorkEntriesContainer'>
-                {dayEntries.map(entry => (
+                {dayEntries.length === 0 ? <p className='noEntries'>No entries</p> : dayEntries.map(entry => (
                     <DailyWorkEntry
                         key={entry.id}
                         entry={entry}

@@ -24,7 +24,14 @@ export const DashboardHeader = () => {
                         src="/src/assets/avatar.png"
                         alt=""
                     />
-                    <button className="logoutBtn" onClick={openModal}>
+                    <button className="headerBtns notifyBtn">
+                        <img
+                            className="logoutImg"
+                            src="/src/assets/notifications.svg"
+                            alt=""
+                        />
+                    </button>
+                    <button className="headerBtns logoutBtn" onClick={openModal}>
                         <img
                             className="logoutImg"
                             src="/src/assets/logout.svg"

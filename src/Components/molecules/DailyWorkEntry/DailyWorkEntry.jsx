@@ -8,7 +8,7 @@ import { RemoveWorkEntry } from "../../molecules/RemoveWorkEntry/RemoveWorkEntry
 import "./DailyWorkEntry.scss";
 
 const DailyWorkEntry = ({ entry }) => {
-    const { setEntries } = useContext(MonthlyEntriesContext);
+    const { entries, setEntries } = useContext(MonthlyEntriesContext);
 
     const modalRef = useRef(null);
 
@@ -16,27 +16,10 @@ const DailyWorkEntry = ({ entry }) => {
         modalRef.current?.showModal();
     };
 
-    const handleConfirmedDelete = async () => {
-        try {
-            const res = await fetch(`http://localhost:3000/users/rmworkentry`, {
-                headers: { "Content-type": "application/json" },
-                method: "DELETE",
-                body: JSON.stringify({ id: entry.id }),
-            });
-
-            if (res.ok) {
-                setEntries(prevEntries => prevEntries.filter(e => e.id !== entry.id));
-
-                if (onDelete) onDelete(entry.id);
-            } else {
-                alert("Error al eliminar la entrada.");
-            }
-        } catch (err) {
-            console.error(err);
-        }
+    const handleDeleteWorkEntry = (removedEntry) => {
+        const newEntries = entries.filter((e) => e.id !== removedEntry.id);
+        setEntries(newEntries);
     };
-
-
 
     return (
         <article className="dailyWorkEntryCard">
@@ -50,7 +33,8 @@ const DailyWorkEntry = ({ entry }) => {
             </div>
             <RemoveWorkEntry
                 modalRef={modalRef}
-                onConfirm={handleConfirmedDelete}
+                entry={entry}
+                handleConfirmedDelete={handleDeleteWorkEntry}
             />
         </article>
     );

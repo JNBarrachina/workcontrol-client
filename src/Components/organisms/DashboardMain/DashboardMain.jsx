@@ -50,15 +50,12 @@ export const DashboardMain = () => {
         setDate(e.target.value);
     };
 
-    // 🔢 Total de horas trabajadas en el mes
     const totalHorasMes = entries.reduce((acc, e) => acc + e.hours, 0);
 
-    // 📆 Calcular días laborables y horas esperadas
     const diasLaborables = days.filter(d => d.isWorkingDay).length;
     const horasEsperadasMes = diasLaborables * 7.5;
     const horasRestantes = Math.max(horasEsperadasMes - totalHorasMes, 0);
 
-    // 📅 Agrupar entradas por día
     const entradasPorDia = {};
     entries.forEach(e => {
         if (!entradasPorDia[e.date]) entradasPorDia[e.date] = [];
@@ -68,7 +65,6 @@ export const DashboardMain = () => {
     return (
         <article className="dashboardMainContent">
             <h1 className="dashboardMainTitle">Your workflow</h1>
-
             <div className="monthSelector">
                 <p>Select a month: </p>
                 <input
@@ -79,7 +75,6 @@ export const DashboardMain = () => {
                     onChange={handleMonthChange} />
             </div>
 
-            {/* ✅ Resumen mensual */}
             <div className="monthlySummary">
                 <h2>Resumen del mes</h2>
                 <p>Horas trabajadas: <strong>{totalHorasMes.toFixed(2)} h</strong></p>
@@ -92,7 +87,6 @@ export const DashboardMain = () => {
                 )}
             </div>
 
-            {/* Lista previa de días */}
             <MonthDaysList days={days} />
         </article>
     );
