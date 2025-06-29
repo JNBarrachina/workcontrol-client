@@ -19,7 +19,7 @@ export const DashboardNav = () => {
                     />
                     <p className="linkText">My workflow</p>
                 </Link>
-                <Link to="#" className="dashboardNavLink">
+                <Link to="/userdocs" className="dashboardNavLink">
                     <img
                         className="dashboardNavImg"
                         src="/src/assets/documentsicon.svg"
@@ -51,7 +51,7 @@ export const DashboardNav = () => {
                     />
                     <p className="linkText">Admin Area</p>
                 </Link>}
-            </nav>
+            </nav >
         </>
     );
 };

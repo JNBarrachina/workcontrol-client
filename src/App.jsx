@@ -2,11 +2,12 @@ import { useContext, useEffect, useState } from 'react'
 
 import { BrowserRouter, Route, Routes, Navigate, useNavigate } from "react-router"
 
-import { Login } from "./Components/pages/Login/Login"
-import { Dashboard } from './Components/pages/Dashboard/Dashboard'
-import { AdminArea } from './Components/pages/AdminArea/AdminArea'
-import { NotFound } from './Components/pages/NotFound/NotFound'
-import { Userprofile } from './Components/pages/Userprofile/Userprofile.jsx'
+import { Login } from "./components/pages/Login/Login"
+import { Dashboard } from './components/pages/Dashboard/Dashboard'
+import { UserDocs } from './components/pages/UserDocs/UserDocs'
+import { AdminArea } from './components/pages/AdminArea/AdminArea'
+import { NotFound } from './components/pages/NotFound/NotFound'
+import { Userprofile } from './components/pages/Userprofile/Userprofile'
 
 import { UserDataContext } from './contexts/UserDataContext'
 import { UserProjectsContext } from './contexts/UserProjectsContext'
@@ -51,8 +52,9 @@ function App() {
               <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/dashboard" element={getlogeaded ? <Dashboard /> : <Login />} />
-                <Route path="/adminarea" element={getlogeaded ? <AdminArea /> : <Login />} />
+                <Route path="/userdocs" element={getlogeaded ? <UserDocs /> : <Login />} />
                 <Route path='/userprofile' element={getlogeaded ? <Userprofile /> : <Login />} />
+                <Route path="/adminarea" element={getlogeaded ? <AdminArea /> : <Login />} />
                 <Route path="/" element={<Navigate to="/login" />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>

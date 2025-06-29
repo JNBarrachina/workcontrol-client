@@ -7,14 +7,14 @@ import { DashboardbyEmplooyeedbyProjets } from '../../molecules/DashboardFetch/D
 
 import '../../organisms/DashboardContent/DashboardContent.scss';
 const Userprofile = () => {
-    return(
+    return (
         <>
             <DashboardHeader />
             <main className="dashboardContent">
                 <DashboardNav />
-                <section id="main_userprofile" style={{width: '100%', overflow: 'hidden', overflowY: 'auto'}}>
+                <section id="main_userprofile" style={{ width: '100%', overflow: 'hidden', overflowY: 'auto' }}>
                     {/* { false && < DashboardbyProjets/> } */}
-                    { true && < DashboardbyEmplooyeedbyProjets/> }
+                    {true && < DashboardbyEmplooyeedbyProjets />}
                 </section>
             </main>
         </>
