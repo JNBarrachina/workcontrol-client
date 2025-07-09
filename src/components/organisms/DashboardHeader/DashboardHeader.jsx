@@ -1,12 +1,16 @@
 import { useContext, useRef } from "react";
 
 import { UserLogout } from "../../molecules/UserLogout/UserLogout";
+
 import { UserDataContext } from "../../../contexts/UserDataContext";
+import { NavContext } from "../../../contexts/NavContext";
 
 import "./DashboardHeader.scss";
 
 export const DashboardHeader = () => {
     const { userData } = useContext(UserDataContext);
+    const { setNavOpen } = useContext(NavContext);
+
     const modalRef = useRef(null);
 
     const openModal = () => {
@@ -16,7 +20,7 @@ export const DashboardHeader = () => {
     return (
         <>
             <header className="dashboardHeaderContainer">
-                <img src=" /src/assets/workflow.png" className="dashboardLogo" alt="" />
+                <button className="navOpenBtn"><img src="/src/assets/menuicon.svg" alt="" onClick={() => setNavOpen(true)} /></button>
                 <div className="userProfileBox">
                     <p className="userProfileEmail">{userData.email}</p>
                     <img

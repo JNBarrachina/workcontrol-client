@@ -4,13 +4,18 @@ import { Link } from "react-router-dom";
 import "./DashboardNav.scss";
 
 import { UserDataContext } from "../../../contexts/UserDataContext";
+import { NavContext } from "../../../contexts/NavContext";
 
 export const DashboardNav = () => {
+    const { navOpen, setNavOpen } = useContext(NavContext);
+
     const { userData } = useContext(UserDataContext);
 
     return (
         <>
-            <nav className="dashboardNavContainer">
+            <nav className={navOpen == true ? "dashboardNavContainer navOpen" : "dashboardNavContainer navClose"}>
+                <img src=" /src/assets/workflow.png" className="mainLogo" alt="" />
+                <button className="navCloseBtn" onClick={() => setNavOpen(false)}><img src=" /src/assets/arrowmenuicon.svg" alt="" /></button>
                 <Link to="/dashboard" className="dashboardNavLink">
                     <img
                         className="dashboardNavImg"

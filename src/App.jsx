@@ -12,6 +12,7 @@ import { Userprofile } from './components/pages/Userprofile/Userprofile'
 import { UserDataContext } from './contexts/UserDataContext'
 import { UserProjectsContext } from './contexts/UserProjectsContext'
 import { MonthlyEntriesContext } from './contexts/MonthlyEntriesContext'
+import { NavContext } from './contexts/NavContext'
 
 function App() {
 
@@ -26,6 +27,8 @@ function App() {
   });
 
   const [entries, setEntries] = useState([]);
+
+  const [navOpen, setNavOpen] = useState(true);
 
   const [getlogeaded, setlogeaded] = useState(() => {
     try {
@@ -43,25 +46,27 @@ function App() {
 
   return (
     <>
-      <UserDataContext.Provider
-        value={{ userData, setUserData, getlogeaded, setlogeaded }}
-      >
-        <UserProjectsContext.Provider value={{ userProjects, setUserProjects }}>
-          <MonthlyEntriesContext.Provider value={{ entries, setEntries }}>
-            <BrowserRouter>
-              <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/dashboard" element={getlogeaded ? <Dashboard /> : <Login />} />
-                <Route path="/userdocs" element={getlogeaded ? <UserDocs /> : <Login />} />
-                <Route path='/userprofile' element={getlogeaded ? <Userprofile /> : <Login />} />
-                <Route path="/adminarea" element={getlogeaded ? <AdminArea /> : <Login />} />
-                <Route path="/" element={<Navigate to="/login" />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
-          </MonthlyEntriesContext.Provider>
-        </UserProjectsContext.Provider>
-      </UserDataContext.Provider>
+      <NavContext.Provider value={{ navOpen, setNavOpen }}>
+        <UserDataContext.Provider
+          value={{ userData, setUserData, getlogeaded, setlogeaded }}
+        >
+          <UserProjectsContext.Provider value={{ userProjects, setUserProjects }}>
+            <MonthlyEntriesContext.Provider value={{ entries, setEntries }}>
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/dashboard" element={getlogeaded ? <Dashboard /> : <Login />} />
+                  <Route path="/userdocs" element={getlogeaded ? <UserDocs /> : <Login />} />
+                  <Route path='/userprofile' element={getlogeaded ? <Userprofile /> : <Login />} />
+                  <Route path="/adminarea" element={getlogeaded ? <AdminArea /> : <Login />} />
+                  <Route path="/" element={<Navigate to="/login" />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </BrowserRouter>
+            </MonthlyEntriesContext.Provider>
+          </UserProjectsContext.Provider>
+        </UserDataContext.Provider>
+      </NavContext.Provider>
     </>
   )
 }
