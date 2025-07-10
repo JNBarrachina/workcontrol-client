@@ -1,0 +1,108 @@
+.dashboardNavContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  width: fit-content;
+  height: 100%;
+  z-index: 1000;
+
+  flex-shrink: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  gap: 2rem;
+  padding: 1rem;
+
+  background-color: white;
+  transition: width 0.3s ease;
+}
+
+.navOpen {
+  display: block;
+}
+
+.navClose {
+  display: none;
+}
+
+.mainLogo {
+  height: 50px;
+
+  margin-top: 24px;
+}
+
+.navCloseBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  padding: 8px;
+  
+  background-color: transparent;
+}
+
+.navCloseBtn:hover {
+  cursor: pointer;
+
+  transform: scale(1.1);
+  transition: 0.4s;
+}
+
+.dashboardNavLink {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+
+  width: 100%;
+  gap: 0.4rem;
+  padding: 0.4rem;
+  
+  border: 2px solid transparent;
+  border-radius: 8px;
+  
+}
+
+.dashboardNavLink:hover {
+  cursor: pointer;
+  border: 2px solid rgb(115, 17, 110);
+  transition: 0.4s;
+}
+
+.linkText {
+  display: inline-block;
+  font-size: 0.9rem;
+  color: black;
+  
+  max-width: 200px;
+  padding-right: 0.4rem;
+}
+
+.themeBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  font-weight: bold;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+.themeBtn:hover {
+  transform: scale(1.1);
+}
+
+.logoutBtn {
+  padding: 0.4rem;
+  background-color: white;
+  border-radius: 1rem;
+}
+
+.logoutBtn:hover {
+  transform: scale(1.1);
+  transition: 0.2s;
+}
