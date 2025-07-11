@@ -1,4 +1,3 @@
-import React from 'react'
 
 import { DashboardHeader } from '../../organisms/DashboardHeader/DashboardHeader'
 import { DashboardNav } from '../../organisms/DashboardNav/DashboardNav'

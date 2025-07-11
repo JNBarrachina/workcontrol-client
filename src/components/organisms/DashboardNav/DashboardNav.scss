@@ -1,4 +1,13 @@
 .dashboardNavContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  width: fit-content;
+  height: 100%;
+  z-index: 1000;
+
   width: 220px;
   height: 100vh;
   flex-shrink: 0;
@@ -7,6 +16,8 @@
   top: 0;
   left: 0;
 
+  gap: 2rem;
+  padding: 1rem;
   padding: 1rem;
   gap: 1rem;
 
