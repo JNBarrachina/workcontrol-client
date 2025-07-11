@@ -1,30 +1,34 @@
 .dashboardNavContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-
-  width: fit-content;
+  width: 220px;
   height: 100vh;
-
   flex-shrink: 0;
+
   position: absolute;
   top: 0;
   left: 0;
 
-  gap: 2rem;
-  padding: 0.4rem;
+  padding: 1rem;
+  gap: 1rem;
 
   background-color: white;
-  transition: width 0.3s ease;
+
+  opacity: 0;
+  transform: translateX(-100%);
+  pointer-events: none;
+
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.navOpen {
-  display: block;
-}
+.dashboardNavContainer.navOpen {
+  opacity: 1;
 
-.navClose {
-  display: none;
+  transform: translateX(0);
+  pointer-events: auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .mainLogo {

@@ -13,7 +13,7 @@ export const DashboardNav = () => {
 
     return (
         <>
-            <nav className={navOpen == true ? "dashboardNavContainer navOpen" : "dashboardNavContainer navClose"}>
+            <nav className={navOpen == true ? "dashboardNavContainer navOpen" : "dashboardNavContainer"}>
                 <img src=" /src/assets/workflow.png" className="mainLogo" alt="" />
                 <button className="navCloseBtn" onClick={() => setNavOpen(false)}><img src=" /src/assets/arrowmenuicon.svg" alt="" /></button>
                 <Link to="/dashboard" className="dashboardNavLink">

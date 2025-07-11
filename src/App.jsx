@@ -28,7 +28,7 @@ function App() {
 
   const [entries, setEntries] = useState([]);
 
-  const [navOpen, setNavOpen] = useState(true);
+  const [navOpen, setNavOpen] = useState(false);
 
   const [getlogeaded, setlogeaded] = useState(() => {
     try {
