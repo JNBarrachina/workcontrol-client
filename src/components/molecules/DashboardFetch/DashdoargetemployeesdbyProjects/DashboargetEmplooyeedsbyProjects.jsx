@@ -46,7 +46,7 @@ const DashboargetEmplooyeedsbyProjects = () => {
             }
         });
 
-        //console.log("Agrupado correctamente:", grouped);
+        console.log("Agrupado correctamente:", grouped);
         setpreformated(grouped)
     }, [getpreviw]);
 
