@@ -66,8 +66,8 @@ const DashboardbyEmplooyeedbyProjets = () => {
   };
 
   return (
-    <article id="main-dashboardbyemployeedprojects" style={{ padding: '10px', height: '40rem', overflowY: 'auto' }}>
-      <table className="main-table">
+    <article id="main-dashboardbyemployeedprojects" style={{ padding: '10px', height: '51.5rem', overflow:'hidden', overflowY: 'auto' }}>
+      <table>
         <thead>
           <tr>
             <th>Employees</th>

@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react'
 import { DashboardHeader } from '../../organisms/DashboardHeader/DashboardHeader.jsx'
 import { DashboardNav } from '../../organisms/DashboardNav/DashboardNav.jsx'
 
-import { DashboardbyEmplooyeedbyProjets } from '../../molecules/DashboardFetch/DashboardbyEmployeedProjects/DashboardbyEmployeedProjects.jsx';
-
 import '../../organisms/DashboardContent/DashboardContent.scss';
+import { Profile } from './Profile.jsx'
+import './Profile.css'
 const Userprofile = () => {
     return (
         <>
@@ -14,7 +14,16 @@ const Userprofile = () => {
                 <DashboardNav />
                 <section id="main_userprofile" style={{ marginTop:'4.05rem', height:'91%', overflow: 'hidden', overflowY: 'auto' }}>
                     {/* { false && < DashboardbyProjets/> } */}
-                    {true && < DashboardbyEmplooyeedbyProjets />}
+                    <section style={{
+                        display:'flex',
+                        flexDirection:'column',
+                        justifyContent:'center',
+                        alignItems: 'center',
+                        padding: '10px'
+                        }}>
+                        < Profile />
+                    </section>
+
                 </section>
             </main>
         </>

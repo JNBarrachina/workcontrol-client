@@ -75,29 +75,32 @@ const DashboargetEmplooyeedsbyProjects = () => {
   };
 
   return (
-    <article id="main-DashboargetEmplooyeedsbyProjects" style={{padding:'10px', height:'40rem', overflowY:'auto' }}>
+    <article id="main-DashboargetEmplooyeedsbyProjects" style={{ padding: '10px', height: '46.80rem', overflow:'hidden', overflowY: 'auto' }}>
       {/* Tabla Principal: empleados y botón para ver proyectos */}
-      <table className="main-table" >
-        <thead>
-          <tr>
-            <th>Employees</th>
-            <th>Projects</th>
-          </tr>
-        </thead>
-        <tbody>
-          {groupedData &&
-            Object.entries(groupedData).map(([employee, projects]) => (
-              <tr key={employee}>
-                <td>{employee}</td>
-                <td>
-                  <button onClick={() => handleOpenProjects(employee, projects)} style={{fontWeight:'bold', backgroundColor: '#e262ff', color:'#fff'}}>
-                    View Projects ({Object.keys(projects).length})
-                  </button>
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+      <section className="main-table">
+        <table  >
+          <thead>
+            <tr>
+              <th>Employees</th>
+              <th>Projects</th>
+            </tr>
+          </thead>
+          <tbody>
+            {groupedData &&
+              Object.entries(groupedData).map(([employee, projects]) => (
+                <tr key={employee}>
+                  <td>{employee}</td>
+                  <td>
+                    <button onClick={() => handleOpenProjects(employee, projects)} style={{fontWeight:'bold', backgroundColor: '#e262ff', color:'#fff'}}>
+                      View Projects ({Object.keys(projects).length})
+                    </button>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </section>
+
 
       {/* Modal de proyectos */}
       {showProjects && (

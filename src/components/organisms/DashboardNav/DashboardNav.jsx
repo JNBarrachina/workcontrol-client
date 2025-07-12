@@ -48,6 +48,15 @@ export const DashboardNav = () => {
                     />
                     <p className="linkText">Profile</p>
                 </Link>
+                <Link
+                    to="/assignments" className="dashboardNavLink">
+                    <img
+                        className="dashboardNavImg"
+                        src="/src/assets/align-left-svgreposvg.svg"
+                        alt=""
+                    />
+                    <p className="linkText">Assignments</p>
+                </Link>
                 {userData.role === "admin" && <Link to="/adminarea" className="dashboardNavLink">
                     <img
                         className="dashboardNavImg"
