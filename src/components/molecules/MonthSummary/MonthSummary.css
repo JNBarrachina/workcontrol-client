@@ -1,0 +1,58 @@
+.sideModal {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  height: 100%;
+  background: white;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+  transition: right 0.3s ease;
+  z-index: 1000;
+  padding: 1rem;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  right: -350px;
+}
+.sideModal.open {
+  right: 0;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.5rem;
+}
+.modalHeader h3 {
+  margin: 0;
+}
+.modalHeader .closeBtn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modalContent {
+  padding-top: 1rem;
+}
+.modalContent .projectSummary {
+  margin-bottom: 1.5rem;
+}
+.modalContent .projectSummary h4 {
+  margin-bottom: 0.5rem;
+}
+.modalContent .projectSummary ul {
+  list-style: none;
+  padding-left: 0;
+}
+.modalContent .projectSummary ul li {
+  margin-left: 1rem;
+  margin-bottom: 0.25rem;
+  color: #555;
+}
+.modalContent .noData {
+  color: #888;
+  font-style: italic;
+}/*# sourceMappingURL=MonthSummary.css.map */

@@ -56,7 +56,7 @@ export const MonthDay = ({ day, dayEntries, onChangeDayCode }) => {
 
     return (
         <div className='dayContainer'>
-            <div className='dayHeaderContainer'>
+            <div className='dayHeaderContainer' style={{position:'relative', zIndex:'600'}}>
                 <section className='dayTitleType'>
                     <h4 className='dayDate'>{formatFecha(day.date)}</h4>
                     <select value={dayType} onChange={changeDayType}>

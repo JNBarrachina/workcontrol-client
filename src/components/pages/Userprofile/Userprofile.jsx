@@ -12,7 +12,7 @@ const Userprofile = () => {
             <DashboardHeader />
             <main className="dashboardContent">
                 <DashboardNav />
-                <section id="main_userprofile" style={{ width: '100%', overflow: 'hidden', overflowY: 'auto' }}>
+                <section id="main_userprofile" style={{ marginTop:'4.05rem', height:'91%', overflow: 'hidden', overflowY: 'auto' }}>
                     {/* { false && < DashboardbyProjets/> } */}
                     {true && < DashboardbyEmplooyeedbyProjets />}
                 </section>

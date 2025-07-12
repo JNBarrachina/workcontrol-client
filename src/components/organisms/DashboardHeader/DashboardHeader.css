@@ -1,15 +1,19 @@
 .dashboardHeaderContainer {
+  position: fixed;
+  top: 0;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 0.5rem 4rem 0.5rem 4rem;
   background-color: white;
   width: 100%;
+  border-bottom: 3px solid rgb(162, 29, 156);
+  z-index: 850;
 }
 
-.dashboardLogo {
-  height: 40px;
+.navOpenBtn {
+  background-color: transparent;
 }
 
 .userProfileBox {
@@ -20,13 +24,13 @@
   gap: 0.6rem;
 }
 
+.userProfileEmail {
+  font-weight: bold;
+}
+
 .userProfileImg {
   width: 30px;
   height: 30px;
-}
-
-.userProfileName {
-  font-weight: bold;
 }
 
 .themeBtn {
@@ -44,13 +48,13 @@
   transform: scale(1.1);
 }
 
-.logoutBtn {
+.headerBtns {
   background-color: white;
   border-radius: 1rem;
   transition: 0.9s;
 }
 
-.logoutBtn:hover {
+.headerBtns:hover {
   transform: scale(1.02);
   transition: 0.9s;
 }
@@ -58,4 +62,16 @@
 .logoutImg {
   width: 25px;
   height: 25px;
+}
+
+@media screen and (max-width: 600px) {
+  .dashboardHeaderContainer {
+    padding: 0.6rem;
+  }
+  .dashboardLogo {
+    height: 40px;
+  }
+  .userProfileEmail {
+    display: none;
+  }
 }/*# sourceMappingURL=DashboardHeader.css.map */

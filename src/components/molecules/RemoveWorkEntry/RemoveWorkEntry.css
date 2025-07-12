@@ -2,14 +2,14 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.logoutTooltip {
+.removeWorkEntryModal {
   width: -moz-fit-content;
   width: fit-content;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 2.5rem;
+  padding: 2rem;
   border-radius: 8px;
   background-color: white;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
@@ -17,41 +17,30 @@
   gap: 1rem;
 }
 
-.logoutTooltipContainer {
+.removeWorkEntryModalContainer {
   display: flex;
   flex-flow: column wrap;
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  gap: 2.3rem;
+  gap: 1rem;
 }
 
-.logoutTitle {
-  font-weight: bolder;
-}
-
-.logoutBtnsContainer {
+.removeWorkEntryBtnsContainer {
   display: flex;
+  justify-content: space-evenly;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
 }
 
-.logoutBtns {
-  padding: 0.6rem 1.2rem;
-  background-color: white;
-  cursor: pointer;
-  font-weight: bold;
-  border: 2px solid black;
-  border-radius: 8px;
-}
-
-.logoutBtns:hover {
+.removeWorkEntryBtns:hover {
+  font-weight: bolder;
   transform: scale(1.1);
-  transition: 0.3s;
-  border: 2px solid rgb(115, 17, 110);
+  transition: 0.2s;
 }
 
-.exitBtn:hover {
-  background-color: rgb(115, 17, 110);
+.removeConfirmBtn:hover {
   color: white;
-}/*# sourceMappingURL=UserLogout.css.map */
+  font-weight: bolder;
+  background-color: red;
+}/*# sourceMappingURL=RemoveWorkEntry.css.map */

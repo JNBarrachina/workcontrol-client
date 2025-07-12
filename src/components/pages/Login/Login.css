@@ -1,5 +1,5 @@
 body {
-  background: linear-gradient(135deg, #ffe9f3, #ffc1dc, #d5b3ff);
+  background: linear-gradient(135deg, #FFE9F3, #FFC1DC, #D5B3FF);
 }
 
 #login-main {
@@ -17,7 +17,9 @@ body {
 
 .login-card {
   display: flex;
-  flex-direction: column;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
   padding: 1rem;
   border-radius: 12px;
   box-shadow: 0 18px 24px rgba(0, 0, 0, 0.75);
@@ -37,22 +39,23 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
   margin: 0;
 }
 
-.login-button {
-  width: 100%;
-  margin: 0;
-  font-weight: bold;
-}
-
-.login-button:hover {
+.loginBtn {
+  width: 60%;
   color: black;
-  font-size: bolder;
-  
-  transform: scale(1.04);
-  transition: 0.3s;
+  font-weight: bolder;
+  border: none;
+  border-radius: 8px;
+  background-color: pink;
+  transition: background-color 0.3s ease;
+}
+.loginBtn:hover {
+  background-color: pink !important;
+  color: black !important;
+  transform: scale(1.1);
+  transition: all 0.3s ease;
 }
 
 .login-logo {
