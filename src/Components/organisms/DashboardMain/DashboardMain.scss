@@ -1,0 +1,106 @@
+.dashboardMainContent {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    
+    width: 100%;
+
+    padding: 1rem;
+    gap: 0.4rem;
+
+    background-color: whitesmoke;
+
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.dashboardMainHeader{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    
+    width: 100%;
+    gap: 1rem;
+}
+
+.monthSelector {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    gap: 0.4rem;
+}
+
+.dashboardMainTitle {
+    width: 100%;
+    
+    text-align: left;
+    font-size: 1.8rem;
+}
+
+.monthInfoContainer{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+
+    gap: 1rem;
+    padding: 0.2rem;
+}
+
+.monthlySummary{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+
+    flex-grow: 1;
+
+    gap: 1rem;
+}
+
+.summaryp{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+.monthlySummaryBtns{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+
+    flex-grow: 1;
+    max-width: 100%;
+
+    gap: 1rem;
+}
+
+.monthBtns{
+    width: 180px;
+
+    font-weight: bolder;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.monthlySummaryBtn {
+    border: 2px solid rgb(162, 29, 156);
+}
+
+.monthBtns:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: 0.2s;
+    border: 2px solid rgb(162, 29, 156);
+}
