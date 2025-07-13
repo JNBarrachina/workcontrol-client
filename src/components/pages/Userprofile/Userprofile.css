@@ -1,8 +1,9 @@
 #main_userprofile {
   margin-top: 4.05rem;
-  height: 100%;
+  height: fit-content;
   overflow: hidden;
   overflow-y: auto;
+  background: whitesmoke;
 }
 
 .container-sections {
