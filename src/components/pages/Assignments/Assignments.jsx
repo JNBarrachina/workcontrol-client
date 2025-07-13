@@ -8,16 +8,7 @@ import { DashboardbyEmplooyeedbyProjets } from '../../molecules/DashboardFetch/D
 import '../../organisms/DashboardContent/DashboardContent.scss';
 const Assignments = () => {
     return (
-        <>
-            <DashboardHeader />
-            <main className="dashboardContent">
-                <DashboardNav />
-                <section id="main_userprofile" style={{ marginTop:'4.05rem', height:'97%', overflow: 'hidden', overflowY: 'auto' }}>
-                    {/* { false && < DashboardbyProjets/> } */}
-                    {true && < DashboardbyEmplooyeedbyProjets />}
-                </section>
-            </main>
-        </>
+            < DashboardbyEmplooyeedbyProjets />
     )
 }
 

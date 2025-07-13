@@ -10,8 +10,6 @@ import { DashboargetEmplooyeedsbyProjects } from './components/molecules/Dashboa
 import { ProjectsManager } from './components/pages/ProjectsManager/ProjectsManager'
 import { NotFound } from './components/pages/NotFound/NotFound'
 import { Userprofile } from './components/pages/Userprofile/Userprofile'
-import { Assignments } from './components/pages/Assignments/Assignments'
-
 
 import { UserDataContext } from './contexts/UserDataContext'
 import { UserProjectsContext } from './contexts/UserProjectsContext'
@@ -68,7 +66,6 @@ function App() {
                     <Route path="/dashboard" element={getlogeaded ? <Dashboard /> : <Login />} />
                     <Route path="/userdocs" element={getlogeaded ? <UserDocs /> : <Login />} />
                     <Route path='/userprofile' element={getlogeaded ? <Userprofile /> : <Login />} />
-                    <Route path='/assignments' element={getlogeaded ? <Assignments /> : <Login />} />
                     <Route path="/adminarea" element={getlogeaded ? <AdminArea mainContent={<DashboargetEmplooyeedsbyProjects />} /> : <Login />} />
                     <Route path="/adminarea/projectsmanager" element={getlogeaded ? <AdminArea mainContent={<ProjectsManager />} /> : <Login />} />
                     <Route path="/" element={<Navigate to="/login" />} />

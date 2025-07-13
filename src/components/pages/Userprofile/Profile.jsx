@@ -118,8 +118,7 @@ const Profile = () => {
 
   return (
     <div className="profile-container">
-      <h1> User Profile </h1>
-
+      
       <div className="profile-image-section">
         <input
           type="file"
