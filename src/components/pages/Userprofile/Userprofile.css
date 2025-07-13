@@ -1,0 +1,40 @@
+#main_userprofile {
+  margin-top: 4.05rem;
+  height: 100%;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.container-sections {
+  display: flex;
+  flex-direction: row;
+  padding: 25px;
+  height: 100%;
+}
+
+
+.section-card {
+
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  height: fit-content;
+  width: 32rem;
+  border: 1px solid #000;
+  border-radius: 12px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+
+.section-card2{
+  margin-left: 2rem;
+}
+
+
+@media screen and (max-width:920px) {
+  .container-sections{
+    flex-direction: column;
+  }
+  
+}
