@@ -70,7 +70,7 @@ const DashboardbyEmplooyeedbyProjets = () => {
       <table>
         <thead>
           <tr>
-            <th>Employees</th>
+            <th>Employee</th>
             <th>Projects</th>
           </tr>
         </thead>
