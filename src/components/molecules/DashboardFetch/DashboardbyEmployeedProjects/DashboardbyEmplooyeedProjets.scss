@@ -4,6 +4,12 @@
     background: whitesmoke;
     width: 100%;
     height: 100%;
+
+    padding: 10px;
+    
+
+    overflow: hidden;
+    overflow-y: auto;
 }
 
 #main-dashboardbyemployeedprojects table{
@@ -11,6 +17,7 @@
     padding: 10px;
     border-collapse: separate;
     border-spacing: 0.5rem 1rem;
+    background: #fff;
 }
                 
 th{
@@ -32,8 +39,79 @@ td{
     background: #fff;
     text-align: center;
     font-weight: bold;
-
+    color: #000;
     border-radius: 12px;
-    box-shadow: inherit;
     box-shadow: 1.55px 1px 1px #000, -0.10px -0.10px 0.7px #000;
+}
+
+#main-dashboardbyemployeedprojects button,
+.modal-projects .projects-table  button{
+    font-weight: bold;
+    background: #e262ff;
+    color: #fff;
+}
+.modal{
+position: absolute;
+top: 0;
+left: 0;
+margin: 0;
+width: 100%;
+height: fit-content;
+padding: 2px 0 2px 0;
+overflow: hidden;
+overflow-y: auto;
+}
+
+.modal-projects{
+
+}
+
+.modal-projects section{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 0.15rem;
+    width: 100%;
+    height: 3.10rem;
+}
+
+.modal-projects section button{
+    height: 100%;
+    font-weight: bold;
+}
+
+.modal-projects .projects-table button{
+    font-weight: bold;
+}
+
+.modal-subprojects{
+
+}
+
+.modal-subprojects section{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 0.15rem;
+    width: 100%;
+    height: 3.10rem;
+}
+
+.modal-subprojects section button{
+    height: 100%;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 920px) {
+  #main-dashboardbyemployeedprojects {
+    min-height: 30rem;
+    max-height: 100vh;
+    height: auto;
+  }
+
+  .modal {
+    height: auto;
+    max-height: 100vh;
+    overflow-y: auto;
+  }
 }
