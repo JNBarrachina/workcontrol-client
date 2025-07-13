@@ -28,11 +28,12 @@ tbody tr {
 }
 
 td {
-  margin: 2em;
+  margin: 0.3rem 0.2rem;
   padding: 5px 10px;
-  background: whitesmoke;
+  background: #fff;
   text-align: center;
-  font-weight: 500;
+  font-weight: bold;
   border-radius: 12px;
-  box-shadow: 1px 1px 0.9px #000, 0 6px 12px #000;
+  box-shadow: inherit;
+  box-shadow: 1.55px 1px 1px #000, -0.1px -0.1px 0.7px #000;
 }/*# sourceMappingURL=DashboardbyEmplooyeedProjets.css.map */

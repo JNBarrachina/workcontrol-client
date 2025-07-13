@@ -41,10 +41,17 @@
   background-color: white;
   cursor: pointer;
   font-weight: bold;
-  border: 2px solid transparent;
+  border: 2px solid black;
   border-radius: 8px;
 }
 
 .logoutBtns:hover {
+  transform: scale(1.1);
+  transition: 0.3s;
   border: 2px solid rgb(115, 17, 110);
+}
+
+.exitBtn:hover {
+  background-color: rgb(115, 17, 110);
+  color: white;
 }/*# sourceMappingURL=UserLogout.css.map */

@@ -8,9 +8,13 @@ import "./DashboardContent.scss"
 
 export const DashboardContent = () => {
     return (
-        <main className="dashboardContent">
+        <>
             <DashboardNav />
-            <DashboardMain />
-        </main>
+            <article className="dashboardContent">
+                <article style={{ marginTop: '4.05rem', height: '91%' }}>
+                    <DashboardMain />
+                </article>
+            </article>
+        </>
     )
 }

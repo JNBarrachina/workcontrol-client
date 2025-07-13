@@ -1,189 +1,171 @@
-import { useEffect, useState, Fragment, } from 'react';
-
-import './DashboargetEmplooyeedsbyProjects.scss'
+import { useEffect, useState } from 'react';
+import './DashboargetEmplooyeedsbyProjects.scss';
 
 const DashboargetEmplooyeedsbyProjects = () => {
-    
-    const [ getpreviw, setpreview] = useState([]);
-    const [ getpreformated, setpreformated ] = useState();
+  // Estado para guardar los datos crudos desde la API
+  const [rawData, setRawData] = useState([]);
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [getselectedSubprojects, setSelectedSubprojects] = useState(null);
+  // Estado para guardar los datos organizados por empleado y proyecto
+  const [groupedData, setGroupedData] = useState(null);
+
+  // Estados para manejar los modales
+  const [showProjects, setShowProjects] = useState(false);
+  const [showSubprojects, setShowSubprojects] = useState(false);
+
+  // Datos del empleado/proyecto actual
+  const [currentEmployee, setCurrentEmployee] = useState('');
+  const [currentProjects, setCurrentProjects] = useState(null);
+  const [currentProjectName, setCurrentProjectName] = useState('');
+  const [currentSubprojects, setCurrentSubprojects] = useState(null);
+
+  // 1. Obtener datos desde el backend al cargar el componente
+  useEffect(() => {
+    fetch('http://localhost:3000/fetchs/employeeds_projects')
+      .then(res => res.json())
+      .then(data => setRawData(data[1])) // Usamos el segundo elemento del array
+      .catch(err => console.error(err));
+  }, []);
+
+  // 2. Formatar datos -> empleado > proyecto > subproyecto
+  useEffect(() => {
+    const grouped = {};
+
+    rawData.forEach(item => {
+    //Los valores bienen asi de la bbdd
+      const emp = item.Employeed;
+      const proj = item["Assigned Project"];
+      const sub = item["Assigned SubProject"];
+      const date = item["Date Assigned"];
+
+        // Si no existe el empleado
+        if (!grouped[emp]) {
+            grouped[emp] = {};
+        }
+
+        // Si no existe el proyecto para ese empleado
+        if (!grouped[emp][proj]) {
+            grouped[emp][proj] = [];
+        }
+
+        // Arry recorrido si ya existe ese subproyecto
+        const subAlreadyExists = grouped[emp][proj].some(([existingSub]) => existingSub === sub);
+
+        // Si no existe, lo añadimos
+        if (!subAlreadyExists) {
+        grouped[emp][proj].push([sub, date]);
+        }
+
+    });
+
+    setGroupedData(grouped);
+  }, [rawData]);
+
+  // Abrir popup de proyectos
+  const handleOpenProjects = (employee, projects) => {
+    setCurrentEmployee(employee);
+    setCurrentProjects(projects);
+    setShowProjects(true);
+  };
+
+  // Abrir popup de subproyectos
+  const handleOpenSubprojects = (projectName, subprojects) => {
+    setCurrentProjectName(projectName);
+    setCurrentSubprojects(subprojects);
+    setShowSubprojects(true);
+  };
+
+  return (
+    <article id="main-DashboargetEmplooyeedsbyProjects" style={{ padding: '10px', height: '46.80rem', overflow:'hidden', overflowY: 'auto' }}>
+      {/* Tabla Principal: empleados y botón para ver proyectos */}
+      <section className="main-table">
+        <table  >
+          <thead>
+            <tr>
+              <th>Employees</th>
+              <th>Projects</th>
+            </tr>
+          </thead>
+          <tbody>
+            {groupedData &&
+              Object.entries(groupedData).map(([employee, projects]) => (
+                <tr key={employee}>
+                  <td>{employee}</td>
+                  <td>
+                    <button onClick={() => handleOpenProjects(employee, projects)} style={{fontWeight:'bold', backgroundColor: '#e262ff', color:'#fff'}}>
+                      View Projects ({Object.keys(projects).length})
+                    </button>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </section>
 
 
-    useEffect(() => {
-        fetch('http://localhost:3000/fetchs/employeeds_projects')
-            .then(res => res.json())
-            .then(data => {
-                //console.log('Preview',data[1]);
-                setpreview(data[1]);
-            })
-            .catch(err => console.error(err));
-    }, []);
+      {/* Modal de proyectos */}
+      {showProjects && (
+        <div className="modal">
+          <div className="modal-content">
+            <section style={{ display:'flex', flexDirection:'row', justifyContent:'space-around', with:'100%'}}>
+                <h2>{currentEmployee}'s Projects</h2>
+                <button onClick={() => setShowProjects(false)} style={{fontWeight:'bold'}}>Close</button>
+            </section>
+            
 
-    useEffect(() => {
-        // Ok, simularemos la prueba
-        // Funciona, pero la Fecha de asignacion es la del proyeto asignado
-        // no la del subproyecto asignado ya que no existe en la BBDD.
-        //
-        // Preformateo Employee Proyecto Subproyectos.
-        const grouped = {};
-        getpreviw.forEach(row => {
-            const employee = row.Employeed;
-            const project = row["Assigned Project"];
-            const subproject = row["Assigned SubProject"];
-
-            if (!grouped[employee]) {
-            grouped[employee] = {};
-            }
-
-            if (!grouped[employee][project]) {
-            grouped[employee][project] = [];
-            }
-
-            if (!grouped[employee][project].includes(subproject)) {
-            grouped[employee][project].push([ subproject,row["Date Assigned"] ]);
-            }
-        });
-
-        //console.log("Agrupado correctamente:", grouped);
-        setpreformated(grouped)
-    }, [getpreviw]);
-
-    const previewProjects = ( subprojects ) => {
-        setSelectedSubprojects( subprojects);
-        setIsModalOpen(true);                
-    }
-
-    const closeModal = () => {
-        setIsModalOpen(false);
-    }
-
-    return (
-        <main id="main-DashboargetEmplooyeedsbyProjects">
-            <table>
-                <thead>
-                    <tr>
-                        {getpreviw.length > 0 && Object.keys(getpreviw[0]).map((key, index) => (
-                            <th key={index}>{key}</th>
-                        ))}
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        false &&
-                        getpreviw.length > 0 && getpreviw.map((obj, i) => (
-                            <tr key={i}>
-                                        {Object.values(obj).map((value, j) => (
-                                            <td key={j}>{value}</td>
-                                        ))}
-                            </tr>
-                        ))
-                    
-                    }
-                           
-                    {
-                        getpreformated &&
-                        Object.entries(getpreformated).map(([employee, projects]) => (
-                            <Fragment key={employee}>
-                            {Object.entries(projects).map(([project, subprojects], i) => (
-                                <tr key={`${employee}-${project}`} style={{ backgroundColor: 'white' }}>
-                                {/* Columna 1: Empleado */}
-                                {i === 0 && (
-                                    <td rowSpan={Object.keys(projects).length} style={{ fontSize: '26px' }}>
-                                    {employee}
-                                    </td>
-                                )}
-                                {/* Columna 2: Proyecto */}
-                                <td style={{ backgroundColor: 'white' }}>{project}</td>
-                                {/* Columna 3: Subproyectos & fechas */}
-                                <td style={{ backgroundColor: 'white' }} colSpan={2}>
-
-                                    <button
-                                        onClick={ () => previewProjects( subprojects ) }
-                                    >
-                                    SubProjects ({subprojects.length})
-                                    </button>
-                                </td>
-                                </tr>
-                            ))}
-                            {/* Línea separadora */}
-                            <tr>
-                                <td colSpan={4} className='separate'></td>
-                            </tr>
-                            </Fragment>
-                        ))
-                    }
-                </tbody>
+            <table className="projects-table" style={{fontWeight:'bold'}}>
+              <thead>
+                <tr>
+                  <th>Project</th>
+                  <th>Subprojects</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.entries(currentProjects).map(([projectName, subprojects]) => (
+                  <tr key={projectName}>
+                    <td>{projectName}</td>
+                    <td>
+                      <button onClick={() => handleOpenSubprojects(projectName, subprojects)} style={{fontWeight:'bold'}}>
+                        View Subprojects ({subprojects.length})
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
+          </div>
+        </div>
+      )}
 
-            {/* Overlay y Modal */}
-            {isModalOpen && (
-                <div style={{
-                    position: 'absolute',
-                    zIndex:'100',
-                    top:'8%',
-                    left:'28%',
-                    right:'28%',
-                    padding:'10px',
-                    background:'rgba(0, 0, 0, 0.89)',
-                    borderRadius: '12px',
-                    }}>
-                    <div style={{display:'flex',flexDirection:'column',  overflowY:'auto', height:'40rem'}}>
-                        <div style={{display: 'flex', justifyContent: 'flex-end', width:'100%', padding:'10px'}}>
-                            <button 
-                                onClick={ closeModal}
-                                style={{
-                                    fontSize: '0.35rem',
-                                    cursor: 'pointer',
-                                    background: '#fff',
-                                    border: '1px solid #000',
-                                    borderRadius:'12px',
-                                }}
-                            >
-                                <img src="/src/assets/deletecross.svg" alt="Close" />
-                            </button>
-                        </div>
-                        <div style={{display: 'flex', flexDirection:'column', justifyContent: 'center', marginRight:'3rem'}}>
-                            {getselectedSubprojects?.map(([sub, date], idx) => (
-                                <div key={idx} style={{marginBottom: '1rem'}}>
-                                    <p style={{
-                                        padding:'10px 0 10px 20px',
-                                        width: '100%',
-                                        textAlign: 'start',
-                                        background: 'linear-gradient(90deg,rgba(252, 6, 174, 1) 0%, rgba(208, 0, 210, 1) 50%, rgba(148, 1, 248, 1) 100%)',
-                                        color: '#fff',
-                                        fontWeight: 'bold',
-                                        margin: '0.5rem 0',
-                                        border: '1px solid #000',
-                                        borderRadius:'12px',
-                                    }}>
-                                        Subproject: {sub}
-                                    </p>
-                                    <p style={{
-                                        padding:'10px 0 10px 20px',
-                                        width: '100%',
-                                        textAlign: 'start',
-                                        fontWeight: 'bold',
-                                        background: 'linear-gradient(90deg,rgba(252, 6, 174, 1) 0%, rgba(208, 0, 210, 1) 50%, rgba(148, 1, 248, 1) 100%)',
-                                        color: '#fff',
-                                        margin: '0.5rem 0',
-                                        border: '1px solid #000',
-                                        borderRadius:'12px',
-                                    }}>
-                                        Date Assigned: {date}
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            )}
+      {/* Modal de subproyectos */}
+      {showSubprojects && (
+        <div className="modal" >
+          <div className="modal-content">
+            <section style={{ display:'flex', flexDirection:'row', justifyContent:'space-around', with:'100%'}}>
+                <h2>{currentProjectName} Subprojects</h2>
+                <button onClick={() => setShowSubprojects(false)} style={{fontWeight:'bold'}}>Close</button>
+            </section>
 
-        </main>
-    );
+            <table className="subprojects-table" style={{fontWeight:'bold'}}>
+              <thead>
+                <tr>
+                  <th>Subproject</th>
+                  <th>Date Assigned</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentSubprojects.map(([sub, date], index) => (
+                  <tr key={index}>
+                    <td>{sub}</td>
+                    <td>{date}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+    </article>
+  );
 };
 
-export {
-    DashboargetEmplooyeedsbyProjects
-};
+export { DashboargetEmplooyeedsbyProjects };

@@ -5,26 +5,26 @@ import { useNavigate } from "react-router";
 
 import { UserDataContext } from "../../../contexts/UserDataContext";
 import { UserProjectsContext } from "../../../contexts/UserProjectsContext";
+import { ProjectsManagerContext } from "../../../contexts/ProjectsManagerContext";
 
 import "./Login.scss";
 
 const { Title } = Typography;
 const Login = () => {
     const navigate = useNavigate();
-    //const [user, setUser] = useState("");
-    //const { userData, setUserData } = useContext(UserDataContext);
-    const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
     const { userData, setUserData, getlogeaded, setlogeaded, } = useContext(UserDataContext);
     const { userProjects, setUserProjects } = useContext(UserProjectsContext);
+    const { projectsManager, setProjectsManager } = useContext(ProjectsManagerContext);
+
+    const [gettypeimput, septypeimput] = useState("password");
+    const [gettypeimage, settypeimage] = useState("/src/assets/eye_visible.svg");
+
+    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
+
     const isButtonEnabled = email && password
-    /*useEffect(() => {
-            const datosguardados = localStorage.getItem("login");
-            if (datosguardados) {
-                setUser(JSON.parse(datosguardados));
-            }
-        }, []);*/
+
     const handleLoginButtonClick = () => {
         fetch("http://localhost:3000/users/login", {
             headers: {
@@ -59,17 +59,23 @@ const Login = () => {
                 localStorage.setItem("userprojects", JSON.stringify(userProjects));
             })
             .catch((err) => console.error(err))
-        //Luego, lo parseamos con el getItem del valor que hemos añadido en el setItem y el logín leerá
-        //los usuarios para que tengan el login correcto en su base de datos.
-        // const savedData = JSON.parse(localStorage.getItem("login"));
-        // console.log(savedData);
-        /*if (savedData && email === savedData.email && password === savedData.password) {
-            navigate("/dashboard");
-        } else {
-            setErrorMsg("Usuario, contraseña o correo incorrectos");
-        }*/
-        // POST /register
-        // si
+
+        if (userData.role === "admin") {
+            fetch(`http://localhost:3000/projects/`, {
+                headers: {
+                    "Content-type": "application/json"
+                },
+                method: "GET",
+            })
+                .then(async (res) => {
+                    const projectsManager = await res.json();
+                    console.log("Todos los proyectos de la app: ", projectsManager);
+
+                    setProjectsManager(projectsManager);
+                    localStorage.setItem("projectsmanager", JSON.stringify(projectsManager));
+                })
+                .catch((err) => console.error(err))
+        }
     }
 
     return (
@@ -79,21 +85,45 @@ const Login = () => {
                     <div className="login-card">
                         <img src="/src/assets/workflow.png" alt="" />
                         <Title level={3}>Login</Title>
-                        <Input
-                            value={email}
-                            type="text"
-                            onChange={(event) =>
-                                setEmail(event.target.value)}
-                            placeholder="Correo Electronico"
-                            className="login-input"
-                        />
-                        <Input
-                            value={password}
-                            type="password"
-                            onChange={(event) => setPassword(event.target.value)}
-                            placeholder="Contraseña"
-                            className="login-input"
-                        />
+                        <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                            <Input
+                                style={{ width: '90%' }}
+                                value={email}
+                                type="text"
+                                onChange={(event) =>
+                                    setEmail(event.target.value)}
+                                placeholder="Correo Electronico"
+                                className="login-input"
+                            />
+                        </section>
+
+                        <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
+                            <Input
+                                style={{ width: '90%' }}
+                                value={password}
+                                type={gettypeimput}
+                                onChange={(event) => setPassword(event.target.value)}
+                                placeholder="Contraseña"
+                                className="login-input"
+                            />
+                            <button style={{ padding: '0', height: '2.80rem' }}>
+                                <img
+                                    style={{ height: '2rem' }}
+                                    src={gettypeimage}
+                                    alt="view"
+                                    onClick={() => {
+                                        if (gettypeimput === "password") {
+                                            settypeimage("/src/assets/eye_visible_hidden.svg");
+                                            septypeimput("text");
+                                        } else {
+                                            settypeimage("/src/assets/eye_visible.svg");
+                                            septypeimput("password");
+                                        }
+                                    }}
+                                />
+                            </button>
+
+                        </section>
                         <Button disabled={!isButtonEnabled} className="loginBtn" onClick={handleLoginButtonClick}>Login</Button><br />
                         <Typography.Text className="error">{errorMsg}</Typography.Text>
                         <img src="/src/assets/lasnavesajuntament.webp" alt="" className="lasnaves" />
@@ -105,9 +135,3 @@ const Login = () => {
 }
 
 export { Login }
-
-
-
-
-
-

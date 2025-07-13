@@ -2,8 +2,9 @@
     width: 100%;
 
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row;
+    flex-wrap: wrap;
     justify-content: center;
 
-    gap: 8px;
+    gap: 4px;
 }
