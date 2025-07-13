@@ -71,7 +71,6 @@ export const ProjectsManager = () => {
     return (
         <>
             <h1>Projects Manager</h1>
-
             <div className="projectSearchCreate">
                 <input
                     type="text"
