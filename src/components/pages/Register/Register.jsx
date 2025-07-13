@@ -65,7 +65,7 @@ const Register = () => {
                 <div className="login-container">
                     <div className="login-card">
                         <img src="/src/assets/workflow.png" alt="" />
-                        <Title level={3}>Login</Title>
+                        <Title level={3}>Register</Title>
                         <section style={{display:'flex',flexDirection:'row', justifyContent:'space-between', alignItems:'center', width:'100%'}}>
                             <Input
                                 style={{width:'90%'}}
@@ -120,6 +120,9 @@ const Register = () => {
                         <Button disabled={!isButtonEnabled} className="loginBtn" onClick={handleLoginButtonClick}>Login</Button><br />
                         <Typography.Text className="error">{errorMsg}</Typography.Text>
                         <img src="/src/assets/lasnavesajuntament.webp" alt="" className="lasnaves" />
+                    <p>
+                        Ya tienes cuenta? <Link to="/login">Logueate ahora</Link>
+                    </p>
                     </div>
                 </div>
             </main>

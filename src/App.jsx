@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 
 import { BrowserRouter, Route, Routes, Navigate, useNavigate } from "react-router"
 
+import { Register } from './components/pages/Register/Register'
 import { Login } from "./components/pages/Login/Login"
 import { Dashboard } from './components/pages/Dashboard/Dashboard'
 import { UserDocs } from './components/pages/UserDocs/UserDocs'
@@ -56,6 +57,7 @@ function App() {
             <MonthlyEntriesContext.Provider value={{ entries, setEntries }}>
               <BrowserRouter>
                 <Routes>
+                  <Route path="/register" element={<Register />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/dashboard" element={getlogeaded ? <Dashboard /> : <Login />} />
                   <Route path="/userdocs" element={getlogeaded ? <UserDocs /> : <Login />} />
