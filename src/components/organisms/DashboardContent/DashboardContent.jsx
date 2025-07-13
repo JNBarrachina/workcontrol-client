@@ -11,9 +11,7 @@ export const DashboardContent = () => {
         <>
             <DashboardNav />
             <article className="dashboardContent">
-                <article style={{ marginTop: '4.05rem', height: '91%' }}>
-                    <DashboardMain />
-                </article>
+                <DashboardMain />
             </article>
         </>
     )
