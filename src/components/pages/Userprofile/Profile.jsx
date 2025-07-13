@@ -92,6 +92,10 @@ const Profile = () => {
   };
 
   const subirFirmaAlServidor = async () => {
+
+     setverifysignature('/src/assets/updatesync_icon_176208.svg');
+
+
     const blob = await new Promise((res) => canvasRef.current.toBlob(res, "image/png"));
 
     const formData = new FormData();
@@ -112,7 +116,7 @@ const Profile = () => {
       }, 1000);
     } catch (err) {
       console.error(err);
-      alert("Error al subir firma.");
+      setverifysignature('/src/assets/crosscirclelinear_106172.svg');
     }
   };
 
