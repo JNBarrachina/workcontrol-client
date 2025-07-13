@@ -14,6 +14,8 @@ const Profile = () => {
   const fileInputRef = useRef();
   const [imagenPerfil, setImagenPerfil] = useState(null);
 
+  const [getverifysignature, setverifysignature] = useState("/src/assets/crosscirclelinear_106172.svg");
+
   const canvasRef = useRef(null);
   const ctxRef = useRef(null);
   const [dibujando, setDibujando] = useState(false);
@@ -91,21 +93,29 @@ const Profile = () => {
 
   const subirFirmaAlServidor = async () => {
     const blob = await new Promise((res) => canvasRef.current.toBlob(res, "image/png"));
+
     const formData = new FormData();
     formData.append("firma", blob, "firma.png");
+    formData.append("user", userData.nombre); // user también va en FormData
 
     try {
-      const response = await fetch("http://localhost:3000/upload", {
+      const response = await fetch("http://localhost:3000/uploads", {
         method: "POST",
-        body: formData,
+        body: formData, // NO usar JSON.stringify aquí
       });
+
       const data = await response.json();
-      alert("Firma subida con éxito: " + data.path);
+      console.log(data);
+
+      setTimeout(() => {
+        setverifysignature('/src/assets/tickcirclelinear_106244.svg');
+      }, 1000);
     } catch (err) {
       console.error(err);
       alert("Error al subir firma.");
     }
   };
+
 
   const manejarCambioImagen = (e) => {
     const archivo = e.target.files[0];
@@ -147,6 +157,11 @@ const Profile = () => {
           />
         </label>
         <p><strong>Role:</strong> {userData.rol}</p>
+          <section style={{display:'flex',flexDirection:'row', gap:'1rem'}}>
+            <p><strong>Upload Signature: </strong></p>
+            <img src={ getverifysignature } alt="" />
+          </section>
+        
         <p><strong>Access Date: </strong> {userData.fecha_alta}</p>
         <p><strong>Supervisor:</strong> {userData.supervisor}</p>
         <p><strong>Supervisor Email:</strong> {userData.email}</p>
@@ -177,7 +192,7 @@ const Profile = () => {
         <div className="firma-preview">
           <div id="">
             <button onClick={() => descargarFirma("png")}>Download PNG</button>
-            <button onClick={subirFirmaAlServidor}>Upload Signature</button>
+            <button onClick={subirFirmaAlServidor}>Upload to Plattform</button>
           </div>
           <div id="">
             <img src={firmaURL} alt="Firma guardada" className="firma-img" />
