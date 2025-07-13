@@ -147,12 +147,12 @@ const Profile = () => {
           />
         </label>
         <p><strong>Role:</strong> {userData.rol}</p>
-        <p><strong>DateAccess Date: </strong> {userData.fecha_alta}</p>
+        <p><strong>Access Date: </strong> {userData.fecha_alta}</p>
         <p><strong>Supervisor:</strong> {userData.supervisor}</p>
         <p><strong>Supervisor Email:</strong> {userData.email}</p>
       </div>
 
-      <h2>Firma digital</h2>
+      <h2>Digital Signature</h2>
       <canvas
         ref={canvasRef}
         className="firma-canvas"
@@ -169,15 +169,15 @@ const Profile = () => {
       ></canvas>
 
       <div className="botones-firma">
-        <button onClick={limpiarFirma}>Limpiar</button>
-        <button onClick={guardarFirma} disabled={getdisabled}>Guardar firma</button>
+        <button onClick={limpiarFirma}>Clean</button>
+        <button onClick={guardarFirma} disabled={getdisabled}>Save Signature</button>
       </div>
 
       {firmaURL && (
         <div className="firma-preview">
           <div id="">
-            <button onClick={() => descargarFirma("png")}>Descargar PNG</button>
-            <button onClick={subirFirmaAlServidor}>Subir al servidor</button>
+            <button onClick={() => descargarFirma("png")}>Download PNG</button>
+            <button onClick={subirFirmaAlServidor}>Upload Signature</button>
           </div>
           <div id="">
             <img src={firmaURL} alt="Firma guardada" className="firma-img" />
