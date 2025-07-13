@@ -8,6 +8,7 @@ import { UserDocs } from './components/pages/UserDocs/UserDocs';
 import { AdminArea } from './components/pages/AdminArea/AdminArea';
 import { DashboargetEmplooyeedsbyProjects } from './components/molecules/DashboardFetch/DashdoargetemployeesdbyProjects/DashboargetEmplooyeedsbyProjects.jsx';
 import { ProjectsManager } from './components/pages/ProjectsManager/ProjectsManager';
+import { EmployeesManager } from './components/pages/EmployeesManager/EmployeesManager';
 import { NotFound } from './components/pages/NotFound/NotFound';
 import { Userprofile } from './components/pages/Userprofile/Userprofile';
 
@@ -61,6 +62,7 @@ function App() {
                   <Route path='/userprofile' element={getlogeaded ? <Userprofile /> : <Login />} />
                   <Route path="/adminarea" element={getlogeaded ? <AdminArea mainContent={<DashboargetEmplooyeedsbyProjects />} /> : <Login />} />
                   <Route path="/adminarea/projectsmanager" element={getlogeaded ? <AdminArea mainContent={<ProjectsManager />} /> : <Login />} />
+                  <Route path="/adminarea/employeesmanager" element={getlogeaded ? <AdminArea mainContent={<EmployeesManager />} /> : <Login />} />
                   <Route path="/" element={<Navigate to="/login" />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>

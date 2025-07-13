@@ -41,7 +41,7 @@ export const DashboardMain = () => {
 
     useEffect(() => {
         const [year, month] = date.split('-');
-        fetch(`http://localhost:3000/api/workentries/${userData.id}/${year}-${month}`, {
+        fetch(`http://localhost:3000/employeework/workentries/${userData.id}/${year}-${month}`, {
             headers: { "Content-type": "application/json" },
             method: "GET",
         })

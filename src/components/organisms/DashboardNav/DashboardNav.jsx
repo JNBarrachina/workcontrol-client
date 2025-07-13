@@ -50,7 +50,7 @@ export const DashboardNav = () => {
                 </Link>
                 {userData.role === "admin" &&
                     <>
-                        <Link to="/adminarea" className="dashboardNavLink">
+                        <Link to="" className="dashboardNavLink">
                             <img
                                 className="dashboardNavImg"
                                 src="/src/assets/admin.svg"
