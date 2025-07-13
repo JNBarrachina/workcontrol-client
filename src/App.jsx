@@ -1,23 +1,24 @@
-import { useContext, useEffect, useState } from 'react'
+import { useState, useEffect } from 'react';
 
-import { BrowserRouter, Route, Routes, Navigate, useNavigate } from "react-router"
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 
-import { Login } from "./components/pages/Login/Login"
-import { Dashboard } from './components/pages/Dashboard/Dashboard'
-import { UserDocs } from './components/pages/UserDocs/UserDocs'
-import { AdminArea } from './components/pages/AdminArea/AdminArea'
+import { Login } from "./components/pages/Login/Login";
+import { Dashboard } from './components/pages/Dashboard/Dashboard';
+import { UserDocs } from './components/pages/UserDocs/UserDocs';
+import { AdminArea } from './components/pages/AdminArea/AdminArea';
 import { DashboargetEmplooyeedsbyProjects } from './components/molecules/DashboardFetch/DashdoargetemployeesdbyProjects/DashboargetEmplooyeedsbyProjects.jsx';
-import { ProjectsManager } from './components/pages/ProjectsManager/ProjectsManager'
-import { NotFound } from './components/pages/NotFound/NotFound'
-import { Userprofile } from './components/pages/Userprofile/Userprofile'
+import { ProjectsManager } from './components/pages/ProjectsManager/ProjectsManager';
+import { NotFound } from './components/pages/NotFound/NotFound';
+import { Userprofile } from './components/pages/Userprofile/Userprofile';
 
-import { UserDataContext } from './contexts/UserDataContext'
-import { UserProjectsContext } from './contexts/UserProjectsContext'
-import { ProjectsManagerContext } from './contexts/ProjectsManagerContext'
-import { MonthlyEntriesContext } from './contexts/MonthlyEntriesContext'
-import { NavContext } from './contexts/NavContext'
+import { UserDataContext } from './contexts/UserDataContext';
+import { UserProjectsContext } from './contexts/UserProjectsContext';
+import { ProjectsManagerProvider } from './contexts/ProjectsManagerContext'; // <--- Aquí
+import { MonthlyEntriesContext } from './contexts/MonthlyEntriesContext';
+import { NavContext } from './contexts/NavContext';
 
 function App() {
+  // estados y lógica local para UserData, UserProjects, entries, navOpen, etc.
 
   const [userData, setUserData] = useState(() => {
     const stored = localStorage.getItem("login");
@@ -26,11 +27,6 @@ function App() {
 
   const [userProjects, setUserProjects] = useState(() => {
     const stored = localStorage.getItem("userprojects");
-    return stored ? JSON.parse(stored) : [];
-  });
-
-  const [projectsManager, setProjectsManager] = useState(() => {
-    const stored = localStorage.getItem("projectsmanager");
     return stored ? JSON.parse(stored) : [];
   });
 
@@ -52,33 +48,29 @@ function App() {
   }, [getlogeaded]);
 
   return (
-    <>
-      <NavContext.Provider value={{ navOpen, setNavOpen }}>
-        <UserDataContext.Provider
-          value={{ userData, setUserData, getlogeaded, setlogeaded }}
-        >
-          <ProjectsManagerContext.Provider value={{ projectsManager, setProjectsManager }}>
-            <UserProjectsContext.Provider value={{ userProjects, setUserProjects }}>
-              <MonthlyEntriesContext.Provider value={{ entries, setEntries }}>
-                <BrowserRouter>
-                  <Routes>
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/dashboard" element={getlogeaded ? <Dashboard /> : <Login />} />
-                    <Route path="/userdocs" element={getlogeaded ? <UserDocs /> : <Login />} />
-                    <Route path='/userprofile' element={getlogeaded ? <Userprofile /> : <Login />} />
-                    <Route path="/adminarea" element={getlogeaded ? <AdminArea mainContent={<DashboargetEmplooyeedsbyProjects />} /> : <Login />} />
-                    <Route path="/adminarea/projectsmanager" element={getlogeaded ? <AdminArea mainContent={<ProjectsManager />} /> : <Login />} />
-                    <Route path="/" element={<Navigate to="/login" />} />
-                    <Route path="*" element={<NotFound />} />
-                  </Routes>
-                </BrowserRouter>
-              </MonthlyEntriesContext.Provider>
-            </UserProjectsContext.Provider>
-          </ProjectsManagerContext.Provider>
-        </UserDataContext.Provider>
-      </NavContext.Provider>
-    </>
-  )
+    <NavContext.Provider value={{ navOpen, setNavOpen }}>
+      <UserDataContext.Provider value={{ userData, setUserData, getlogeaded, setlogeaded }}>
+        <ProjectsManagerProvider>
+          <UserProjectsContext.Provider value={{ userProjects, setUserProjects }}>
+            <MonthlyEntriesContext.Provider value={{ entries, setEntries }}>
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/dashboard" element={getlogeaded ? <Dashboard /> : <Login />} />
+                  <Route path="/userdocs" element={getlogeaded ? <UserDocs /> : <Login />} />
+                  <Route path='/userprofile' element={getlogeaded ? <Userprofile /> : <Login />} />
+                  <Route path="/adminarea" element={getlogeaded ? <AdminArea mainContent={<DashboargetEmplooyeedsbyProjects />} /> : <Login />} />
+                  <Route path="/adminarea/projectsmanager" element={getlogeaded ? <AdminArea mainContent={<ProjectsManager />} /> : <Login />} />
+                  <Route path="/" element={<Navigate to="/login" />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </BrowserRouter>
+            </MonthlyEntriesContext.Provider>
+          </UserProjectsContext.Provider>
+        </ProjectsManagerProvider>
+      </UserDataContext.Provider>
+    </NavContext.Provider>
+  );
 }
 
-export default App
+export default App;
