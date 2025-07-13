@@ -6,6 +6,8 @@ import { Login } from "./components/pages/Login/Login"
 import { Dashboard } from './components/pages/Dashboard/Dashboard'
 import { UserDocs } from './components/pages/UserDocs/UserDocs'
 import { AdminArea } from './components/pages/AdminArea/AdminArea'
+import { DashboargetEmplooyeedsbyProjects } from './components/molecules/DashboardFetch/DashdoargetemployeesdbyProjects/DashboargetEmplooyeedsbyProjects.jsx';
+import { ProjectsManager } from './components/pages/ProjectsManager/ProjectsManager'
 import { NotFound } from './components/pages/NotFound/NotFound'
 import { Userprofile } from './components/pages/Userprofile/Userprofile'
 import { Assignments } from './components/pages/Assignments/Assignments'
@@ -13,6 +15,7 @@ import { Assignments } from './components/pages/Assignments/Assignments'
 
 import { UserDataContext } from './contexts/UserDataContext'
 import { UserProjectsContext } from './contexts/UserProjectsContext'
+import { ProjectsManagerContext } from './contexts/ProjectsManagerContext'
 import { MonthlyEntriesContext } from './contexts/MonthlyEntriesContext'
 import { NavContext } from './contexts/NavContext'
 
@@ -28,8 +31,12 @@ function App() {
     return stored ? JSON.parse(stored) : [];
   });
 
-  const [entries, setEntries] = useState([]);
+  const [projectsManager, setProjectsManager] = useState(() => {
+    const stored = localStorage.getItem("projectsmanager");
+    return stored ? JSON.parse(stored) : [];
+  });
 
+  const [entries, setEntries] = useState([]);
   const [navOpen, setNavOpen] = useState(false);
 
   const [getlogeaded, setlogeaded] = useState(() => {
@@ -52,22 +59,25 @@ function App() {
         <UserDataContext.Provider
           value={{ userData, setUserData, getlogeaded, setlogeaded }}
         >
-          <UserProjectsContext.Provider value={{ userProjects, setUserProjects }}>
-            <MonthlyEntriesContext.Provider value={{ entries, setEntries }}>
-              <BrowserRouter>
-                <Routes>
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/dashboard" element={getlogeaded ? <Dashboard /> : <Login />} />
-                  <Route path="/userdocs" element={getlogeaded ? <UserDocs /> : <Login />} />
-                  <Route path='/userprofile' element={getlogeaded ? <Userprofile /> : <Login />} />
-                  <Route path='/assignments' element={getlogeaded ? <Assignments /> : <Login />} />
-                  <Route path="/adminarea" element={getlogeaded ? <AdminArea /> : <Login />} />
-                  <Route path="/" element={<Navigate to="/login" />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </BrowserRouter>
-            </MonthlyEntriesContext.Provider>
-          </UserProjectsContext.Provider>
+          <ProjectsManagerContext.Provider value={{ projectsManager, setProjectsManager }}>
+            <UserProjectsContext.Provider value={{ userProjects, setUserProjects }}>
+              <MonthlyEntriesContext.Provider value={{ entries, setEntries }}>
+                <BrowserRouter>
+                  <Routes>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/dashboard" element={getlogeaded ? <Dashboard /> : <Login />} />
+                    <Route path="/userdocs" element={getlogeaded ? <UserDocs /> : <Login />} />
+                    <Route path='/userprofile' element={getlogeaded ? <Userprofile /> : <Login />} />
+                    <Route path='/assignments' element={getlogeaded ? <Assignments /> : <Login />} />
+                    <Route path="/adminarea" element={getlogeaded ? <AdminArea mainContent={<DashboargetEmplooyeedsbyProjects />} /> : <Login />} />
+                    <Route path="/adminarea/projectsmanager" element={getlogeaded ? <AdminArea mainContent={<ProjectsManager />} /> : <Login />} />
+                    <Route path="/" element={<Navigate to="/login" />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </BrowserRouter>
+              </MonthlyEntriesContext.Provider>
+            </UserProjectsContext.Provider>
+          </ProjectsManagerContext.Provider>
         </UserDataContext.Provider>
       </NavContext.Provider>
     </>

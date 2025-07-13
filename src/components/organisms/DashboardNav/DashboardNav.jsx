@@ -57,14 +57,29 @@ export const DashboardNav = () => {
                     />
                     <p className="linkText">Assignments</p>
                 </Link>
-                {userData.role === "admin" && <Link to="/adminarea" className="dashboardNavLink">
-                    <img
-                        className="dashboardNavImg"
-                        src="/src/assets/admin.svg"
-                        alt=""
-                    />
-                    <p className="linkText">Admin Area</p>
-                </Link>}
+                {userData.role === "admin" &&
+                    <>
+                        <Link to="/adminarea" className="dashboardNavLink">
+                            <img
+                                className="dashboardNavImg"
+                                src="/src/assets/admin.svg"
+                                alt=""
+                            />
+                            <p className="linkText">Admin Area</p>
+                        </Link>
+                        <ul className="adminSubmenu">
+                            <Link to="/adminarea/projectsmanager" className="dashboardNavLink adminNavLink">
+                                <p className="linkText">Projects</p>
+                            </Link>
+                            <Link to="/adminarea/employeesmanager" className="dashboardNavLink adminNavLink">
+                                <p className="linkText">Employees</p>
+                            </Link>
+                            <Link to="/adminarea/esignaturesmanager" className="dashboardNavLink adminNavLink">
+                                <p className="linkText">E-Signatures</p>
+                            </Link>
+                        </ul>
+                    </>
+                }
             </nav >
         </>
     );

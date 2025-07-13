@@ -75,6 +75,27 @@
   border: 2px solid rgb(115, 17, 110);
 }
 
+.adminSubmenu {
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  gap: 0.4rem;
+  margin-top: -16px;
+  padding-left: 42px;
+}
+
+.adminNavLink {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+
+  width: fit-content;
+}
+
 .linkText {
   display: inline-block;
   font-size: 0.9rem;
@@ -82,23 +103,6 @@
 
   max-width: 200px;
   padding-right: 0.4rem;
-}
-
-.themeBtn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  font-weight: bold;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-
-  transition: transform 0.2s ease;
-}
-
-.themeBtn:hover {
-  transform: scale(1.1);
 }
 
 .logoutBtn {
