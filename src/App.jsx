@@ -2,6 +2,7 @@
 
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 
+import { Register } from './components/pages/Register/Register'
 import { Login } from "./components/pages/Login/Login";
 import { Dashboard } from './components/pages/Dashboard/Dashboard';
 import { UserDocs } from './components/pages/UserDocs/UserDocs';
@@ -11,6 +12,7 @@ import { ProjectsManager } from './components/pages/ProjectsManager/ProjectsMana
 import { EmployeesManager } from './components/pages/EmployeesManager/EmployeesManager';
 import { NotFound } from './components/pages/NotFound/NotFound';
 import { Userprofile } from './components/pages/Userprofile/Userprofile';
+
 
 import { UserDataContext } from './contexts/UserDataContext';
 import { UserProjectsContext } from './contexts/UserProjectsContext';
@@ -56,6 +58,7 @@ function App() {
             <MonthlyEntriesContext.Provider value={{ entries, setEntries }}>
               <BrowserRouter>
                 <Routes>
+                  <Route path="/register" element={<Register />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/dashboard" element={getlogeaded ? <Dashboard /> : <Login />} />
                   <Route path="/userdocs" element={getlogeaded ? <UserDocs /> : <Login />} />
