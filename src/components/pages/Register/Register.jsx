@@ -20,7 +20,7 @@ const Register = () => {
     const [tlf, setTlf] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
-    const [role, setRole] = useState("");
+    const [role, setRole] = useState("user");
     const [name, setName] = useState("");
     const { userData, setUserData, getlogeaded, setlogeaded, } = useContext(UserDataContext);
     const { userProjects, setUserProjects } = useContext(UserProjectsContext);
@@ -33,7 +33,7 @@ const Register = () => {
                 "Content-type": "application/json"
             },
             method: "POST", body: JSON.stringify(
-                { name: name, surname: surname, dni: dni, tlf: tlf, email: email, password: password })
+                { name: name, surname: surname, dni: dni, tlf: tlf, email: email, password: password, role: role })
         })
             .then(async (res) => {
                 const data = await res.json();
@@ -170,7 +170,7 @@ const Register = () => {
                             </button>
 
                         </section>
-                        <Button disabled={!isButtonEnabled} className="loginBtn" onClick={handleLoginButtonClick}>Login</Button><br />
+                        <Button disabled={!isButtonEnabled} className="loginBtn" onClick={handleLoginButtonClick}>Register</Button><br />
                         <Typography.Text className="error">{errorMsg}</Typography.Text>
                         <img src="/src/assets/lasnavesajuntament.webp" alt="" className="lasnaves" />
                         <p>
