@@ -23,7 +23,7 @@ const Userprofile = () => {
                             <Profile />
                         </article>
 
-                        <article className="section-card section-card2">
+                        <article className="section-card section-card2 assignments">
                             <h2>Projects Assigned</h2>
                             <Assignments />
                         </article>

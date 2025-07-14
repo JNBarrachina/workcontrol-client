@@ -66,8 +66,8 @@ const DashboardbyEmplooyeedbyProjets = () => {
   };
 
   return (
-    <article id="main-dashboardbyemployeedprojects" style={{ padding: '10px', height: '51.5rem', overflow:'hidden', overflowY: 'auto' }}>
-      <table>
+    <article id="main-dashboardbyemployeedprojects">
+      <table className='inithial-table'>
         <thead>
           <tr>
             <th>Employee</th>
@@ -80,7 +80,7 @@ const DashboardbyEmplooyeedbyProjets = () => {
               <tr key={employee}>
                 <td>{employee}</td>
                 <td>
-                  <button onClick={() => handleOpenProjects(employee, projects)} style={{ fontWeight: 'bold', backgroundColor: '#e262ff', color: '#fff' }}>
+                  <button onClick={() => handleOpenProjects(employee, projects)}>
                     View Projects ({Object.keys(projects).length})
                   </button>
                 </td>
@@ -91,11 +91,11 @@ const DashboardbyEmplooyeedbyProjets = () => {
 
       {/* Modal Projects */}
       {showProjects && (
-        <div className="modal">
+        <div className="modal modal-projects">
           <div className="modal-content">
-            <section style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '1rem' }}>
+            <section>
               <h2>{currentEmployee}'s Projects</h2>
-              <button onClick={() => setShowProjects(false)} style={{ fontWeight: 'bold' }}>Close</button>
+              <button onClick={() => setShowProjects(false)} >Close</button>
             </section>
 
             <table className="projects-table">
@@ -110,7 +110,7 @@ const DashboardbyEmplooyeedbyProjets = () => {
                   <tr key={projectName}>
                     <td>{projectName}</td>
                     <td>
-                      <button onClick={() => handleOpenSubprojects(projectName, subprojects)} style={{ fontWeight: 'bold' }}>
+                      <button onClick={() => handleOpenSubprojects(projectName, subprojects)} >
                         View Subprojects ({subprojects.length})
                       </button>
                     </td>
@@ -124,13 +124,12 @@ const DashboardbyEmplooyeedbyProjets = () => {
 
       {/* Modal Subprojects */}
       {showSubprojects && (
-        <div className="modal">
+        <div className="modal modal-subprojects">
           <div className="modal-content">
-            <section style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '1rem' }}>
+            <section>
               <h2>{currentProjectName} Subprojects</h2>
-              <button onClick={() => setShowSubprojects(false)} style={{ fontWeight: 'bold' }}>Close</button>
+              <button onClick={() => setShowSubprojects(false)}>Close</button>
             </section>
-
             <table className="subprojects-table">
               <thead>
                 <tr>

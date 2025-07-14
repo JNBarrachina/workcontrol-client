@@ -17,11 +17,12 @@ export const ProjectsManager = () => {
     const [newSubprojectName, setNewSubprojectName] = useState({});
     const [searchTerm, setSearchTerm] = useState("");
 
-    // Estados para añadir nuevo proyecto
     const [newProjectName, setNewProjectName] = useState("");
     const [newProjectIsEuropean, setNewProjectIsEuropean] = useState(false);
 
     const toggleProject = (id) => {
+        const project = projectsManager.find((p) => p.id === id);
+        if (!project?.isActive) return;
         setExpandedProjectIds((prev) =>
             prev.includes(id) ? prev.filter((pid) => pid !== id) : [...prev, id]
         );
@@ -79,7 +80,6 @@ export const ProjectsManager = () => {
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
 
-                {/* Formulario simple para crear nuevo proyecto */}
                 <div className="newProjectForm">
                     <input
                         type="text"
@@ -105,7 +105,7 @@ export const ProjectsManager = () => {
                     return (
                         <div key={project.id} className="projectItem">
                             <div
-                                className="projectHeader"
+                                className={`projectHeader ${!project.isActive ? "disabled" : ""}`}
                                 onClick={() => toggleProject(project.id)}
                                 role="button"
                                 tabIndex={0}
@@ -117,6 +117,9 @@ export const ProjectsManager = () => {
                                     <strong>{project.name}</strong>
                                     <span className="projectType">
                                         {project.isEuropean ? "European Project" : "Local Project"}
+                                    </span>
+                                    <span className={`projectStatus ${project.isActive ? "open" : "closed"}`}>
+                                        ● {project.isActive ? "Open" : "Closed"}
                                     </span>
                                 </div>
                                 <button
@@ -195,4 +198,5 @@ export const ProjectsManager = () => {
         </>
     );
 };
+
 

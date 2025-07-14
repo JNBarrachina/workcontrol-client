@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import { UserDataContext } from "../../../contexts/UserDataContext";
+
 import { UserProjectsContext } from "../../../contexts/UserProjectsContext";
 
 import "./NewWorkEntry.scss";
