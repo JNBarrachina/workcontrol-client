@@ -87,14 +87,13 @@ const Login = () => {
             </section>
 
             {/* Contraseña */}
-            <section className="login-input-container" style={{ display: "flex", alignItems: "center" }}>
+            <section className="login-input-container">
               <Input
                 value={password}
                 type={gettypeimput}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Contraseña"
                 className="login-input"
-                style={{ width: "90%" }}
               />
               <button
                 onClick={() => {
@@ -106,9 +105,9 @@ const Login = () => {
                     settypeimage("/src/assets/eye_visible.svg");
                   }
                 }}
-                style={{ background: "none", border: "none", padding: 0 }}
+                className="view-password"
               >
-                <img src={gettypeimage} alt="view" style={{ height: "2rem" }} />
+                <img src={gettypeimage} alt="view" />
               </button>
             </section>
 
