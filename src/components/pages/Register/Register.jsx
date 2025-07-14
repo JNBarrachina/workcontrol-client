@@ -47,6 +47,20 @@ const Register = () => {
                 }
             })
             .catch((err) => console.error(err))
+
+        fetch(`http://localhost:3000/users/userprojects/${userData.id}`, {
+            headers: {
+                "Content-type": "application/json"
+            },
+            method: "GET",
+        })
+            .then(async (res) => {
+                const userProjects = await res.json();
+                console.log(userProjects);
+                setUserProjects(userProjects);
+                localStorage.setItem("userprojects", JSON.stringify(userProjects));
+            })
+            .catch((err) => console.error(err))
     }
 
     return (
