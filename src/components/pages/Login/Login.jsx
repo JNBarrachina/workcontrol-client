@@ -65,48 +65,51 @@ const Login = () => {
                     <div className="login-card">
                         <img src="/src/assets/workflow.png" alt="" />
                         <Title level={3}>Login</Title>
-                        <section style={{display:'flex',flexDirection:'row', justifyContent:'space-between', alignItems:'center', width:'100%'}}>
+                        <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
                             <Input
-                                style={{width:'90%'}}
+                                style={{ width: '90%' }}
                                 value={email}
                                 type="text"
                                 onChange={(event) =>
                                     setEmail(event.target.value)}
                                 placeholder="Correo Electronico"
                                 className="login-input"
-                            />         
+                            />
                         </section>
 
-                        <section style={{display:'flex',flexDirection:'row', justifyContent:'space-between',  width:'100%'}}>
+                        <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
                             <Input
-                                style={{width:'90%'}}
+                                style={{ width: '90%' }}
                                 value={password}
                                 type={gettypeimput}
                                 onChange={(event) => setPassword(event.target.value)}
                                 placeholder="Contraseña"
                                 className="login-input"
                             />
-                            <button style={{padding:'0', height:'2.80rem'}}>
+                            <button style={{ padding: '0', height: '2.80rem' }}>
                                 <img
-                                    style={{height:'2rem'}}
+                                    style={{ height: '2rem' }}
                                     src={gettypeimage}
                                     alt="view"
                                     onClick={() => {
                                         if (gettypeimput === "password") {
-                                        settypeimage("/src/assets/eye_visible_hidden.svg");
-                                        septypeimput("text");
+                                            settypeimage("/src/assets/eye_visible_hidden.svg");
+                                            septypeimput("text");
                                         } else {
-                                        settypeimage("/src/assets/eye_visible.svg");
-                                        septypeimput("password");
+                                            settypeimage("/src/assets/eye_visible.svg");
+                                            septypeimput("password");
                                         }
                                     }}
                                 />
                             </button>
-                            
+
                         </section>
                         <Button disabled={!isButtonEnabled} className="loginBtn" onClick={handleLoginButtonClick}>Login</Button><br />
                         <Typography.Text className="error">{errorMsg}</Typography.Text>
                         <img src="/src/assets/lasnavesajuntament.webp" alt="" className="lasnaves" />
+                        <p>
+                            Ya tienes cuenta? <Link to="/register">Regístrate ahora</Link>
+                        </p>
                     </div>
                 </div>
             </main>
