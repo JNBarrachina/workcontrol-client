@@ -15,6 +15,9 @@ const Register = () => {
     const [gettypeimput, septypeimput] = useState("password");
     const [gettypeimage, settypeimage] = useState("/src/assets/eye_visible.svg");
 
+    const [surname, setSurname] = useState("");
+    const [dni, setDNI] = useState("");
+    const [tlf, setTlf] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
@@ -24,12 +27,12 @@ const Register = () => {
     const isButtonEnabled = email && password
 
     const handleLoginButtonClick = () => {
-        fetch("http://localhost:3000/users/login", {
+        fetch("http://localhost:3000/users/register", {
             headers: {
                 "Content-type": "application/json"
             },
             method: "POST", body: JSON.stringify(
-                { name: name, email: email, password: password })
+                { name: name, surname: surname, dni: dni, tlf: tlf, email: email, password: password })
         })
             .then(async (res) => {
                 const data = await res.json();
@@ -66,63 +69,100 @@ const Register = () => {
                     <div className="login-card">
                         <img src="/src/assets/workflow.png" alt="" />
                         <Title level={3}>Register</Title>
-                        <section style={{display:'flex',flexDirection:'row', justifyContent:'space-between', alignItems:'center', width:'100%'}}>
+                        <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
                             <Input
-                                style={{width:'90%'}}
+                                style={{ width: '90%' }}
                                 value={name}
                                 type="text"
                                 onChange={(event) =>
                                     setName(event.target.value)}
                                 placeholder="Nombre"
                                 className="login-input"
-                            />         
+                            />
                         </section>
 
-                        <section style={{display:'flex',flexDirection:'row', justifyContent:'space-between', alignItems:'center', width:'100%'}}>
+                        <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
                             <Input
-                                style={{width:'90%'}}
+                                style={{ width: '90%' }}
+                                value={surname}
+                                type="text"
+                                onChange={(event) =>
+                                    setSurname(event.target.value)}
+                                placeholder="Apellidos"
+                                className="login-input"
+                            />
+                        </section>
+
+
+                        <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                            <Input
+                                style={{ width: '90%' }}
                                 value={email}
                                 type="text"
                                 onChange={(event) =>
                                     setEmail(event.target.value)}
                                 placeholder="Correo Electronico"
                                 className="login-input"
-                            />         
+                            />
                         </section>
 
-                        <section style={{display:'flex',flexDirection:'row', justifyContent:'space-between',  width:'100%'}}>
+                        <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
                             <Input
-                                style={{width:'90%'}}
+                                style={{ width: '90%' }}
+                                value={dni}
+                                type="text"
+                                onChange={(event) =>
+                                    setDNI(event.target.value)}
+                                placeholder="DNI"
+                                className="login-input"
+                            />
+                        </section>
+
+                        <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                            <Input
+                                style={{ width: '90%' }}
+                                value={tlf}
+                                type="text"
+                                onChange={(event) =>
+                                    setTlf(event.target.value)}
+                                placeholder="Telefono"
+                                className="login-input"
+                            />
+                        </section>
+
+                        <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
+                            <Input
+                                style={{ width: '90%' }}
                                 value={password}
                                 type={gettypeimput}
                                 onChange={(event) => setPassword(event.target.value)}
                                 placeholder="Contraseña"
                                 className="login-input"
                             />
-                            <button style={{padding:'0', height:'2.80rem'}}>
+                            <button style={{ padding: '0', height: '2.80rem' }}>
                                 <img
-                                    style={{height:'2rem'}}
+                                    style={{ height: '2rem' }}
                                     src={gettypeimage}
                                     alt="view"
                                     onClick={() => {
                                         if (gettypeimput === "password") {
-                                        settypeimage("/src/assets/eye_visible_hidden.svg");
-                                        septypeimput("text");
+                                            settypeimage("/src/assets/eye_visible_hidden.svg");
+                                            septypeimput("text");
                                         } else {
-                                        settypeimage("/src/assets/eye_visible.svg");
-                                        septypeimput("password");
+                                            settypeimage("/src/assets/eye_visible.svg");
+                                            septypeimput("password");
                                         }
                                     }}
                                 />
                             </button>
-                            
+
                         </section>
                         <Button disabled={!isButtonEnabled} className="loginBtn" onClick={handleLoginButtonClick}>Login</Button><br />
                         <Typography.Text className="error">{errorMsg}</Typography.Text>
                         <img src="/src/assets/lasnavesajuntament.webp" alt="" className="lasnaves" />
-                    <p>
-                        Ya tienes cuenta? <Link to="/login">Logueate ahora</Link>
-                    </p>
+                        <p>
+                            Ya tienes cuenta? <Link to="/login">Logueate ahora</Link>
+                        </p>
                     </div>
                 </div>
             </main>
