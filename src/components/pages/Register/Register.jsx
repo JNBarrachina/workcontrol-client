@@ -20,6 +20,7 @@ const Register = () => {
     const [tlf, setTlf] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
+    const [role, setRole] = useState("");
     const [name, setName] = useState("");
     const { userData, setUserData, getlogeaded, setlogeaded, } = useContext(UserDataContext);
     const { userProjects, setUserProjects } = useContext(UserProjectsContext);
@@ -44,20 +45,6 @@ const Register = () => {
                     localStorage.setItem("login", JSON.stringify(data));
                     navigate("/dashboard")
                 }
-            })
-            .catch((err) => console.error(err))
-
-        fetch(`http://localhost:3000/users/userprojects/${userData.id}`, {
-            headers: {
-                "Content-type": "application/json"
-            },
-            method: "GET",
-        })
-            .then(async (res) => {
-                const userProjects = await res.json();
-                console.log(userProjects);
-                setUserProjects(userProjects);
-                localStorage.setItem("userprojects", JSON.stringify(userProjects));
             })
             .catch((err) => console.error(err))
     }
@@ -126,6 +113,18 @@ const Register = () => {
                                 onChange={(event) =>
                                     setTlf(event.target.value)}
                                 placeholder="Telefono"
+                                className="login-input"
+                            />
+                        </section>
+
+                        <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                            <Input
+                                style={{ width: '90%' }}
+                                value={role}
+                                type="text"
+                                onChange={(event) =>
+                                    setRole(event.target.value)}
+                                placeholder="Rol(admin o user)"
                                 className="login-input"
                             />
                         </section>
