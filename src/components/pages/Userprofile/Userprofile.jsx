@@ -19,13 +19,13 @@ const Userprofile = () => {
                 <section id="main_userprofile">
                     <section className="container-sections">
                         <article className="section-card">
-                            <h2>Projects Assigned</h2>
-                            <Assignments />
-                        </article>
-
-                        <article className="section-card section-card2">
                             <h2>User Profile</h2>
                             <Profile />
+                        </article>
+
+                        <article className="section-card section-card2 assignments">
+                            <h2>Projects Assigned</h2>
+                            <Assignments />
                         </article>
 
                         <article className="section-card section-card2">
