@@ -153,7 +153,6 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
                             onClose();
                             setboolsignature(null);
                             setsignature(null);
-                            useNavigate('/dashboard');
                         }
                         
                         }>✕</button>
