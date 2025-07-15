@@ -14,7 +14,7 @@ export const DashboardMain = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [modalOpen2, setModalOpen2] = useState(false);
     const handleOpen = () => {
-        console.log (entries)
+        console.log(entries)
         setModalOpen(true);
     }
     const handleClose = () => setModalOpen(false);
@@ -88,6 +88,7 @@ export const DashboardMain = () => {
                             max={new Date().toISOString().slice(0, 7)}
                             value={date}
                             onChange={handleMonthChange} />
+                        <button className='logHoursBtn'>Log Hours in Bulk</button>
                     </div>
                     <div className="monthlySummary">
                         <p className="summaryp">Expected: <strong>{horasEsperadasMes.toFixed(2)} h</strong></p>
