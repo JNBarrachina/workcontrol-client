@@ -1,0 +1,17 @@
+.dashboardAdminMainContent {
+    width: 100%;
+    height: 100vh;
+
+    overflow-y: scroll;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding: 1rem;
+    gap: 1rem;
+
+    background-color: whitesmoke;
+}
+

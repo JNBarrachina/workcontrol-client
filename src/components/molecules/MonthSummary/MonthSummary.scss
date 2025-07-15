@@ -1,0 +1,70 @@
+.sideModal {
+    display: flex;
+    flex-direction: column;
+    
+    width: 350px;
+    height: 100%;
+    
+    background: white;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+    transition: right 0.3s ease;
+    
+    z-index: 1000;
+    padding: 1rem;
+    overflow-y: auto;
+    
+    position: fixed;
+    top: 0;
+    right: -350px;
+    &.open {
+        right: 0;
+    }
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.5rem;
+
+    h3 {
+        margin: 0;
+    }
+
+    .closeBtn {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+}
+
+.modalContent {
+    padding-top: 1rem;
+
+    .projectSummary {
+        margin-bottom: 1.5rem;
+
+        h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+
+            li {
+                margin-left: 1rem;
+                margin-bottom: 0.25rem;
+                color: #555;
+            }
+        }
+    }
+
+    .noData {
+        color: #888;
+        font-style: italic;
+    }
+}
+

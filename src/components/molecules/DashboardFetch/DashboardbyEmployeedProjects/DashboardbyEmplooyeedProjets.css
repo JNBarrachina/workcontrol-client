@@ -1,0 +1,39 @@
+#main-dashboardbyemployeedprojects {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: whitesmoke;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#main-dashboardbyemployeedprojects table {
+  width: 100%;
+  padding: 10px;
+  border-collapse: separate;
+  border-spacing: 0.5rem 1rem;
+}
+
+th {
+  background: #000;
+  color: #fff;
+  padding: 8px 10px;
+  text-align: center;
+  font-size: 20px;
+  border-radius: 12px;
+}
+
+tbody tr {
+  margin: 1rem 0;
+}
+
+td {
+  margin: 0.3rem 0.2rem;
+  padding: 5px 10px;
+  background: #fff;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 12px;
+  box-shadow: inherit;
+  box-shadow: 1.55px 1px 1px #000, -0.1px -0.1px 0.7px #000;
+}/*# sourceMappingURL=DashboardbyEmplooyeedProjets.css.map */

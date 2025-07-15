@@ -1,0 +1,61 @@
+#main_userprofile {
+  margin-top: 4.05rem;
+  height: fit-content;
+  overflow: hidden;
+  width: 100%;
+  overflow-y: auto;
+  background: whitesmoke;
+}
+
+.container-sections {
+  display: flex;
+  flex-direction: row;
+  padding: 25px;
+  height: 100%;
+}
+
+.section-card {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  min-height: 30rem;
+  width: 33%;
+  border: 1px solid #000;
+  border-radius: 12px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.section-card2 {
+  margin-left: 2rem;
+}
+
+.assignments{
+  position: relative;
+}
+
+@media screen and (max-width: 920px) {
+  #main_userprofile {
+    margin-top: 1rem;
+    width: 100%;
+  }
+
+  .container-sections {
+    flex-direction: column;
+    padding: 5px;
+    height: auto;
+  }
+
+  .section-card {
+    padding: 2.5rem;
+    width: 100%;
+    min-height: 30rem;
+    max-height: none; 
+    height: auto;
+  }
+
+  .section-card2 {
+    margin-left: 0;
+    margin-top: 2rem;
+  }
+}

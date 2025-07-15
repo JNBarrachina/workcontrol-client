@@ -1,0 +1,81 @@
+/* Fondo del modal: cubre toda la pantalla y oscurece detrás */
+.modal {
+  position: fixed; /* se queda fijo aunque hagas scroll */
+  top: 15vh;
+  left: 25%;
+  width: 50%; /* ancho completo */
+  height: 50%; /* alto completo */
+  background-color: rgba(0, 0, 0, 0.5); /* fondo oscuro con transparencia */
+  display: flex; /* permite centrar el contenido */
+  justify-content: center; /* centra horizontalmente */
+  align-items: center; /* centra verticalmente */
+  z-index: 9999; /* aparece encima de todo */
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+/* Caja blanca que se muestra en el centro del modal */
+.modal-content {
+  background-color: white; /* color de fondo blanco */
+  padding: 20px; /* espacio interno */
+  border-radius: 8px; /* bordes redondeados */
+  width: 90%; /* ocupa el 90% del ancho */
+  max-width: 600px; /* máximo 600px de ancho */
+  max-height: 80vh; /* altura máxima para evitar que se salga */
+  overflow-y: auto; /* si es muy largo, se puede hacer scroll */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* sombra suave */
+}
+
+/* Cabecera del modal: contiene el título y el botón cerrar */
+.modal-header {
+  display: flex; /* permite separar los elementos */
+  justify-content: space-between; /* título a la izquierda y botón a la derecha */
+  align-items: center; /* alineación vertical */
+
+  h2 {
+    font-size: 20px;
+    margin: 0;
+  }
+
+  button {
+    background-color: #FC06AE; /* rojo claro */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+}
+
+/* Estilos básicos para las tablas dentro del modal */
+.projects-table,
+.subprojects-table {
+  width: 100%;
+  border-collapse: collapse; /* quita los espacios entre celdas */
+  margin-top: 20px;
+}
+
+.projects-table th,
+.projects-table td,
+.subprojects-table th,
+.subprojects-table td {
+  padding: 8px;
+  text-align: left;
+}
+
+/* Botones dentro de las celdas */
+.inithial-table,
+.projects-table button,
+.subprojects-table button {
+  background-color: #e262ff;
+  color: white;
+  border: none;
+  padding: 5px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.main-table{
+  height: 30rem;
+}

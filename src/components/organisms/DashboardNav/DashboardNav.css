@@ -1,0 +1,100 @@
+@charset "UTF-8";
+.dashboardNavContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 100%;
+  flex-shrink: 0;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: white;
+  opacity: 0;
+  transform: translateX(-100%);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dashboardNavContainer.navOpen {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+  /* Ya heredó el display/flex-direction/etc. No hace falta repetir */
+}
+
+.mainLogo {
+  height: 50px;
+  margin-top: 24px;
+}
+
+.navCloseBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 8px;
+  background-color: transparent;
+  transition: transform 0.4s ease;
+}
+
+.navCloseBtn:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.dashboardNavLink {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  gap: 0.4rem;
+  padding: 0.4rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  transition: border 0.4s ease;
+}
+
+.dashboardNavLink:hover {
+  cursor: pointer;
+  border: 2px solid rgb(115, 17, 110);
+}
+
+.linkText {
+  display: inline-block;
+  font-size: 0.9rem;
+  color: black;
+  max-width: 200px;
+  padding-right: 0.4rem;
+}
+
+.themeBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  transition: transform 0.2s ease;
+}
+
+.themeBtn:hover {
+  transform: scale(1.1);
+}
+
+.logoutBtn {
+  padding: 0.4rem;
+  background-color: white;
+  border-radius: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.logoutBtn:hover {
+  transform: scale(1.1);
+}/*# sourceMappingURL=DashboardNav.css.map */

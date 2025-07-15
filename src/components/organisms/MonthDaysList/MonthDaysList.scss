@@ -1,0 +1,10 @@
+.monthDaysList {
+    width: 100%;
+
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    gap: 4px;
+}

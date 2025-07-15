@@ -1,0 +1,80 @@
+.dailyWorkEntryCard {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    flex-grow: 1;
+
+    background-color: whitesmoke;
+    border-radius: 4px;
+
+    padding: 0.6rem;
+    gap: 0.6rem;
+}
+
+.dailyWorkEntryCard:hover {
+    transform: scale(1.01);
+    background-color: rgb(247, 224, 255);
+    transition: 0.3s;
+}
+
+.dailyWorkEntryCard:hover .btnRemove {
+    background-color: rgb(247, 224, 255);
+    transition: 0.3s;
+}
+
+.namesContainer {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    flex-grow: 1;
+
+    gap: 0.2rem;
+}
+
+.entryProjectName{
+    font-weight: bold;
+    font-size: 1.2rem;
+
+    gap: 10px;
+}
+
+.entrySubprojectName {
+    font-size: 1rem;
+    font-weight: normal;
+
+}
+
+.timeremoveContainer {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 0.4rem;
+}
+
+.entryTime {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+@media screen and (max-width: 600px) {
+
+    .entryProjectName {
+        font-size: 1rem;
+    }
+
+    .entrySubprojectName {
+        font-size: 0.8rem;
+    }
+
+    .entryTime {
+        font-size: 0.8rem;
+    }
+    
+}

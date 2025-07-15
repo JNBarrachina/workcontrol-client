@@ -1,0 +1,17 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#main-notfound {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: whitesmoke;
+  height: 100%;
+  width: 100%;
+}/*# sourceMappingURL=NotFound.css.map */

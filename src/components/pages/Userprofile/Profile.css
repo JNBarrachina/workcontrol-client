@@ -1,0 +1,111 @@
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  max-width: 600px;
+  font-family: sans-serif;
+}
+
+.profile-image-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.profile-image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #444;
+  cursor: pointer;
+}
+
+.profile-data {
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.input-nombre {
+  width: 100%;
+  padding: 6px;
+  margin-bottom: 8px;
+}
+
+.firma-canvas {
+  width: 100%;
+  height: 100%;
+  border: 2px dashed #aaa;
+  background: #fff;
+  margin-top: 10px;
+}
+
+.botones-firma {
+  margin-top: 10px;
+}
+
+button {
+    margin-right: 4px;
+}
+
+.firma-preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.firma-img {
+  border: 1px solid #333;
+  width: 100%;
+}
+
+@media screen and (max-width:920px) {
+
+    .profile-container {
+    width: 100%;
+    font-family: sans-serif;
+  }
+
+    .profile-image {
+    width: 90px;
+    height: 90px;
+    border: 1px solid #444;
+  }
+
+    .profile-data {
+    padding: 0.50rem;
+  }
+
+    .input-nombre {
+    padding: 3px;
+    margin-bottom: 4px;
+  }
+
+    .firma-canvas {
+    width: 100%;
+    height: 100%;
+    border: 1.25px dashed #aaa;
+    background: #fff;
+    margin-top: 5px;
+  }
+
+  .firma-canvas {
+    border: 1.25px dashed #aaa;
+    margin-top: 5px;
+  }
+
+  .firma-preview {
+    margin-top: 10px;
+  }
+
+  button {
+      margin-right: 2px;
+  }
+}
