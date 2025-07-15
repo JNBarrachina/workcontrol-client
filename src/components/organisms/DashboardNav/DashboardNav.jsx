@@ -65,8 +65,8 @@ export const DashboardNav = () => {
                             <Link to="/adminarea/employeesmanager" className="dashboardNavLink adminNavLink">
                                 <p className="linkText">Employees</p>
                             </Link>
-                            <Link to="/adminarea/esignaturesmanager" className="dashboardNavLink adminNavLink">
-                                <p className="linkText">E-Signatures</p>
+                            <Link to="/adminarea/timesheetsmanager" className="dashboardNavLink adminNavLink">
+                                <p className="linkText">Timesheets</p>
                             </Link>
                         </ul>
                     </>

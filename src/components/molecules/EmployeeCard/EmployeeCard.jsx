@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+
 import avatarImg from "../../../assets/avatar.png";
 import "./EmployeeCard.scss";
 import { EmployeeProjectItem } from "../../molecules/EmployeeProjectItem/EmployeeProjetItem";
