@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+
 import avatarImg from "../../../assets/avatar.png";
 import "./EmployeeCard.scss";
 import { EmployeeProjectItem } from "../../molecules/EmployeeProjectItem/EmployeeProjetItem";
@@ -25,8 +26,8 @@ export const EmployeeCard = ({ employee, fetchEmployees }) => {
             });
 
             if (res.ok) {
-                await fetchEmployees(); // Refrescar empleados
-                setSelectedProjectId(""); // Reset selector
+                await fetchEmployees();
+                setSelectedProjectId("");
             } else {
                 const data = await res.json();
                 alert(data.message || "Error al asignar proyecto.");

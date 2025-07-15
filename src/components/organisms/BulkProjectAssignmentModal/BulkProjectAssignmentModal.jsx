@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import avatarIcon from "../../../assets/avatar.png";
+import imgRemove from "../../../assets/deletecross.svg";
 import "./BulkProjectAssignmentModal.scss";
 
 export const BulkProjectAssignmentModal = ({ projects, employees, onClose, refreshEmployees }) => {
@@ -61,7 +62,6 @@ export const BulkProjectAssignmentModal = ({ projects, employees, onClose, refre
                 showToast(data.message || "Proyecto asignado con éxito", "success");
                 setSelectedEmployees([]);
                 refreshEmployees();
-                onClose();
             } else {
                 showToast(data.message || "Error al asignar proyecto", "error");
             }
@@ -76,8 +76,7 @@ export const BulkProjectAssignmentModal = ({ projects, employees, onClose, refre
         <div className="modalBackdrop">
             <div className="bulkModalContent">
                 <h3 className="bulkModalTitle">Asignación de proyecto en bloque</h3>
-                <button className="closeButton" onClick={onClose}>X</button>
-
+                <button className="closeBulkModalButton" onClick={onClose}><img src={imgRemove} className="imgRemove" alt="" /></button>
                 <label className="projectSelectorLabel">
                     Selecciona un proyecto:
                     <select
