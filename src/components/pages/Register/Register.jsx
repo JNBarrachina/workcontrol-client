@@ -69,7 +69,6 @@ const Register = () => {
                 <div className="login-container">
                     <div className="login-card">
                         <img src="/src/assets/workflow.png" alt="" />
-                        <Title level={3}>WORKFLOW</Title>
                         <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
                             <Input
                                 style={{ width: '90%' }}
@@ -95,7 +94,7 @@ const Register = () => {
                         </section>
 
 
-                        <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                        <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%', gap: '0.25rem' }}>
                             <Input
                                 style={{ width: '90%' }}
                                 value={email}
@@ -143,7 +142,7 @@ const Register = () => {
                             />
                         </section>
 
-                        <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
+                        <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', gap: '0.25rem' }}>
                             <Input
                                 style={{ width: '90%' }}
                                 value={password}
