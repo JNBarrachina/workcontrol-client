@@ -43,7 +43,7 @@ const Register = () => {
                     setUserData(data);
                     setlogeaded(true);
                     localStorage.setItem("login", JSON.stringify(data));
-                    navigate("/dashboard")
+                    navigate("/login")
                 }
             })
             .catch((err) => console.error(err))
@@ -126,18 +126,6 @@ const Register = () => {
                                 onChange={(event) =>
                                     setTlf(event.target.value)}
                                 placeholder="Telefono"
-                                className="login-input"
-                            />
-                        </section>
-
-                        <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-                            <Input
-                                style={{ width: '90%' }}
-                                value={role}
-                                type="text"
-                                onChange={(event) =>
-                                    setRole(event.target.value)}
-                                placeholder="Rol(admin o user)"
                                 className="login-input"
                             />
                         </section>
