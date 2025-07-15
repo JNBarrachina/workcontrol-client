@@ -1,3 +1,4 @@
+import {useNavigate} from 'react-router-dom'
 import { useState, useContext, useEffect } from 'react';
 import { MonthlyEntriesContext } from '../../../contexts/MonthlyEntriesContext';
 import { ProjectsManagerContext } from "../../../contexts/ProjectsManagerContext";
@@ -13,6 +14,9 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
 
     const [getboolsignature, setboolsignature] = useState(false);
     const [getsignature, setsignature] = useState();
+    const navigate = useNavigate();
+
+
 
     useEffect(() => {
     const works = entries.map(element => ({
@@ -26,7 +30,6 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
         if (match) element.isEuropean = match.isEuropean;
     });
 
-    console.log ("Works: ",works)
     const rep = [0, 0];
     works.forEach(work => {
         work.isEuropean
@@ -46,7 +49,6 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
         const monthName = new Date(date + "-01").toLocaleString("en-US", { month: "long" });
             return `Timesheet of ${monthName} ${year}`;
     };
-
 
     const summarizeEntriesByProject = (entries) => {
         const projectMap = new Map();
@@ -124,14 +126,37 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
         }
     };
 
+    const creteTimesheet = async () => {
+        const [año, mes] = date.split("-");
+        const id_employee = JSON.parse( localStorage.getItem('login') )?.id;
 
+        const fetch1 = await fetch(`http://localhost:3000/fetchs/monthlyworkvalidations/${año}/${mes}/${id_employee}`,{
+            method:'POST',
+        })
+
+        const data1 = await fetch1.json()
+        console.log(data1)
+    };
+  
     return (
         <>
-        { pieData && (
+
+        { pieData &&(
             <div className={`sideGraphModal ${isOpen ? 'open' : ''}`}>
+
+                
+
                 <div className="modalHeader">
                     <h3>{formatDateHeader(date)}</h3>
-                    <button className="closeBtn" onClick={onClose}>✕</button>
+                    <button className="closeBtn" onClick={
+                        ()=>{
+                            onClose();
+                            setboolsignature(null);
+                            setsignature(null);
+                            navigate('/dashboard');
+                        }
+                        
+                        }>✕</button>
                 </div>
                 <div className="modalContent">
                 {pieData && (
@@ -163,7 +188,7 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
                     {
                         (!getboolsignature) && <>
                             <section style={{width:'100%',display:'flex', justifyContent:"center"}}>
-                                <button onClick={ cargarFirmados }> Assign Signature </button>
+                                <button onClick={ ()=> { cargarFirmados(); '' } }> Assign Signature </button>
                             </section>
                         </>
                     }
@@ -177,12 +202,14 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
                                 alignItems:'center',
                                 padding:'5px'
                                 }}>
-                                <img src={getsignature} alt="signature" style={{
+                                <img src={getsignature} alt="signature"
+                                style={{
                                     background:'#fff',
                                     border:'1px solid #000',
                                     width:'90%',
                                     borderRadius:'12px',
-                                    }}/>
+                                }}/>
+                                <button onClick={()=>{ creteTimesheet()}}>Create Timesheet</button>
                             </section>
                         </>
                     }
@@ -191,7 +218,8 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
 
                 </div>
             </div>
-        )}
+        )
+        }
         </>
     );
 };
