@@ -86,10 +86,7 @@ const Login = () => {
                         <img src="/src/assets/workflow.png" alt="" />
                         <Title level={3}>Login</Title>
 
-                        <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-                            <Input
-                                style={{ width: '90%' }}
-
+                        <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }} />
                         <section className="login-input-container">
                             <Input
                                 value={email}
@@ -102,9 +99,8 @@ const Login = () => {
                         </section>
 
 
-                        <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
-                            <Input
-                                style={{ width: '90%' }}
+                        <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }} />
+
 
                         <section className="login-input-container">
                             <Input
@@ -115,9 +111,8 @@ const Login = () => {
                                 className="login-input"
                             />
 
-                            <button style={{ padding: '0', height: '2.80rem' }}>
 
-                            <button style={{ padding: '0' }}>
+                            <button style={{ padding: '0', height: '2.80rem' }}>
 
                                 <img
                                     style={{ height: '2rem' }}

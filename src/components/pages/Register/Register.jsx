@@ -69,7 +69,7 @@ const Register = () => {
                 <div className="login-container">
                     <div className="login-card">
                         <img src="/src/assets/workflow.png" alt="" />
-                        <Title level={3}>Register</Title>
+                        <Title level={3}>WORKFLOW</Title>
                         <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
                             <Input
                                 style={{ width: '90%' }}
