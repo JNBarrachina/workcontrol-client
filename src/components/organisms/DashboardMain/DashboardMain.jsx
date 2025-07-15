@@ -80,6 +80,7 @@ export const DashboardMain = () => {
                             max={new Date().toISOString().slice(0, 7)}
                             value={date}
                             onChange={handleMonthChange} />
+                        <button className='logHoursBtn'>Log Hours in Bulk</button>
                     </div>
                     <div className="monthlySummary">
                         <p className="summaryp">Expected: <strong>{horasEsperadasMes.toFixed(2)} h</strong></p>

@@ -1,5 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, createContext } from "react";
+import { UserprofileCanvas } from './UserprofileCanvas.jsx'
 import "./Profile.css";
+
+
+const CanvasContext = createContext();
 
 const Profile = () => {
   const [userData, setUserData] = useState({
@@ -13,15 +17,8 @@ const Profile = () => {
 
   const fileInputRef = useRef();
   const [imagenPerfil, setImagenPerfil] = useState(null);
-
   const [getverifysignature, setverifysignature] = useState("/src/assets/crosscirclelinear_106172.svg");
-
-  const canvasRef = useRef(null);
-  const ctxRef = useRef(null);
-  const [dibujando, setDibujando] = useState(false);
-  const [firmaURL, setFirmaURL] = useState(null);
-
-  const [getdisabled, setdisabled] = useState(false);
+  const [gethavesignature, sethavesignature] = useState(true)
 
   const manejarClickImagen = () => {
     fileInputRef.current?.click();
@@ -31,95 +28,15 @@ const Profile = () => {
     const storedData = {
       nombre: JSON.parse( localStorage.getItem('login'))?.name,
       rol: JSON.parse( localStorage.getItem('login'))?.role,
+      email: JSON.parse( localStorage.getItem('login'))?.email,
+      dni: JSON.parse( localStorage.getItem('login'))?.dni,
+      tlf: JSON.parse( localStorage.getItem('login'))?.tlf,
       fecha_alta: "2024-07-10",
       supervisor: "Supervisor X",
-      email: "supervisor@example.com",
+      email_sup: "supervisor@example.com",
     };
     setUserData(storedData);
   }, []);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    canvas.width = 500;
-    canvas.height = 200;
-    const ctx = canvas.getContext("2d");
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = "#000";
-    ctxRef.current = ctx;
-  }, []);
-
-  const obtenerPos = (e) => {
-    const rect = canvasRef.current.getBoundingClientRect();
-    const x = e.clientX || e.touches[0].clientX;
-    const y = e.clientY || e.touches[0].clientY;
-    return [x - rect.left, y - rect.top];
-  };
-
-  const comenzarDibujo = (e) => {
-    setDibujando(true);
-    ctxRef.current.beginPath();
-    ctxRef.current.moveTo(...obtenerPos(e));
-  };
-
-  const dibujar = (e) => {
-    if (!dibujando) return;
-    ctxRef.current.lineTo(...obtenerPos(e));
-    ctxRef.current.stroke();
-  };
-
-  const terminarDibujo = () => {
-    setDibujando(false);
-  };
-
-  const limpiarFirma = () => {
-    ctxRef.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-    setFirmaURL(null);
-    setdisabled(false);
-  };
-
-  const guardarFirma = () => {
-    const dataUrl = canvasRef.current.toDataURL("image/png");
-    setFirmaURL(dataUrl);
-    setdisabled(true);
-  };
-
-  const descargarFirma = (formato = "png") => {
-    const mime = formato === "jpg" ? "image/jpeg" : "image/png";
-    const link = document.createElement("a");
-    link.download = `firma.${formato}`;
-    link.href = canvasRef.current.toDataURL(mime);
-    link.click();
-  };
-
-  const subirFirmaAlServidor = async () => {
-
-     setverifysignature('/src/assets/updatesync_icon_176208.svg');
-
-
-    const blob = await new Promise((res) => canvasRef.current.toBlob(res, "image/png"));
-
-    const formData = new FormData();
-    formData.append("firma", blob, "firma.png");
-    formData.append("user", userData.nombre); // user también va en FormData
-
-    try {
-      const response = await fetch("http://localhost:3000/uploads", {
-        method: "POST",
-        body: formData, // NO usar JSON.stringify aquí
-      });
-
-      const data = await response.json();
-      console.log(data);
-
-      setTimeout(() => {
-        setverifysignature('/src/assets/tickcirclelinear_106244.svg');
-      }, 1000);
-    } catch (err) {
-      console.error(err);
-      setverifysignature('/src/assets/crosscirclelinear_106172.svg');
-    }
-  };
-
 
   const manejarCambioImagen = (e) => {
     const archivo = e.target.files[0];
@@ -161,51 +78,30 @@ const Profile = () => {
           />
         </label>
         <p><strong>Role:</strong> {userData.rol}</p>
-          <section style={{display:'flex',flexDirection:'row', gap:'1rem'}}>
-            <p><strong>Upload Signature: </strong></p>
-            <img src={ getverifysignature } alt="" />
-          </section>
-        
+        <p><strong>Email:</strong>{userData.email}</p>
+        <p><strong>DNI:</strong>{userData.dni}</p>
+        <p><strong>Telephone:{userData.tlf}</strong></p>
+        <section style={{display:'flex',flexDirection:'row', gap:'1rem'}}>
+          <p><strong>Upload Signature: </strong></p>
+          <img src={ getverifysignature } alt="" />
+        </section>
+
         <p><strong>Access Date: </strong> {userData.fecha_alta}</p>
+
         <p><strong>Supervisor:</strong> {userData.supervisor}</p>
-        <p><strong>Supervisor Email:</strong> {userData.email}</p>
+        <p><strong>Supervisor Email:</strong> {userData.email_sup}</p>
       </div>
 
       <h2>Digital Signature</h2>
-      <canvas
-        ref={canvasRef}
-        className="firma-canvas"
-        onMouseDown={comenzarDibujo}
-        onMouseMove={dibujar}
-        onMouseUp={terminarDibujo}
-        onMouseOut={terminarDibujo}
-        onTouchStart={comenzarDibujo}
-        onTouchMove={(e) => {
-          e.preventDefault();
-          dibujar(e);
-        }}
-        onTouchEnd={terminarDibujo}
-      ></canvas>
+      {gethavesignature && <>
+        <CanvasContext.Provider value={{getverifysignature, setverifysignature, userData}}>
+          < UserprofileCanvas />
+        </CanvasContext.Provider>
+      </>}
 
-      <div className="botones-firma">
-        <button onClick={limpiarFirma}>Clean</button>
-        <button onClick={guardarFirma} disabled={getdisabled}>Save Signature</button>
-      </div>
 
-      {firmaURL && (
-        <div className="firma-preview">
-          <div id="">
-            <button onClick={() => descargarFirma("png")}>Download PNG</button>
-            <button onClick={subirFirmaAlServidor}>Upload to Plattform</button>
-          </div>
-          <div id="">
-            <img src={firmaURL} alt="Firma guardada" className="firma-img" />
-          </div>
-        </div>
-      )}
-      
     </div>
   );
 };
 
-export { Profile };
+export { Profile, CanvasContext, };
