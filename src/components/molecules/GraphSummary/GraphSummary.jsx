@@ -9,7 +9,10 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
 
     const { entries } = useContext(MonthlyEntriesContext);
     const { projectsManager } = useContext(ProjectsManagerContext);
+    const [worksaux, setWorksaux] = useState (null)
     const [pieData, setPieData] = useState(null);
+    const [european, setEuropean] = useState (null)
+    const [noteuropean, setNoteuropean] = useState (null)
 
     const [getboolsignature, setboolsignature] = useState(false);
     const [getsignature, setsignature] = useState();
@@ -25,15 +28,15 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
         const match = projectsManager.find(p => p.name === element.project);
         if (match) element.isEuropean = match.isEuropean;
     });
-
-    console.log ("Works: ",works)
     const rep = [0, 0];
     works.forEach(work => {
         work.isEuropean
             ? (rep[0] += Number(work.hours))
             : (rep[1] += Number(work.hours));
     });
-    
+    setWorksaux (works)
+    setEuropean (works.filter(work => work.isEuropean))
+    setNoteuropean (works.filter(work => !work.isEuropean))
     setPieData([
         { name: "Europeo", value: rep[0] },
         { name: "No Europeo", value: rep[1] }
@@ -52,8 +55,8 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
         const projectMap = new Map();
 
         entries.forEach(entry => {
-            const projectName = entry.Subproject.Project.name;
-            const subprojectName = entry.Subproject.name;
+            const projectName = entry.project;
+            const subprojectName = entry.subproject;
             const hours = entry.hours;
 
             if (!projectMap.has(projectName)) {
@@ -89,9 +92,6 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
 
         return summaryData;
     };
-
-    const summaryData = summarizeEntriesByProject(entries);
-
 
     const cargarFirmados = async () => {
         try {
@@ -139,22 +139,38 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
                         <SimplePieChart data={pieData} />
                     </div>
                 )}
-                {summaryData.map(project => (
-                        <div key={project.projectName} className="projectSummary">
-                            <h4>{project.projectName} – {project.totalHours.toFixed(2)} h</h4>
-                            <ul>
-                                {project.subprojects.map(sub => (
-                                    <li key={sub.name}>
-                                        {sub.name}: {sub.hours.toFixed(2)} h
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                <p><h3>European Projects:</h3></p>
+                {summarizeEntriesByProject(european || []).map(project => (
+                    <div key={project.projectName} className="projectSummary">
+                        <h4>{project.projectName} – {project.totalHours.toFixed(2)} h</h4>
+                        <ul>
+                            {project.subprojects.map(sub => (
+                                <li key={sub.name}>
+                                    {sub.name}: {sub.hours.toFixed(2)} h
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 ))}
-                {entries.length === 0 && (
+                {european.length === 0 && (
                     <p className="noData">No work entries this month</p>
                 )}
-
+                <p><h3>Not european Projects:</h3></p>
+                {summarizeEntriesByProject(noteuropean || []).map(project => (
+                    <div key={project.projectName} className="projectSummary">
+                        <h4>{project.projectName} – {project.totalHours.toFixed(2)} h</h4>
+                        <ul>
+                            {project.subprojects.map(sub => (
+                                <li key={sub.name}>
+                                    {sub.name}: {sub.hours.toFixed(2)} h
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                ))}
+                {noteuropean.length === 0 && (
+                    <p className="noData">No work entries this month</p>
+                )}
                 {
                     true
                     &&
