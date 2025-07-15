@@ -11,6 +11,9 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
     const { projectsManager } = useContext(ProjectsManagerContext);
     const [pieData, setPieData] = useState(null);
 
+    const [getboolsignature, setboolsignature] = useState(false);
+    const [getsignature, setsignature] = useState();
+
     useEffect(() => {
     const works = entries.map(element => ({
         project: element.Subproject?.Project.name,
@@ -35,6 +38,7 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
         { name: "Europeo", value: rep[0] },
         { name: "No Europeo", value: rep[1] }
     ]);
+
 }, [entries]);
 
     const formatDateHeader = (date) => {
@@ -87,6 +91,40 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
     };
 
     const summaryData = summarizeEntriesByProject(entries);
+
+
+    const cargarFirmados = async () => {
+        try {
+
+        const nombre = JSON.parse(localStorage.getItem('login'))?.name;
+        const email = JSON.parse(localStorage.getItem('login'))?.email;
+
+            const response = await fetch(
+                `http://localhost:3000/uploads/firma/${email}/${nombre}`
+            );
+
+            console.log(response);
+            
+            if (!response.ok) {
+                throw new Error(`Error ${response.status}: ${response.statusText}`);
+            }
+
+            const blob = await response.blob();
+            if (blob.type === 'text/html') {
+                throw new Error('No se encontró la firma');
+            }
+
+            const imageUrl = URL.createObjectURL(blob);
+            setsignature(imageUrl);
+            setboolsignature(true);
+            
+        } catch (err) {
+            console.error("Error al obtener la firma:", err);
+            setsignature(null);
+        }
+    };
+
+
     return (
         <>
         { pieData && (
@@ -116,11 +154,44 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
                 {entries.length === 0 && (
                     <p className="noData">No work entries this month</p>
                 )}
+
+                {
+                    true
+                    &&
+                    <>
+
+                    {
+                        (!getboolsignature) && <>
+                            <section style={{width:'100%',display:'flex', justifyContent:"center"}}>
+                                <button onClick={ cargarFirmados }> Assign Signature </button>
+                            </section>
+                        </>
+                    }
+                    {
+                        getboolsignature && <>
+                            <section style={{
+                                width:'100%',
+                                display:'flex',
+                                flexDirection:'column',
+                                justifyContent:"center",
+                                alignItems:'center',
+                                padding:'5px'
+                                }}>
+                                <img src={getsignature} alt="signature" style={{
+                                    background:'#fff',
+                                    border:'1px solid #000',
+                                    width:'90%',
+                                    borderRadius:'12px',
+                                    }}/>
+                            </section>
+                        </>
+                    }
+                    </>
+                }
+
                 </div>
             </div>
         )}
         </>
     );
 };
-
-
