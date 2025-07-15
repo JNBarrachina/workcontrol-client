@@ -5,20 +5,27 @@ import { MonthlyEntriesContext } from '../../../contexts/MonthlyEntriesContext';
 
 import { MonthDaysList } from '../MonthDaysList/MonthDaysList';
 import { MonthSummary } from '../../molecules/MonthSummary/MonthSummary';
+import { GraphSummary } from '../../molecules/GraphSummary/GraphSummary';
 import './DashboardMain.scss'
 
 export const DashboardMain = () => {
     const { userData } = useContext(UserDataContext);
 
     const [modalOpen, setModalOpen] = useState(false);
-    const handleOpen = () => setModalOpen(true);
+    const [modalOpen2, setModalOpen2] = useState(false);
+    const handleOpen = () => {
+        console.log (entries)
+        setModalOpen(true);
+    }
     const handleClose = () => setModalOpen(false);
+    const handleOpen2 = () => setModalOpen2(true);
+    const handleClose2 = () => setModalOpen2(false);
 
     const [date, setDate] = useState(new Date().toISOString().slice(0, 7));
     const [days, setDays] = useState([]);
     const { entries, setEntries } = useContext(MonthlyEntriesContext);
 
-    const diasLaborables = days.filter(day => day.DayCodeId === 6).length;
+    const diasLaborables = days.filter(day => day.DayCodeId !== 5).length;
     const totalHorasMes = entries.reduce((acc, e) => acc + e.hours, 0);
     const horasEsperadasMes = diasLaborables * 7.5;
     const horasRestantes = Math.max(horasEsperadasMes - totalHorasMes, 0);
@@ -59,6 +66,7 @@ export const DashboardMain = () => {
     };
 
     const generateMonthlyTimesheet = () => {
+        setModalOpen2(true);
         console.log(entries);
     };
 
@@ -80,7 +88,6 @@ export const DashboardMain = () => {
                             max={new Date().toISOString().slice(0, 7)}
                             value={date}
                             onChange={handleMonthChange} />
-                        <button className='logHoursBtn'>Log Hours in Bulk</button>
                     </div>
                     <div className="monthlySummary">
                         <p className="summaryp">Expected: <strong>{horasEsperadasMes.toFixed(2)} h</strong></p>
@@ -88,8 +95,8 @@ export const DashboardMain = () => {
                         <p className='summaryp'>Remaining: <strong>{horasRestantes.toFixed(2)} h</strong></p>
                     </div>
                     <div className="monthlySummaryBtns">
-                        <button className='monthBtns timesheetBtn' onClick={generateMonthlyTimesheet} disabled={horasEsperadasMes !== totalHorasMes}
-                        >Generate timesheet</button>
+                        <button className='monthBtns timesheetBtn' onClick={generateMonthlyTimesheet}
+                        >View timesheet</button>
                         <button className='monthBtns monthlySummaryBtn' onClick={handleOpen}>Month summary</button>
                     </div>
                 </div>
@@ -101,7 +108,7 @@ export const DashboardMain = () => {
             </div>
             <MonthDaysList days={days} setDays={setDays} />
             <MonthSummary isOpen={modalOpen} onClose={handleClose} date={date} />
+            <GraphSummary isOpen={modalOpen2} onClose={handleClose2} date={date} />
         </article>
     );
 };
-

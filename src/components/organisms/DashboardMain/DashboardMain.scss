@@ -27,11 +27,9 @@
 
 .monthSelector {
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-evenly;
-    align-items: center;
-
-    flex-grow: 1;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
 
     gap: 0.4rem;
 }
@@ -87,7 +85,7 @@
     gap: 1rem;
 }
 
-.monthBtns, .logHoursBtn{
+.monthBtns{
     width: 180px;
 
     font-weight: bolder;
@@ -96,13 +94,12 @@
     padding: 0.5rem;
 }
 
-.monthlySummaryBtn, .logHoursBtn {
+.monthlySummaryBtn {
     border: 2px solid rgb(162, 29, 156);
 }
 
-.monthBtns:hover, .logHoursBtn:hover{
+.monthBtns:hover{
     cursor: pointer;
-
     transform: scale(1.05);
     transition: 0.2s;
     border: 2px solid rgb(162, 29, 156);
