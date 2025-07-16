@@ -134,9 +134,6 @@ const Login = () => {
                         <Button disabled={!isButtonEnabled} className="loginBtn" onClick={handleLoginButtonClick}>Login</Button><br />
                         <Typography.Text className="error">{errorMsg}</Typography.Text>
                         <img src="/src/assets/lasnavesajuntament.webp" alt="" className="lasnaves" />
-                        <p>
-                            Ya tienes cuenta? <Link to="/register">Regístrate ahora</Link>
-                        </p>
                     </div>
                 </div>
             </main>
