@@ -124,6 +124,18 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
         }
     };
 
+     const creteTimesheet = async () => {
+        const [año, mes] = date.split("-");
+        const id_employee = JSON.parse( localStorage.getItem('login') )?.id;
+
+        const fetch1 = await fetch(`http://localhost:3000/fetchs/monthlyworkvalidations/${año}/${mes}/${id_employee}`,{
+            method:'POST',
+        })
+
+        const data1 = await fetch1.json()
+        console.log(data1)
+    };
+
 
     return (
         <>
@@ -139,7 +151,7 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
                         <SimplePieChart data={pieData} />
                     </div>
                 )}
-                <p><h3>European Projects:</h3></p>
+                <h3>European Projects:</h3>
                 {summarizeEntriesByProject(european || []).map(project => (
                     <div key={project.projectName} className="projectSummary">
                         <h4>{project.projectName} – {project.totalHours.toFixed(2)} h</h4>
@@ -155,7 +167,7 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
                 {european.length === 0 && (
                     <p className="noData">No work entries this month</p>
                 )}
-                <p><h3>Not european Projects:</h3></p>
+                <h3>Not european Projects:</h3>
                 {summarizeEntriesByProject(noteuropean || []).map(project => (
                     <div key={project.projectName} className="projectSummary">
                         <h4>{project.projectName} – {project.totalHours.toFixed(2)} h</h4>
@@ -193,12 +205,14 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
                                 alignItems:'center',
                                 padding:'5px'
                                 }}>
-                                <img src={getsignature} alt="signature" style={{
+                                <img src={getsignature} alt="signature"
+                                style={{
                                     background:'#fff',
                                     border:'1px solid #000',
                                     width:'90%',
                                     borderRadius:'12px',
-                                    }}/>
+                                }}/>
+                                <button onClick={()=>{ creteTimesheet()}}>Create Timesheet</button>
                             </section>
                         </>
                     }
