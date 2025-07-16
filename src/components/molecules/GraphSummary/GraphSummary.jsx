@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useState, useContext, useEffect } from 'react';
+
 import { MonthlyEntriesContext } from '../../../contexts/MonthlyEntriesContext';
 import { ProjectsManagerContext } from "../../../contexts/ProjectsManagerContext";
 import { SimplePieChart } from './SimplePieChart';
@@ -61,8 +62,8 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
         const projectMap = new Map();
 
         entries.forEach(entry => {
-            const projectName = entry.Subproject.Project.name;
-            const subprojectName = entry.Subproject.name;
+            const projectName = entry.project;
+            const subprojectName = entry.subproject;
             const hours = entry.hours;
 
             if (!projectMap.has(projectName)) {
@@ -98,8 +99,6 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
 
         return summaryData;
     };
-
-    const summaryData = summarizeEntriesByProject(entries);
 
 
     const cargarFirmados = async () => {
