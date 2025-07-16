@@ -27,10 +27,6 @@ const Userprofile = () => {
                             <h2>Projects Assigned</h2>
                             <Assignments />
                         </article>
-
-                        <article className="section-card section-card2">
-                            {/* Hueco para poner cosas */}
-                        </article>
                     </section>
                 </section>
             </article>
