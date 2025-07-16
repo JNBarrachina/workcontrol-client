@@ -1,3 +1,4 @@
+import {useNavigate} from 'react-router-dom'
 import { useState, useContext, useEffect } from 'react';
 import { MonthlyEntriesContext } from '../../../contexts/MonthlyEntriesContext';
 import { ProjectsManagerContext } from "../../../contexts/ProjectsManagerContext";
@@ -9,13 +10,13 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
 
     const { entries } = useContext(MonthlyEntriesContext);
     const { projectsManager } = useContext(ProjectsManagerContext);
-    const [worksaux, setWorksaux] = useState (null)
     const [pieData, setPieData] = useState(null);
-    const [european, setEuropean] = useState (null)
-    const [noteuropean, setNoteuropean] = useState (null)
 
     const [getboolsignature, setboolsignature] = useState(false);
     const [getsignature, setsignature] = useState();
+    const navigate = useNavigate();
+
+
 
     useEffect(() => {
     const works = entries.map(element => ({
@@ -28,15 +29,14 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
         const match = projectsManager.find(p => p.name === element.project);
         if (match) element.isEuropean = match.isEuropean;
     });
+
     const rep = [0, 0];
     works.forEach(work => {
         work.isEuropean
             ? (rep[0] += Number(work.hours))
             : (rep[1] += Number(work.hours));
     });
-    setWorksaux (works)
-    setEuropean (works.filter(work => work.isEuropean))
-    setNoteuropean (works.filter(work => !work.isEuropean))
+    
     setPieData([
         { name: "Europeo", value: rep[0] },
         { name: "No Europeo", value: rep[1] }
@@ -50,13 +50,12 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
             return `Timesheet of ${monthName} ${year}`;
     };
 
-
     const summarizeEntriesByProject = (entries) => {
         const projectMap = new Map();
 
         entries.forEach(entry => {
-            const projectName = entry.project;
-            const subprojectName = entry.subproject;
+            const projectName = entry.Subproject.Project.name;
+            const subprojectName = entry.Subproject.name;
             const hours = entry.hours;
 
             if (!projectMap.has(projectName)) {
@@ -93,6 +92,9 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
         return summaryData;
     };
 
+    const summaryData = summarizeEntriesByProject(entries);
+
+
     const cargarFirmados = async () => {
         try {
 
@@ -124,7 +126,7 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
         }
     };
 
-     const creteTimesheet = async () => {
+    const creteTimesheet = async () => {
         const [año, mes] = date.split("-");
         const id_employee = JSON.parse( localStorage.getItem('login') )?.id;
 
@@ -135,15 +137,22 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
         const data1 = await fetch1.json()
         console.log(data1)
     };
-
-
+  
     return (
         <>
-        { pieData && (
+
+        { pieData &&(
             <div className={`sideGraphModal ${isOpen ? 'open' : ''}`}>
                 <div className="modalHeader">
                     <h3>{formatDateHeader(date)}</h3>
-                    <button className="closeBtn" onClick={onClose}>✕</button>
+                    <button className="closeBtn" onClick={
+                        ()=>{
+                            onClose();
+                            setboolsignature(null);
+                            setsignature(null);
+                        }
+                        
+                        }>✕</button>
                 </div>
                 <div className="modalContent">
                 {pieData && (
@@ -151,38 +160,22 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
                         <SimplePieChart data={pieData} />
                     </div>
                 )}
-                <h3>European Projects:</h3>
-                {summarizeEntriesByProject(european || []).map(project => (
-                    <div key={project.projectName} className="projectSummary">
-                        <h4>{project.projectName} – {project.totalHours.toFixed(2)} h</h4>
-                        <ul>
-                            {project.subprojects.map(sub => (
-                                <li key={sub.name}>
-                                    {sub.name}: {sub.hours.toFixed(2)} h
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+                {summaryData.map(project => (
+                        <div key={project.projectName} className="projectSummary">
+                            <h4>{project.projectName} – {project.totalHours.toFixed(2)} h</h4>
+                            <ul>
+                                {project.subprojects.map(sub => (
+                                    <li key={sub.name}>
+                                        {sub.name}: {sub.hours.toFixed(2)} h
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                 ))}
-                {european.length === 0 && (
+                {entries.length === 0 && (
                     <p className="noData">No work entries this month</p>
                 )}
-                <h3>Not european Projects:</h3>
-                {summarizeEntriesByProject(noteuropean || []).map(project => (
-                    <div key={project.projectName} className="projectSummary">
-                        <h4>{project.projectName} – {project.totalHours.toFixed(2)} h</h4>
-                        <ul>
-                            {project.subprojects.map(sub => (
-                                <li key={sub.name}>
-                                    {sub.name}: {sub.hours.toFixed(2)} h
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                ))}
-                {noteuropean.length === 0 && (
-                    <p className="noData">No work entries this month</p>
-                )}
+
                 {
                     true
                     &&
@@ -191,7 +184,7 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
                     {
                         (!getboolsignature) && <>
                             <section style={{width:'100%',display:'flex', justifyContent:"center"}}>
-                                <button onClick={ cargarFirmados }> Assign Signature </button>
+                                <button onClick={ ()=> { cargarFirmados(); '' } }> Assign Signature </button>
                             </section>
                         </>
                     }
@@ -221,7 +214,8 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
 
                 </div>
             </div>
-        )}
+        )
+        }
         </>
     );
 };

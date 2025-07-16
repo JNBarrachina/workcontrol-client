@@ -50,7 +50,7 @@ export const DashboardMain = () => {
 
         const checkTimesheet = async () => {
             const exists = await existTimesheet();
-            setexisttimesheet( exists );
+            setexisttimesheet(exists);
         };
 
         checkTimesheet();
@@ -74,20 +74,20 @@ export const DashboardMain = () => {
 
     const existTimesheet = async () => {
         const [año, mes] = date.split("-");
-        const id_employee = JSON.parse( localStorage.getItem('login') )?.id;
+        const id_employee = JSON.parse(localStorage.getItem('login'))?.id;
 
         const fetch1 = await fetch(`http://localhost:3000/fetchs/monthlyworkvalidations/${año}/${mes}/${id_employee}`);
         const data1 = await fetch1.json()
-                                   
+
         //return (data1.length > 0) ? false :  true;
 
         //console.log("getexisttimesheet:", getexisttimesheet);
         //console.log("date:", date);
 
 
-        if(data1.length === 0){
+        if (data1.length === 0) {
             return true; //Not Exist
-        }else{
+        } else {
             return false;  //Exist 
         }
     }
@@ -128,16 +128,16 @@ export const DashboardMain = () => {
                     </div>
                     <div className="monthlySummaryBtns">
 
-                        { getexisttimesheet 
-                        ?
+                        {getexisttimesheet
+                            ?
                             <button className='monthBtns timesheetBtn' onClick={generateMonthlyTimesheet}>
                                 View timesheet
                             </button>
-                        :
-                            <button onClick={()=>{setexisttimesheet(true)}}>Overwrite timesheet</button>
+                            :
+                            <button onClick={() => { setexisttimesheet(true) }}>Overwrite timesheet</button>
                         }
 
-                        
+
                         <button className='monthBtns monthlySummaryBtn' onClick={handleOpen}>Month summary</button>
                     </div>
                 </div>
@@ -150,7 +150,7 @@ export const DashboardMain = () => {
             <MonthDaysList days={days} setDays={setDays} />
             <MonthSummary isOpen={modalOpen} onClose={handleClose} date={date} />
             <GraphSummary isOpen={modalOpen2} onClose={handleClose2} date={date} />
-            
+
         </article>
     );
 };
