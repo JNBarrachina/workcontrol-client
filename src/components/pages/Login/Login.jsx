@@ -54,7 +54,7 @@ const Login = () => {
         })
             .then(async (res) => {
                 const userProjects = await res.json();
-                console.log(userProjects);
+
                 setUserProjects(userProjects);
                 localStorage.setItem("userprojects", JSON.stringify(userProjects));
             })
@@ -69,7 +69,6 @@ const Login = () => {
             })
                 .then(async (res) => {
                     const projectsManager = await res.json();
-                    console.log("Todos los proyectos de la app: ", projectsManager);
 
                     setProjectsManager(projectsManager);
                     localStorage.setItem("projectsmanager", JSON.stringify(projectsManager));
@@ -134,9 +133,6 @@ const Login = () => {
                         <Button disabled={!isButtonEnabled} className="loginBtn" onClick={handleLoginButtonClick}>Login</Button><br />
                         <Typography.Text className="error">{errorMsg}</Typography.Text>
                         <img src="/src/assets/lasnavesajuntament.webp" alt="" className="lasnaves" />
-                        <p>
-                            Ya tienes cuenta? <Link to="/register">Regístrate ahora</Link>
-                        </p>
                     </div>
                 </div>
             </main>
