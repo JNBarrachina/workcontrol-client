@@ -134,7 +134,11 @@ export const DashboardMain = () => {
                                 View timesheet
                             </button>
                             :
-                            <button onClick={() => { setexisttimesheet(true) }}>Overwrite timesheet</button>
+                            <section style={{display:'flex', flexDirection:'row', justifyContent: 'space-around', alignItems:'center'}}>
+                                <button onClick={() => { setexisttimesheet(true) }}>Overwrite timesheet</button>
+                                <img src="/src/assets/cercle_oranje.svg" alt="" />
+                            </section>
+
                         }
 
 

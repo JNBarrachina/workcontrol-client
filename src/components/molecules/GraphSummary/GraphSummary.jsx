@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom'
 import { useState, useContext, useEffect } from 'react';
 
 import { MonthlyEntriesContext } from '../../../contexts/MonthlyEntriesContext';
@@ -19,9 +18,9 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
 
     const [getboolsignature, setboolsignature] = useState(false);
     const [getsignature, setsignature] = useState();
-    const navigate = useNavigate();
 
-
+    const [getbooltimesheet,setbooltimesheet] = useState(true);
+    const [getcontenttimesheet,setcontenttimesheet] = useState(null);
 
     useEffect(() => {
         const works = entries.map(element => ({
@@ -142,6 +141,23 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
 
         const data1 = await fetch1.json()
         console.log(data1)
+
+        setcontenttimesheet(
+        <>
+            <section style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: "center",
+                alignItems: 'center',
+            }}>
+                <h2>Details</h2>
+                <p><strong>State:</strong> {data1.message} </p>
+                <p><strong>Date:</strong> {data1.date_create}</p>
+            </section>
+        </>
+        );
+
+        setbooltimesheet(false);
     };
 
     return (
@@ -156,6 +172,8 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
                                 onClose();
                                 setboolsignature(null);
                                 setsignature(null);
+                                setcontenttimesheet(null)
+                                setbooltimesheet(true)
                             }
 
                         }>✕</button>
@@ -229,7 +247,14 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
                                                     width: '90%',
                                                     borderRadius: '12px',
                                                 }} />
-                                            <button onClick={() => { creteTimesheet() }}>Create Timesheet</button>
+
+                                                {getbooltimesheet
+                                                ?
+                                                    <button onClick={() => { creteTimesheet() }}>Create Timesheet</button>
+                                                :
+                                                    <>{ getcontenttimesheet }</>
+                                                }
+                                            
                                         </section>
                                     </>
                                 }
