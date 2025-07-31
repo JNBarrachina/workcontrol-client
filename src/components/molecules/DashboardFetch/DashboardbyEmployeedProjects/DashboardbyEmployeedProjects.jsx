@@ -141,7 +141,7 @@ const DashboardbyEmplooyeedbyProjets = () => {
                 {currentSubprojects.map(([sub, date], index) => (
                   <tr key={index}>
                     <td>{sub}</td>
-                    <td>{date}</td>
+                    <td>{date.slice(0, 10)}</td>
                   </tr>
                 ))}
               </tbody>

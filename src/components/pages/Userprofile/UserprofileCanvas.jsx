@@ -49,7 +49,7 @@ const UserprofileCanvas = () => {
     const inicializarCanvas = () => {
         const canvas = canvasRef.current;
         if (!canvas) return;
-        
+
         canvas.width = 500;
         canvas.height = 200;
         const ctx = canvas.getContext("2d");
@@ -124,7 +124,7 @@ const UserprofileCanvas = () => {
             const response = await fetch(
                 `http://localhost:3000/uploads/firma/${email}/${nombre}`
             );
-            
+
             if (!response.ok) {
                 throw new Error(`Error ${response.status}: ${response.statusText}`);
             }
@@ -138,7 +138,7 @@ const UserprofileCanvas = () => {
             setsignature(imageUrl);
             context.setverifysignature('/src/assets/tickcirclelinear_106244.svg');
             setShowCanvas(false);
-            
+
         } catch (err) {
             console.error("Error al obtener la firma:", err);
             context.setverifysignature('/src/assets/crosscirclelinear_106172.svg');
@@ -172,7 +172,7 @@ const UserprofileCanvas = () => {
         <>
             {getsignature && !showCanvas ? (
                 <>
-                    <button onClick={toggleCanvas}>Change Signature</button>
+                    <button className="btnSignature" onClick={toggleCanvas}>Change Signature</button>
                     <img src={getsignature} alt="signature" />
                 </>
             ) : (
@@ -191,10 +191,10 @@ const UserprofileCanvas = () => {
                         }}
                         onTouchEnd={terminarDibujo}
                     />
-                    
+
                     <div className="botones-firma">
-                        <button onClick={limpiarFirma}>Clean</button>
-                        <button onClick={guardarFirma} disabled={getdisabled}>
+                        <button className="btnSignature" onClick={limpiarFirma}>Clean</button>
+                        <button className="btnSignature" onClick={guardarFirma} disabled={getdisabled}>
                             Save Signature
                         </button>
                     </div>
@@ -202,10 +202,10 @@ const UserprofileCanvas = () => {
                     {firmaURL && (
                         <div className="firma-preview">
                             <div>
-                                <button onClick={() => descargarFirma("png")}>
+                                <button className="btnSignature" onClick={() => descargarFirma("png")}>
                                     Download PNG
                                 </button>
-                                <button onClick={subirFirmaAlServidor}>
+                                <button className="btnSignature" onClick={subirFirmaAlServidor}>
                                     Upload to Platform
                                 </button>
                             </div>

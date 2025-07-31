@@ -19,8 +19,8 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
     const [getboolsignature, setboolsignature] = useState(false);
     const [getsignature, setsignature] = useState();
 
-    const [getbooltimesheet,setbooltimesheet] = useState(true);
-    const [getcontenttimesheet,setcontenttimesheet] = useState(null);
+    const [getbooltimesheet, setbooltimesheet] = useState(true);
+    const [getcontenttimesheet, setcontenttimesheet] = useState(null);
 
     useEffect(() => {
         const works = entries.map(element => ({
@@ -143,18 +143,18 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
         console.log(data1)
 
         setcontenttimesheet(
-        <>
-            <section style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: "center",
-                alignItems: 'center',
-            }}>
-                <h2>Details</h2>
-                <p><strong>State:</strong> {data1.message} </p>
-                <p><strong>Date:</strong> {data1.date_create}</p>
-            </section>
-        </>
+            <>
+                <section style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: "center",
+                    alignItems: 'center',
+                }}>
+                    <h2>Details</h2>
+                    <p><strong>State:</strong> {data1.message} </p>
+                    <p><strong>Date:</strong> {data1.date_create}</p>
+                </section>
+            </>
         );
 
         setbooltimesheet(false);
@@ -226,13 +226,13 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
                                 {
                                     (!getboolsignature) && <>
                                         <section style={{ width: '100%', display: 'flex', justifyContent: "center" }}>
-                                            <button onClick={() => { cargarFirmados(); '' }}> Assign Signature </button>
+                                            <button className='btnSignature' onClick={() => { cargarFirmados(); '' }}> Assign Signature </button>
                                         </section>
                                     </>
                                 }
                                 {
                                     getboolsignature && <>
-                                        <section style={{
+                                        <section className="signatureBox" style={{
                                             width: '100%',
                                             display: 'flex',
                                             flexDirection: 'column',
@@ -248,13 +248,13 @@ export const GraphSummary = ({ isOpen, onClose, date }) => {
                                                     borderRadius: '12px',
                                                 }} />
 
-                                                {getbooltimesheet
+                                            {getbooltimesheet
                                                 ?
-                                                    <button onClick={() => { creteTimesheet() }}>Create Timesheet</button>
+                                                <button className='btnSignature' onClick={() => { creteTimesheet() }}>Create Timesheet</button>
                                                 :
-                                                    <>{ getcontenttimesheet }</>
-                                                }
-                                            
+                                                <>{getcontenttimesheet}</>
+                                            }
+
                                         </section>
                                     </>
                                 }
