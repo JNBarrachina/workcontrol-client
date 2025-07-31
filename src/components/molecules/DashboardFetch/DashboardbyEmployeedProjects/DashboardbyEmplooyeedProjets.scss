@@ -19,7 +19,7 @@
     border-spacing: 0.5rem 1rem;
     background: #fff;
 }
-                
+
 th{
     background: #000;
     color: #fff;
@@ -47,9 +47,10 @@ td{
 #main-dashboardbyemployeedprojects button,
 .modal-projects .projects-table  button{
     font-weight: bold;
-    background: #e262ff;
+    background: rgb(115, 17, 110);
     color: #fff;
 }
+
 .modal{
 position: absolute;
 top: 0;
@@ -60,10 +61,6 @@ height: fit-content;
 padding: 2px 0 2px 0;
 overflow: hidden;
 overflow-y: auto;
-}
-
-.modal-projects{
-
 }
 
 .modal-projects section{
@@ -82,10 +79,6 @@ overflow-y: auto;
 
 .modal-projects .projects-table button{
     font-weight: bold;
-}
-
-.modal-subprojects{
-
 }
 
 .modal-subprojects section{
