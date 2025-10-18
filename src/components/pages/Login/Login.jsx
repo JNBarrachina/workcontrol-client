@@ -1,5 +1,4 @@
 import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
 import { Button, Input, Flex, Typography } from "antd";
 import { useNavigate } from "react-router";
 
@@ -80,61 +79,51 @@ const Login = () => {
     return (
         <Flex>
             <main id="login-main">
-                <div className="login-container">
-                    <div className="login-card">
-                        <img src="/src/assets/workflow.png" alt="" />
-                        <Title level={3}>Login</Title>
+                <section className="login-card">
+                    <img src="/src/assets/workflow.png" alt="" />
+                    <Title level={3}>Login</Title>
+                    <section className="login-input-container">
+                        <Input
+                            value={email}
+                            type="text"
+                            onChange={(event) =>
+                                setEmail(event.target.value)}
+                            placeholder="Correo Electronico"
+                            className="login-input"
+                        />
+                    </section>
+                    <section className="login-input-container">
+                        <Input
+                            value={password}
+                            type={gettypeimput}
+                            onChange={(event) => setPassword(event.target.value)}
+                            placeholder="Contraseña"
+                            className="login-input"
+                        />
 
-                        <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }} />
-                        <section className="login-input-container">
-                            <Input
-                                value={email}
-                                type="text"
-                                onChange={(event) =>
-                                    setEmail(event.target.value)}
-                                placeholder="Correo Electronico"
-                                className="login-input"
+
+                        <button style={{ padding: '0', height: '2.80rem' }}>
+
+                            <img
+                                style={{ height: '2rem' }}
+                                src={gettypeimage}
+                                alt="view"
+                                onClick={() => {
+                                    if (gettypeimput === "password") {
+                                        settypeimage("/src/assets/eye_visible_hidden.svg");
+                                        septypeimput("text");
+                                    } else {
+                                        settypeimage("/src/assets/eye_visible.svg");
+                                        septypeimput("password");
+                                    }
+                                }}
                             />
-                        </section>
-
-
-                        <section style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }} />
-
-
-                        <section className="login-input-container">
-                            <Input
-                                value={password}
-                                type={gettypeimput}
-                                onChange={(event) => setPassword(event.target.value)}
-                                placeholder="Contraseña"
-                                className="login-input"
-                            />
-
-
-                            <button style={{ padding: '0', height: '2.80rem' }}>
-
-                                <img
-                                    style={{ height: '2rem' }}
-                                    src={gettypeimage}
-                                    alt="view"
-                                    onClick={() => {
-                                        if (gettypeimput === "password") {
-                                            settypeimage("/src/assets/eye_visible_hidden.svg");
-                                            septypeimput("text");
-                                        } else {
-                                            settypeimage("/src/assets/eye_visible.svg");
-                                            septypeimput("password");
-                                        }
-                                    }}
-                                />
-                            </button>
-
-                        </section>
-                        <Button disabled={!isButtonEnabled} className="loginBtn" onClick={handleLoginButtonClick}>Login</Button><br />
-                        <Typography.Text className="error">{errorMsg}</Typography.Text>
-                        <img src="/src/assets/lasnavesajuntament.webp" alt="" className="lasnaves" />
-                    </div>
-                </div>
+                        </button>
+                    </section>
+                    <Button disabled={!isButtonEnabled} className="loginBtn" onClick={handleLoginButtonClick} onKe>Login</Button><br />
+                    <Typography.Text className="error">{errorMsg}</Typography.Text>
+                    <img src="/src/assets/lasnavesajuntament.webp" alt="" className="lasnaves" />
+                </section>
             </main>
         </Flex>
     )
